@@ -20,8 +20,15 @@ Curabitur suscipit metus placerat arcu tincidunt cursus. Nunc nec mauris ferment
     <string name="ack_title">Acknowledgments</string>
     <string name="ack_list">FILL IN</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    // MAIN FRAGMENT CONTROLS
+    <string name="walk_button">Walk</string>
+    <string name="settings_button">Settings</string>
+    <string name="user_profile_button">User Profile</string>
+    <string name="instructions_button">Instructions</string>
+
+    // ACTIVITY TITLES
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_simplepedometer">SimplePedometerActivity</string>
 </resources>

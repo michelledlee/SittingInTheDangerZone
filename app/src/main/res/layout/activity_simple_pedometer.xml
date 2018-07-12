@@ -4,21 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/main_screen_background"
     tools:context=".SimplePedometerActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
-    <fragment
-        android:id="@+id/main_fragment"
-        class="edu.neu.madcourse.michellelee.dangerzone.MainControlsFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="50dp"
-        tools:layout="@layout/fragment_main_controls" />
+
 
     </LinearLayout>
 </LinearLayout>
