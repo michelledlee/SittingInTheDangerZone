@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">dangerzone</string>
+
+    // INFORMATION AND INSTRUCTIONS
+    <string name="acknowledgments">Acknowledgments</string>
+    <string name="sources">
+    Volcano image from pixabay.com\n\
+    Tom Cruise from google</string>
+    <string name="instructions">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac diam condimentum, dignissim leo nec, congue massa. Duis vulputate nunc diam, sit amet commodo risus blandit in. Cras diam justo, consequat et nibh a, tristique venenatis est. Duis sagittis metus et est laoreet, elementum commodo mi gravida. Proin accumsan imperdiet dolor, varius sagittis quam commodo ut. Nunc eu tellus ut mi egestas consequat. Sed tincidunt leo sed maximus venenatis. Proin non massa diam. Maecenas viverra mi id libero suscipit mattis eu sit amet lacus. Nam at varius nunc, at ultrices felis. Cras nec elit ac est imperdiet commodo eu venenatis augue. Aenean iaculis auctor magna a pellentesque. Suspendisse faucibus turpis aliquet nisl eleifend eleifend. Maecenas porttitor nulla risus, et condimentum ex placerat eget. Morbi eu interdum est.
+
+Vivamus elementum tortor non ex lacinia lacinia. Maecenas suscipit lacus euismod odio pellentesque, eget euismod nunc tincidunt. Nunc sit amet posuere magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget congue nunc. Sed nisl orci, luctus quis varius a, viverra vel metus. Etiam ante sem, pretium ac varius suscipit, sagittis at lacus. In vulputate fermentum sapien, nec rutrum eros sagittis ac. Aliquam suscipit ultricies dolor, id ornare felis. Maecenas nec vulputate nibh, nec luctus massa.
+
+Sed quam nunc, rutrum ut sapien et, vestibulum consectetur dui. Etiam luctus lacinia enim at tincidunt. Sed fermentum turpis vel risus porttitor ornare. In hac habitasse platea dictumst. Vivamus varius accumsan enim, sit amet efficitur massa volutpat imperdiet. Sed consequat tellus in risus tempus imperdiet. Nunc auctor metus lectus, in rhoncus justo porta dignissim. Nullam bibendum, urna vehicula facilisis hendrerit, nulla justo dictum nibh, vitae pretium nisl libero quis est. Aenean eget nisl porttitor, auctor sem ut, bibendum libero. Maecenas eu turpis nulla. Quisque eget dui eu lacus dictum placerat. Phasellus vulputate volutpat cursus. Donec sed luctus libero, et molestie tellus.
+
+Duis porta gravida nulla eget ultrices. Morbi eu consectetur dui, vel pellentesque dolor. Ut eu fermentum purus. Donec rhoncus varius velit et posuere. Proin a euismod libero, placerat sodales justo. Suspendisse pharetra, dolor in aliquam eleifend, nulla mauris volutpat felis, et porta dui diam eu augue. Ut in justo nec mauris malesuada aliquet accumsan ac nisl. Suspendisse potenti. Praesent in turpis commodo, commodo turpis non, euismod nunc.
+
+Curabitur suscipit metus placerat arcu tincidunt cursus. Nunc nec mauris fermentum, ullamcorper arcu a, convallis tortor. Nullam eu augue eros. Vestibulum id eros quis dui ullamcorper aliquam. Curabitur ultricies, urna sit amet vehicula dictum, neque lacus vulputate sem, sit amet semper tortor massa eu mi. Mauris pellentesque mi ligula, eget molestie elit molestie quis. Proin mattis diam vitae neque facilisis, a molestie libero mollis. Praesent tincidunt sem in suscipit tempus. Quisque dictum maximus est, in ultrices odio rhoncus nec. Morbi a ipsum pharetra, viverra turpis id, auctor nulla. Etiam bibend</string>
+    <string name="information">Information</string>
+    <string name="ok_label">OK</string>
+    <string name="ack_title">Acknowledgments</string>
+    <string name="ack_list">FILL IN</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+</resources>

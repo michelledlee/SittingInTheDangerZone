@@ -1,0 +1,50 @@
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".SimplePedometerActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <Button
+        android:id="@+id/walk_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/menu_button_margin"
+        android:baselineAligned="false"
+        android:padding="@dimen/menu_button_padding"
+        android:text="WALK" />
+
+    <Button
+        android:id="@+id/settings_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/menu_button_margin"
+        android:padding="@dimen/menu_button_padding"
+        android:text="SETTINGS" />
+
+    <Button
+        android:id="@+id/profile_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/menu_button_margin"
+        android:padding="@dimen/menu_button_padding"
+        android:text="USER PROFILE" />
+
+    <Button
+        android:id="@+id/instructions_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/menu_button_margin"
+        android:padding="@dimen/menu_button_padding"
+        android:text="INSTRUCTIONS" />
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
