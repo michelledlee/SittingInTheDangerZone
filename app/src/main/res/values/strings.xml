@@ -26,9 +26,48 @@ Curabitur suscipit metus placerat arcu tincidunt cursus. Nunc nec mauris ferment
     <string name="user_profile_button">User Profile</string>
     <string name="instructions_button">Instructions</string>
 
+    // SETTINGS XML
+    <string name="notifications_on_off">Notifications</string>
+    <string name="notification_interval">Interval</string>
+    <string name="notification_hours">Hours</string>
+    <string name="notification_minutes">Minutes</string>
+    <string name="notification_donotdisturb">Do Not Disturb</string>
+    <resources>
+        <string-array name="minutes_array">
+            <item>5</item>
+            <item>10</item>
+            <item>15</item>
+            <item>20</item>
+            <item>25</item>
+            <item>30</item>
+            <item>35</item>
+            <item>40</item>
+            <item>45</item>
+            <item>50</item>
+            <item>55</item>
+        </string-array>
+    </resources>
+    <resources>
+        <string-array name="hours_array">
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+            <item>5</item>
+            <item>6</item>
+            <item>7</item>
+            <item>8</item>
+            <item>9</item>
+            <item>10</item>
+            <item>11</item>
+            <item>12</item>
+        </string-array>
+    </resources>
+
     // ACTIVITY TITLES
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_simplepedometer">SimplePedometerActivity</string>
+
 </resources>

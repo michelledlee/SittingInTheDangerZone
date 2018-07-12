@@ -2,16 +2,21 @@
     <dimen name="elevation_high">8dp</dimen>
     <dimen name="stroke_width">1dp</dimen>
     <dimen name="corner_radius">5dp</dimen>
+    <dimen name="button_width">50dp</dimen>
+    <dimen name="button_height">3dp</dimen>
+    <dimen name="button_margin">0dp</dimen>
+    <dimen name="button_padding">3dp</dimen>
+    <dimen name="menu_button_margin">0dp</dimen>
+    <dimen name="menu_button_padding">10dp</dimen>
+    <dimen name="settings_padding">60dp</dimen>
+    <dimen name="settings_button_spacing">30dp</dimen>
+    <dimen name="settings_related_spacing">15dp</dimen>
+    <dimen name="settings_indented">100dp</dimen>
+    <dimen name="spinner_width">50dp</dimen>
     <!--<dimen name="menu_padding">10dp</dimen>-->
     <!--<dimen name="menu_space">10dp</dimen>-->
     <!--<dimen name="menu_text_size">32sp</dimen>-->
-    <dimen name="menu_button_margin">0dp</dimen>
-    <dimen name="menu_button_padding">10dp</dimen>
-    <dimen name="button_width">50dp</dimen>
-    <dimen name="button_height">3dp</dimen>
     <!--<dimen name="button_size">30dp</dimen>-->
-    <dimen name="button_margin">0dp</dimen>
-    <dimen name="button_padding">3dp</dimen>
     <!--<dimen name="control_padding">20dp</dimen>-->
     <!--<dimen name="fab_margin">16dp</dimen>-->
 </resources>

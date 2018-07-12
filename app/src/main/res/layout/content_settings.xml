@@ -1,11 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".SettingsActivity"
     tools:showIn="@layout/activity_settings">
 
-</android.support.constraint.ConstraintLayout>
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <!--app:popupTheme="@style/AppTheme.PopupOverlay" />-->
+
+    <!--</android.support.design.widget.AppBarLayout>-->
+    <TextView
+        android:id="@+id/notifications_on_off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/settings_padding"
+        android:layout_marginTop="@dimen/settings_padding"
+        android:text="@string/notifications_on_off" />
+
+    <Switch
+        android:id="@+id/notifications_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/notifications_on_off"
+        android:layout_marginTop="@dimen/settings_padding"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/settings_padding"/>
+
+    <TextView
+        android:id="@+id/interval_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notifications_on_off"
+        android:layout_marginStart="@dimen/settings_padding"
+        android:layout_marginTop="@dimen/settings_button_spacing"
+        android:text="@string/notification_interval" />
+
+    <TextView
+        android:id="@+id/hours_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/interval_text"
+        android:layout_marginStart="@dimen/settings_indented"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:text="@string/notification_hours" />
+
+    <Spinner
+        android:id="@+id/hours_spinner"
+        android:layout_width="@dimen/spinner_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notifications_switch"
+        android:layout_alignTop="@id/hours_text"
+        android:layout_toEndOf="@id/hours_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/settings_padding" />
+
+    <TextView
+        android:id="@+id/minutes_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hours_text"
+        android:layout_marginStart="@dimen/settings_indented"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:text="@string/notification_minutes" />
+
+    <Spinner
+        android:id="@+id/minutes_spinner"
+        android:layout_width="@dimen/spinner_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/notifications_switch"
+        android:layout_alignTop="@id/minutes_text"
+        android:layout_toEndOf="@id/minutes_text"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/settings_padding"/>
+
+    <TextView
+        android:id="@+id/dnd_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/minutes_text"
+        android:layout_marginStart="@dimen/settings_padding"
+        android:layout_marginTop="@dimen/settings_button_spacing"
+        android:text="@string/notification_donotdisturb" />
+
+</RelativeLayout>
