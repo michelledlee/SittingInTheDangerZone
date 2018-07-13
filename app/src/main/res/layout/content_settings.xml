@@ -112,6 +112,14 @@
         android:layout_marginTop="@dimen/settings_related_spacing"
         android:text="@string/dnd_before" />
 
+    <TextView
+        android:id="@+id/before_time_set"
+        android:layout_width="@dimen/settings_time_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/before_text"
+        android:layout_marginStart="@dimen/settings_indented_time"
+        android:text="@string/dnd_not_set" />
+
     <Button
         android:id="@+id/select_time1"
         android:layout_width="wrap_content"
@@ -131,8 +139,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/before_text"
         android:layout_marginStart="@dimen/settings_indented"
-        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:layout_marginTop="@dimen/settings_button_spacing"
         android:text="@string/dnd_after" />
+
+
+    <TextView
+        android:id="@+id/after_time_set"
+        android:layout_width="@dimen/settings_time_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/after_text"
+        android:layout_marginStart="@dimen/settings_indented_time"
+        android:text="@string/dnd_not_set" />
 
     <Button
         android:id="@+id/select_time2"
