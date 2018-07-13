@@ -12,7 +12,9 @@
     <dimen name="settings_button_spacing">30dp</dimen>
     <dimen name="settings_related_spacing">15dp</dimen>
     <dimen name="settings_indented">100dp</dimen>
-    <dimen name="spinner_width">50dp</dimen>
+    <dimen name="settings_text_width">60dp</dimen>
+    <dimen name="spinner_width">100dp</dimen>
+    <dimen name="spinner_margin">75dp</dimen>
     <!--<dimen name="menu_padding">10dp</dimen>-->
     <!--<dimen name="menu_space">10dp</dimen>-->
     <!--<dimen name="menu_text_size">32sp</dimen>-->

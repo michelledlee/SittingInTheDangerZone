@@ -38,7 +38,8 @@
         android:layout_toEndOf="@id/notifications_on_off"
         android:layout_marginTop="@dimen/settings_padding"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/settings_padding"/>
+        android:layout_marginEnd="@dimen/settings_padding"
+        android:showText="true"/>
 
     <TextView
         android:id="@+id/interval_text"
@@ -51,7 +52,7 @@
 
     <TextView
         android:id="@+id/hours_text"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/settings_text_width"
         android:layout_height="wrap_content"
         android:layout_below="@id/interval_text"
         android:layout_marginStart="@dimen/settings_indented"
@@ -60,17 +61,20 @@
 
     <Spinner
         android:id="@+id/hours_spinner"
-        android:layout_width="@dimen/spinner_width"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/notifications_switch"
-        android:layout_alignTop="@id/hours_text"
-        android:layout_toEndOf="@id/hours_text"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/settings_padding" />
+        android:layout_alignTop="@id/hours_text"
+        android:layout_below="@id/notifications_switch"
+        android:layout_marginEnd="@dimen/settings_padding"
+        android:layout_marginStart="@dimen/spinner_margin"
+        android:layout_toEndOf="@id/hours_text"
+        android:dropDownWidth="@dimen/spinner_width"
+        android:entries="@array/hours_array" />
 
     <TextView
         android:id="@+id/minutes_text"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/settings_text_width"
         android:layout_height="wrap_content"
         android:layout_below="@id/hours_text"
         android:layout_marginStart="@dimen/settings_indented"
@@ -79,13 +83,16 @@
 
     <Spinner
         android:id="@+id/minutes_spinner"
-        android:layout_width="@dimen/spinner_width"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/notifications_switch"
-        android:layout_alignTop="@id/minutes_text"
-        android:layout_toEndOf="@id/minutes_text"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/settings_padding"/>
+        android:layout_alignTop="@id/minutes_text"
+        android:layout_below="@id/notifications_switch"
+        android:layout_marginEnd="@dimen/settings_padding"
+        android:layout_marginStart="@dimen/spinner_margin"
+        android:layout_toEndOf="@id/minutes_text"
+        android:dropDownWidth="@dimen/spinner_width"
+        android:entries="@array/minutes_array" />
 
     <TextView
         android:id="@+id/dnd_text"
@@ -95,5 +102,49 @@
         android:layout_marginStart="@dimen/settings_padding"
         android:layout_marginTop="@dimen/settings_button_spacing"
         android:text="@string/notification_donotdisturb" />
+
+    <TextView
+        android:id="@+id/before_text"
+        android:layout_width="@dimen/settings_text_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dnd_text"
+        android:layout_marginStart="@dimen/settings_indented"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:text="@string/dnd_before" />
+
+    <Button
+        android:id="@+id/select_time1"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/before_text"
+        android:layout_below="@id/notifications_switch"
+        android:layout_marginEnd="@dimen/settings_padding"
+        android:layout_marginStart="@dimen/spinner_margin"
+        android:layout_toEndOf="@id/before_text"
+        android:padding="2dp"
+        android:text="@string/select_time"/>
+
+    <TextView
+        android:id="@+id/after_text"
+        android:layout_width="@dimen/settings_text_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/before_text"
+        android:layout_marginStart="@dimen/settings_indented"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:text="@string/dnd_after" />
+
+    <Button
+        android:id="@+id/select_time2"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@id/after_text"
+        android:layout_below="@id/notifications_switch"
+        android:layout_marginEnd="@dimen/settings_padding"
+        android:layout_marginStart="@dimen/spinner_margin"
+        android:layout_toEndOf="@id/after_text"
+        android:padding="2dp"
+        android:text="@string/select_time"/>
 
 </RelativeLayout>
