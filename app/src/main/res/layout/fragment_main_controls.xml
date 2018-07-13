@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".SimplePedometerActivity">
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
     <Button
         android:id="@+id/walk_button"
         android:layout_width="match_parent"
@@ -17,16 +18,9 @@
         android:layout_margin="@dimen/menu_button_margin"
         android:baselineAligned="false"
         android:padding="@dimen/menu_button_padding"
-        android:text="WALK" />
-
-    <Button
-        android:id="@+id/settings_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/menu_button_margin"
-        android:padding="@dimen/menu_button_padding"
-        android:text="SETTINGS" />
+        android:text="@string/walk_button"
+        android:textColor="@color/white"
+        android:background="@drawable/button"/>
 
     <Button
         android:id="@+id/profile_button"
@@ -35,7 +29,9 @@
         android:layout_gravity="center"
         android:layout_margin="@dimen/menu_button_margin"
         android:padding="@dimen/menu_button_padding"
-        android:text="USER PROFILE" />
+        android:text="@string/user_profile_button"
+        android:textColor="@color/white"
+        android:background="@drawable/button"/>
 
     <Button
         android:id="@+id/instructions_button"
@@ -44,7 +40,9 @@
         android:layout_gravity="center"
         android:layout_margin="@dimen/menu_button_margin"
         android:padding="@dimen/menu_button_padding"
-        android:text="INSTRUCTIONS" />
+        android:text="@string/instructions_button"
+        android:textColor="@color/white"
+        android:background="@drawable/button"/>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
