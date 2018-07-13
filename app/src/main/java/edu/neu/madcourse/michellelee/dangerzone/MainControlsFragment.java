@@ -26,16 +26,6 @@ public class MainControlsFragment extends Fragment {
             }
         });
 
-        // Settings button
-        View settingsButton = rootView.findViewById(R.id.settings_button);  // create button view
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) throws RuntimeException {
-                Intent settingsIntent = new Intent(getActivity(), SettingsActivity.class);
-                startActivity(settingsIntent);
-            }
-        });
-
         // Profile button
         View profileButton = rootView.findViewById(R.id.profile_button);  // create button view
         profileButton.setOnClickListener(new View.OnClickListener() {
