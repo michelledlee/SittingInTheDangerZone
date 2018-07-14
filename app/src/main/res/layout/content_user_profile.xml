@@ -1,22 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".UserProfileActivity"
     tools:showIn="@layout/activity_user_profile">
 
 
     <TextView
-        android:id="@+id/notifications_on_off"
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="@dimen/settings_padding"
+        android:layout_marginStart="@dimen/profile_padding"
         android:layout_marginTop="@dimen/settings_padding"
-        android:text="@string/notifications_on_off" />
-    
-</android.support.constraint.ConstraintLayout>
+        android:textStyle="bold"
+        android:textSize="@dimen/profile_username_text"
+        android:text="USER NAME" />
+
+    <TextView
+        android:id="@+id/user_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/settings_padding"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/profile_padding_right"
+        android:textSize="@dimen/profile_username_text"
+        android:text="LEVEL"/>
+
+    <TextView
+        android:id="@+id/user_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_level"
+        android:layout_marginStart="@dimen/profile_indented"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:textStyle="italic"
+        android:textSize="@dimen/profile_username_title"
+        android:text="USER TITLE" />
+
+    <TextView
+        android:id="@+id/user_min_walked"
+        android:layout_width="@dimen/profile_stat_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_title"
+        android:layout_marginStart="@dimen/profile_double_indented"
+        android:layout_marginTop="@dimen/settings_button_spacing"
+        android:text="MINUTES WALKED" />
+
+    <TextView
+        android:id="@+id/minutes_walked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/user_level"
+        android:layout_marginEnd="@dimen/profile_padding_right"
+        android:layout_marginTop="@dimen/profile_numbers"
+        android:layout_toEndOf="@id/user_min_walked"
+        android:gravity="right"
+        android:text="MIN"/>
+
+    <TextView
+        android:id="@+id/user_distance_walked"
+        android:layout_width="@dimen/profile_stat_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_min_walked"
+        android:layout_marginStart="@dimen/profile_double_indented"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:text="DISTANCE WALKED" />
+
+    <TextView
+        android:id="@+id/distance_walked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/minutes_walked"
+        android:layout_marginEnd="@dimen/profile_padding_right"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:layout_toEndOf="@id/user_distance_walked"
+        android:gravity="right"
+        android:text="KM"/>
+
+    <TextView
+        android:id="@+id/number_of_achievements"
+        android:layout_width="@dimen/profile_stat_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_distance_walked"
+        android:layout_marginStart="@dimen/profile_double_indented"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:text="# OF ACHIEVEMENTS" />
+
+    <TextView
+        android:id="@+id/achievements_earned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/distance_walked"
+        android:layout_marginEnd="@dimen/profile_padding_right"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:layout_toEndOf="@id/number_of_achievements"
+        android:gravity="right"
+        android:text="##"/>
+
+
+</RelativeLayout>

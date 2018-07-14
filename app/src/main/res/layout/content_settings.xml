@@ -21,6 +21,7 @@
             <!--app:popupTheme="@style/AppTheme.PopupOverlay" />-->
 
     <!--</android.support.design.widget.AppBarLayout>-->
+
     <TextView
         android:id="@+id/notifications_on_off"
         android:layout_width="wrap_content"
@@ -38,8 +39,7 @@
         android:layout_toEndOf="@id/notifications_on_off"
         android:layout_marginTop="@dimen/settings_padding"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/settings_padding"
-        android:showText="true"/>
+        android:layout_marginEnd="@dimen/settings_padding" />
 
     <TextView
         android:id="@+id/interval_text"
