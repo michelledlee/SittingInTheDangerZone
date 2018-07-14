@@ -28,6 +28,7 @@
     <dimen name="profile_margin">30dp</dimen>
     <dimen name="profile_list_padding">75dp</dimen>
     <dimen name="profile_scrollview">90dp</dimen>
+    <dimen name="dialog_width">300dp</dimen>
 
     <!--<dimen name="menu_padding">10dp</dimen>-->
     <!--<dimen name="menu_space">10dp</dimen>-->
