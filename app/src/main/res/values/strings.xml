@@ -37,6 +37,25 @@ Curabitur suscipit metus placerat arcu tincidunt cursus. Nunc nec mauris ferment
     <string name="select_time">Select</string>
     <string name="dnd_not_set">- not set -</string>
 
+    // USER XML
+    <string name="user_default">USER NAME</string>
+    <string name="user_level">LEVEL</string>
+    <string name="title_default">\"Fresh meat\" </string>
+    <string name="minutes_walked">Minutes Walked</string>
+    <string name="distance_walked">Distance Walked</string>
+    <string name="number_of_achievements"># of Achievements</string>
+    <string name="min_default">0 min</string>
+    <string name="distance_default">0 km</string>
+    <string name="number_of_titles"># of Titles</string>
+    <string name="titles_default">None</string>
+    <string name="achievements_default">None</string>
+
+    // INITIAL STARTUP DIALOG
+    <string name="welcome_title">You are now entering the danger zone...</string>
+    <string name="enter_name">What should we call you?</string>
+    <string name="enter">Enter</string>
+    <string name="go">Go</string>
+
     // ACTIVITY TITLES
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
