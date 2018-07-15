@@ -12,6 +12,7 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,7 +29,9 @@
             android:name=".SimplePedometerActivity"
             android:label="@string/title_activity_simplepedometer"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".WalkActivity"></activity>
+        <activity android:name=".WalkActivity" />
+        <activity android:name=".WalkIntro" />
+        <activity android:name=".EndWalk"></activity>
     </application>
 
 </manifest>

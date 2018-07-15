@@ -51,7 +51,7 @@ Curabitur suscipit metus placerat arcu tincidunt cursus. Nunc nec mauris ferment
     <string name="achievements_default">None</string>
 
     // INITIAL STARTUP DIALOG
-    <string name="welcome_title">You are now entering the danger zone...</string>
+    <string name="welcome_title">You are now entering the danger zone&#8230;</string>
     <string name="enter_name">What should we call you?</string>
     <string name="enter">Enter</string>
     <string name="go">Go</string>
@@ -61,5 +61,12 @@ Curabitur suscipit metus placerat arcu tincidunt cursus. Nunc nec mauris ferment
     <string name="title_activity_user_profile">UserProfileActivity</string>
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_simplepedometer">SimplePedometerActivity</string>
+
+    // WALK INTRO
+    <string name="five_min">5 min</string>
+    <string name="ten_min">10 min</string>
+    <string name="fifteen_min">15 min</string>
+    <string name="walk">Walk!</string>
+    <string name="time_selection">SELECT WALK TIME: </string>
 
 </resources>

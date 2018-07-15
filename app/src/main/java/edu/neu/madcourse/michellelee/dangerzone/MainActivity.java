@@ -43,6 +43,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Walk introduction screen
+        View walkIntroButton = findViewById(R.id.walk_button);
+        walkIntroButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) throws RuntimeException {
+                Intent walkIntoIntent = new Intent(getApplicationContext(), WalkIntro.class);
+                startActivity(walkIntoIntent);
+            }
+        });
+
         // User profile
         View userProfile = findViewById(R.id.profile_button);
         userProfile.setOnClickListener(new View.OnClickListener() {
@@ -90,14 +100,17 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
                 editor.putInt("level", 0);
                 editor.apply();
-                editor.putString("title", "Fresh Meat");
                 editor.putInt("minutes walked", 0);
                 editor.apply();
                 editor.putInt("distance walked", 0);
                 editor.apply();
                 editor.putInt("# titles", 1);
                 editor.apply();
+                editor.putString("title", "Fresh Meat");
+                editor.apply();
                 editor.putInt("# achievements", 0);
+                editor.apply();
+                editor.putString("achievements", "Danger Seeker");
                 editor.apply();
 
                 }
