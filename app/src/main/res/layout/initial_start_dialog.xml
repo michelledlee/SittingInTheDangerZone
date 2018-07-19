@@ -1,0 +1,58 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/start_dialog_title"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="@dimen/profile_username_text"
+        android:text="@string/welcome_title" />
+
+    <TextView
+        android:id="@+id/username_ask"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/start_dialog_title"
+        android:layout_marginTop="@dimen/settings_button_spacing"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/profile_username_title"
+        android:text="@string/enter_name"/>
+
+    <EditText
+        android:id="@+id/username_input"
+        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:layout_marginStart="@dimen/profile_padding"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/username_ask"/>
+
+    <TextView
+        android:id="@+id/welcome_message"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username_input"
+        android:layout_marginTop="@dimen/settings_button_spacing"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/profile_username_title"
+        android:textStyle="italic"
+        android:visibility="invisible"/>
+
+    <Button
+        android:id="@+id/enter_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:layout_below="@id/welcome_message"
+        android:layout_centerHorizontal="true"
+        android:text="@string/enter" />
+
+
+</RelativeLayout>
