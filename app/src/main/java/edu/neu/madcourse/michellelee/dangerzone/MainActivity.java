@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity {
         walkIntroButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) throws RuntimeException {
-                Intent walkIntoIntent = new Intent(getApplicationContext(), WalkIntro.class);
-                startActivity(walkIntoIntent);
+//                Intent walkIntroIntent = new Intent(getApplicationContext(), WalkIntro.class);
+                Intent walkIntroIntent = new Intent(getApplicationContext(), EndWalk.class);
+                startActivity(walkIntroIntent);
             }
         });
 
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 // Update shared preferences with default values for the user profile
                 editor.putString("username", userNameString);
                 editor.apply();
-                editor.putInt("level", 0);
+                editor.putInt("level", 1);
                 editor.apply();
                 editor.putInt("minutes walked", 0);
                 editor.apply();
@@ -111,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
                 editor.putInt("# achievements", 0);
                 editor.apply();
                 editor.putString("achievements", "Danger Seeker");
+                editor.apply();
+                editor.putInt("xp", 0);
                 editor.apply();
 
                 }

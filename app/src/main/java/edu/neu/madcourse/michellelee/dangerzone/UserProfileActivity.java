@@ -53,30 +53,34 @@ public class UserProfileActivity extends AppCompatActivity {
 //        achievementsAdapter.add("title1");
 
         // TEST FOR TITLES AND ACHIEVEMENTS PROCESSING
+        // Special Processing to Add: To add a new title to the StringBuilder "list", create a StringBuilder based on the current
+        // titles in shared preferences. Append an "," to the current titles "list" in StringBuilder before the next new title.
+        // Add the new title to the list. Commit to shared preferences.
         String test1 = "test 1";
-        StringBuilder titlebuild = new StringBuilder(currentTitle);
-        titlebuild.append(",");
-        titlebuild.append(test1);
-        editor.putString("titles", titlebuild.toString());
+        StringBuilder titlebuild = new StringBuilder(currentTitle); // Create new StringBuilder
+        titlebuild.append(","); // Add a delimiter to the end of it the existing String list
+        titlebuild.append(test1);   // Add the new title to the StringBuilder
+        editor.putString("titles", titlebuild.toString());  // Replace old String of titles with new
         editor.apply();
 
         String test2 = "test 2";
-        StringBuilder achievebuild = new StringBuilder();
+        StringBuilder achievebuild = new StringBuilder();   // Create new StringBuilder
         achievebuild.append(test1);
-        achievebuild.append(",");
-        achievebuild.append(test2);
-        editor.putString("achievements", achievebuild.toString());
+        achievebuild.append(",");   // Add a delimiter to the end of it the existing String list
+        achievebuild.append(test2); // Add the new title to the StringBuilder
+        editor.putString("achievements", achievebuild.toString());  // Replace old String of titles with new
         editor.apply();
 
-        // Special processing for list of strings
-        String titleList = preferences.getString("titles", null);
-        String[] titleArray = titleList.split(","); // Get array of individual titles
-        for (String eachTitle : titleArray) {
+        // Special Processing to Retrieve: Get the String which contains all the titles. Split into an array based on the ","
+        // delimiter. Iterate through the array of titles and add each to the ListView.
+        String titleList = preferences.getString("titles", null);   // Get String list from SharedPreferences
+        String[] titleArray = titleList.split(","); // Get array of individual titles by splitting the string based on the "," delimiter
+        for (String eachTitle : titleArray) {   // Iterate through each of the titles in the list
             titlesAdapter.add(eachTitle);   // Add each title to the list
         }
-        String achievementList = preferences.getString("achievements", null);
-        String[] achievementArray = achievementList.split(","); // Get array of individual achievements
-        for (String eachAchievement : achievementArray) {
+        String achievementList = preferences.getString("achievements", null); // Get String list from SharedPreferences
+        String[] achievementArray = achievementList.split(","); // Get array of individual achievements by splitting the string based on the "," delimiter
+        for (String eachAchievement : achievementArray) { // Iterate through each of the achievements in the list
             achievementsAdapter.add(eachAchievement);   // Add each achievement to the list
         }
 

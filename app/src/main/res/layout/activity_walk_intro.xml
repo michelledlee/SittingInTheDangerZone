@@ -66,6 +66,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/walk_intro_bottom_padding2"
-        android:text="@string/walk" />
+        android:text="@string/walk"
+        android:background="@drawable/button"/>
 
 </RelativeLayout>
