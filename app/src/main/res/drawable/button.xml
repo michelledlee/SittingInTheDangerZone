@@ -5,5 +5,7 @@
     <corners android:radius="@dimen/corner_radius"/>
     <size android:height="@dimen/button_height"/>
     <size android:width="@dimen/button_width"/>
-    <padding android:bottom="@dimen/button_padding"/>
+    <padding android:bottom="@dimen/button_padding"
+        android:right="@dimen/button_padding"
+        android:left="@dimen/button_padding"/>
 </shape>

@@ -6,7 +6,7 @@
     <dimen name="button_height">3dp</dimen>
     <dimen name="button_margin">0dp</dimen>
     <dimen name="button_padding">3dp</dimen>
-    <dimen name="menu_button_margin">0dp</dimen>
+    <dimen name="menu_button_margin">5dp</dimen>
     <dimen name="menu_button_padding">10dp</dimen>
 
     <dimen name="settings_padding">60dp</dimen>
