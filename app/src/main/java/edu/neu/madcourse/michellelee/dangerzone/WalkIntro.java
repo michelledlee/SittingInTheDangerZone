@@ -25,13 +25,12 @@ public class WalkIntro extends AppCompatActivity {
         walkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Get user selection for walk time
-                int selectedID = minSelection.getCheckedRadioButtonId();
-                RadioButton minSelectionButton = (RadioButton) findViewById(selectedID);
+            // Get user selection for walk time
+            String radioValue = ((RadioButton)findViewById(minSelection.getCheckedRadioButtonId())).getText().toString();
 
-                // Start walk activity
-                Intent walkIntent = new Intent(getApplicationContext(), WalkActivity.class);
-                startActivity(walkIntent);
+            // Start walk activity
+            Intent walkIntent = new Intent(getApplicationContext(), WalkActivity.class);
+            startActivity(walkIntent);
             }
         });
     }

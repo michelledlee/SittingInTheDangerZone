@@ -39,23 +39,23 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/five_min"
+            android:id="@+id/one_min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/five_min"
+            android:text="@string/one_min"
             android:checked="true" />
 
         <RadioButton
-            android:id="@+id/ten_min"
+            android:id="@+id/three_min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ten_min" />
+            android:text="@string/three_min" />
 
         <RadioButton
-            android:id="@+id/fifteen_min"
+            android:id="@+id/five_min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fifteen_min" />
+            android:text="@string/five_min" />
 
     </RadioGroup>
 
