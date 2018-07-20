@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 //                Intent walkIntroIntent = new Intent(getApplicationContext(), WalkIntro.class);
 //                Intent walkIntroIntent = new Intent(getApplicationContext(), EndWalk.class);
 //                startActivity(walkIntroIntent);
-                Intent walkIntent = new Intent(getApplicationContext(), SimplePedometerActivity.class);
+                Intent walkIntent = new Intent(getApplicationContext(), WalkIntro.class);
                 startActivity(walkIntent);
             }
         });
