@@ -34,10 +34,10 @@
             android:name=".SimplePedometerActivity"
             android:label="@string/title_activity_simplepedometer"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".WalkActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".WalkIntro"
             android:screenOrientation="portrait"/>

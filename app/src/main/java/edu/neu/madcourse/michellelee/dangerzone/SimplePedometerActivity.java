@@ -2,6 +2,7 @@ package edu.neu.madcourse.michellelee.dangerzone;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.app.Activity;
@@ -29,13 +30,14 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
     private int numSteps;
 
     // Timer
-    private boolean isPaused = false;   // paused status
+    private boolean isPaused = false;   // Paused status
     private long timeRemaining = 0;     // CountDownTimer remaining time
-    private CountDownTimer timer;       // timer object
+    private CountDownTimer timer;       // Timer object
     private Button btnPause;
     private Button btnResume;
     private TextView tView;
     private TextView steps;
+    private int timerTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +63,11 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
         btnResume.setEnabled(false);    // Resume is disabled while not paused
 
         // Default time for CountdownTimer
-        long millisInFuture;   // Default of 1 minute
+        long millisInFuture;
         long countDownInterval = 1000; // 1 second
 
         // Set countdown timer based on selection the user made
-        int timerTime = getIntent().getIntExtra("timer", -1);
+        timerTime = getIntent().getIntExtra("timer", -1);
         if (timerTime == 1) {
             millisInFuture = 60000;
         } else if (timerTime == 3) {
@@ -87,6 +89,7 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
                 if (isPaused) {             // Cancel current instance if paused
                     btnResume.setClickable(true);  // Resume is enabled while paused
                     btnResume.setEnabled(true);    // Resume is enabled while paused
+                    onPause();
                     cancel();
                 } else {
                     tView.setText(text);    // Display current time set above
@@ -110,11 +113,15 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
             isPaused = true;
             btnPause.setEnabled(false);             // Disable the pause button after being clicked
             btnPause.setClickable(false);           // Disable the pause button after being clicked
+            btnResume.setEnabled(true);     // Enable the resume buttons
+            btnResume.setClickable(true);   // Enable the resume buttons
             btnResume.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {   // Set the action available for the resume button
                 btnPause.setEnabled(true);          // Reenable the pause button
-                btnPause.setClickable(true);          // Reenable the pause button
+                btnPause.setClickable(true);        // Reenable the pause button
+                btnResume.setEnabled(false);        // Disable resume button while the game is actively paused
+                btnResume.setClickable(false);      // Disable resume button while the game is actively paused
 
                 isPaused = false;   // Specify the current state is not paused
 
@@ -132,32 +139,42 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
 
                         if (isPaused) { // If paused, cancel the current countdowntimer instance
                             cancel();
-                            btnResume.setEnabled(true);     // Enable the resume buttons
-                            btnResume.setClickable(true);   // Enable the resume buttons
                         } else {
                             tView.setText(text);    // As long as the timer is running, update the view with the time
                             timeRemaining = millisUntilFinished;    // Remember time remaining
                         }
                     }
 
-                    // Set buttons as disabled once the timer has run out
                     public void onFinish() {
+                        // Set buttons as disabled once the timer has run out
                         btnPause.setEnabled(false);
                         btnPause.setClickable(false);
                         btnResume.setEnabled(false);
                         btnResume.setClickable(false);
                     }
                 }.start();
+                 onResume();
                 }
             });
+            onPause();
             }
         });
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Start walk activity
+        Intent endScreenIntent = new Intent(getApplicationContext(), EndWalk.class);
+        endScreenIntent.putExtra("steps", numSteps);
+        endScreenIntent.putExtra("timer", timerTime);
+        startActivity(endScreenIntent);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        numSteps = 0;
+//        numSteps = 0;
 //        textView.setText(TEXT_NUM_STEPS + numSteps);
         steps.setText(TEXT_NUM_STEPS + numSteps);
         sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_FASTEST);
@@ -188,5 +205,7 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
         steps.setText(TEXT_NUM_STEPS + numSteps);
 
     }
+
+
 
 }
