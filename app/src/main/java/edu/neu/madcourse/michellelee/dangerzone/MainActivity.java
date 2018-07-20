@@ -49,8 +49,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) throws RuntimeException {
 //                Intent walkIntroIntent = new Intent(getApplicationContext(), WalkIntro.class);
-                Intent walkIntroIntent = new Intent(getApplicationContext(), EndWalk.class);
-                startActivity(walkIntroIntent);
+//                Intent walkIntroIntent = new Intent(getApplicationContext(), EndWalk.class);
+//                startActivity(walkIntroIntent);
+                Intent walkIntent = new Intent(getApplicationContext(), SimplePedometerActivity.class);
+                startActivity(walkIntent);
             }
         });
 
