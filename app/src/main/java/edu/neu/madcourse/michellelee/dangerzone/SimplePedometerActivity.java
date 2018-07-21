@@ -1,7 +1,11 @@
 package edu.neu.madcourse.michellelee.dangerzone;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 
 import android.hardware.Sensor;
@@ -13,7 +17,9 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.os.Vibrator;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -41,6 +47,11 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
     private TextView tView;
     private TextView steps;
     private int timerTime;
+
+    // sound
+    public int mSoundAlert, mBackgroundMusic;
+    private SoundPool mSoundPool;
+    private float mVolume = 1f;
 
     // Bonus
     private boolean extraTimeMarker = false;
@@ -78,6 +89,13 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
         btnResume.setClickable(false);  // Resume is disabled while not paused
         btnResume.setEnabled(false);    // Resume is disabled while not paused
 
+        // build vibrator service & soundpool
+        final Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
+        mSoundAlert = mSoundPool.load(getApplicationContext(), R.raw.beep_alert, 1);
+        mBackgroundMusic = mSoundPool.load(getApplicationContext(), R.raw.deeper, 1); // music but not hooked up yet
+
+
         // Default time for CountdownTimer
         long millisInFuture;
         long countDownInterval = 1000; // 1 second
@@ -108,10 +126,20 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
                 String text = String.format(Locale.getDefault(), "%02d:%02d",
                         TimeUnit.MILLISECONDS.toMinutes(millis),
                         TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+
+                // change background resource
+                if (text.equals("00:30")) {
+                    RelativeLayout layout =(RelativeLayout)findViewById(R.id.walk_activity);
+                    layout.setBackgroundResource(R.drawable.scenario_end);
+                    mSoundPool.play(mSoundAlert, mVolume, mVolume, 1, 0, 1f);
+                }
+
+                // flash text & vibrate at set times
                 if (text.equals("00:30") || text.equals("00:25") || text.equals("00:20") || text.equals("00:15") ||
                         text.equals("00:10") || text.equals("00:09") || text.equals("00:08") || text.equals("00:07") || text.equals("00:06") ||
                         text.equals("00:05") || text.equals("00:04") || text.equals("00:03") || text.equals("00:02") || text.equals("00:01")) {
                     tView.setTextColor(getResources().getColor(R.color.red_color));
+                    v.vibrate(500);
                 }
                 else tView.setTextColor(getResources().getColor(R.color.white));
 
@@ -132,6 +160,10 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
                 btnPause.setClickable(false);
                 btnResume.setEnabled(false);
                 btnResume.setClickable(false);
+
+                // vibrate alert
+                v.vibrate(500);
+                mSoundPool.play(mSoundAlert, mVolume, mVolume, 1, 0, 1f);
 
                 // Perform calculations and actions to start EndWalk screen
                 finishTransition();
