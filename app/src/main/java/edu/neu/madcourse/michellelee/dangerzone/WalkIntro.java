@@ -30,7 +30,6 @@ public class WalkIntro extends AppCompatActivity {
                 int radioButtonID = minSelection.getCheckedRadioButtonId();
                 View radioButton = minSelection.findViewById(radioButtonID);
                 int index = minSelection.indexOfChild(radioButton);
-            Log.e("radioValue: ", Integer.toString(index));
             // Identify what the timer is
                 int timer = 0;
                 if (index == 0) {

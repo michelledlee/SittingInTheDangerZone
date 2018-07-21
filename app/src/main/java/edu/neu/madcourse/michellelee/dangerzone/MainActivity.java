@@ -100,22 +100,15 @@ public class MainActivity extends AppCompatActivity {
                 enterUserName.setVisibility(View.INVISIBLE);
                 // Update shared preferences with default values for the user profile
                 editor.putString("username", userNameString);
-                editor.apply();
                 editor.putInt("level", 1);
-                editor.apply();
-                editor.putInt("minutes walked", 0);
-                editor.apply();
-                editor.putInt("distance walked", 0);
-                editor.apply();
+                editor.putString("minutes walked", "0");
+                editor.putString("distance walked", "0");
                 editor.putInt("# titles", 1);
-                editor.apply();
                 editor.putString("title", "Fresh Meat");
-                editor.apply();
-                editor.putInt("# achievements", 0);
-                editor.apply();
+                editor.putInt("# achievements", 1);
                 editor.putString("achievements", "Danger Seeker");
-                editor.apply();
                 editor.putInt("xp", 0);
+                editor.putInt("personal best", 0);
                 editor.apply();
 
                 }
