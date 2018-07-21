@@ -36,18 +36,21 @@ public class UserProfileActivity extends AppCompatActivity {
         String name = preferences.getString("username", null);
         int level = preferences.getInt("level", -1);
         String currentTitle = preferences.getString("title", null);
-        int minutesWalked = preferences.getInt("minutes walked", -1);
-        int distanceWalked = preferences.getInt("distance walked", -1);
+        String minutesWalked = preferences.getString("minutes walked", null);
+        String distanceWalked = preferences.getString("distance walked", null);
         int titles = preferences.getInt("# titles", -1);
         int achievements = preferences.getInt("# achievements", -1);
+        String achievementsString = preferences.getString("achievements", null);
+
 
         // Hooking up achievements with adapters
-        ArrayList<String> itemList = new ArrayList<String>();
-        ArrayAdapter<String> titlesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemList);
+        ArrayList<String> itemList1 = new ArrayList<String>();
+        ArrayAdapter<String> titlesAdapter = new ArrayAdapter<String>(this, R.layout.list_item_profile, itemList1);
         ListView titlesList = (ListView) findViewById(R.id.titles_list);
         titlesList.setAdapter(titlesAdapter);
 //        titlesAdapter.add("title1");
-        ArrayAdapter<String> achievementsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, itemList);
+        ArrayList<String> itemList2 = new ArrayList<String>();
+        ArrayAdapter<String> achievementsAdapter = new ArrayAdapter<String>(this, R.layout.list_item_profile, itemList2);
         ListView achievementsList = (ListView) findViewById(R.id.achievements_list);
         achievementsList.setAdapter(achievementsAdapter);
 //        achievementsAdapter.add("title1");
@@ -63,13 +66,13 @@ public class UserProfileActivity extends AppCompatActivity {
         editor.putString("titles", titlebuild.toString());  // Replace old String of titles with new
         editor.apply();
 
-        String test2 = "test 2";
-        StringBuilder achievebuild = new StringBuilder();   // Create new StringBuilder
-        achievebuild.append(test1);
-        achievebuild.append(",");   // Add a delimiter to the end of it the existing String list
-        achievebuild.append(test2); // Add the new title to the StringBuilder
-        editor.putString("achievements", achievebuild.toString());  // Replace old String of titles with new
-        editor.apply();
+//        String test2 = "test 2";
+//        StringBuilder achievebuild = new StringBuilder(achievementsString);   // Create new StringBuilder
+//        achievebuild.append(test1);
+//        achievebuild.append(",");   // Add a delimiter to the end of it the existing String list
+//        achievebuild.append(test2); // Add the new title to the StringBuilder
+//        editor.putString("achievements", achievebuild.toString());  // Replace old String of titles with new
+//        editor.apply();
 
         // Special Processing to Retrieve: Get the String which contains all the titles. Split into an array based on the ","
         // delimiter. Iterate through the array of titles and add each to the ListView.
@@ -92,9 +95,9 @@ public class UserProfileActivity extends AppCompatActivity {
         final TextView userTitleView = (TextView) findViewById(R.id.user_title);
         userTitleView.setText("Title: " + currentTitle);
         TextView minutesWalkedView = (TextView) findViewById(R.id.minutes_walked);
-        minutesWalkedView.setText(Integer.toString(minutesWalked));
+        minutesWalkedView.setText(minutesWalked);
         TextView distancewalkedView = (TextView) findViewById(R.id.distance_walked);
-        distancewalkedView.setText(Integer.toString(distanceWalked));
+        distancewalkedView.setText(distanceWalked);
         TextView titlesEarned = (TextView) findViewById(R.id.titles_earned);
         titlesEarned.setText(Integer.toString(titles));
         TextView numberOfAchievementsView = (TextView) findViewById(R.id.achievements_earned);

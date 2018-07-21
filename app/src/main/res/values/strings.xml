@@ -41,8 +41,8 @@ Curabitur suscipit metus placerat arcu tincidunt cursus. Nunc nec mauris ferment
     <string name="user_default">USER NAME</string>
     <string name="user_level">LEVEL</string>
     <string name="title_default">\"Fresh meat\" </string>
-    <string name="minutes_walked">Minutes Walked</string>
-    <string name="distance_walked">Distance Walked</string>
+    <string name="minutes_walked">Minutes Walked (min)</string>
+    <string name="distance_walked">Distance Walked (m)</string>
     <string name="number_of_achievements"># of Achievements</string>
     <string name="min_default">0 min</string>
     <string name="distance_default">0 km</string>
@@ -74,9 +74,11 @@ Curabitur suscipit metus placerat arcu tincidunt cursus. Nunc nec mauris ferment
     <string name="experience_earned">Walk Experience Summary:</string>
     <string name="stat_summary">Walk Statistics Summary:</string>
     <string name="main_menu_button">Main Menu</string>
+    <string name="to_next_level">% to level&#160;</string>
 
     // WALK ACTIVITY
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
     <string name="timer_default">0:00</string>
+
 </resources>

@@ -1,33 +1,36 @@
 package edu.neu.madcourse.michellelee.dangerzone;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import android.app.Activity;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Random;
 
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class SimplePedometerActivity extends AppCompatActivity implements SensorEventListener, StepListener {
-//    private TextView textView;
+    //  Step counter variables
     private SimpleStepDetector simpleStepDetector;
     private SensorManager sensorManager;
     private Sensor accel;
     private static final String TEXT_NUM_STEPS = "Steps: ";
     private int numSteps;
+    private int minSteps;
+    private int maxSteps;
 
     // Timer
     private boolean isPaused = false;   // Paused status
@@ -39,6 +42,15 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
     private TextView steps;
     private int timerTime;
 
+    // Bonus
+    private boolean extraTimeMarker = false;
+    private int totalPoints = 0;
+    private int bonusTime = 0;
+
+    // Shared preferences
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +58,10 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
 //        textView.setTextSize(30);
 //        setContentView(R.layout.activity_simple_pedometer);
         setContentView(R.layout.activity_walk);
+
+        // Initialize Shared Preferences
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = preferences.edit();
 
         // Get an instance of the SensorManager
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -69,11 +85,18 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
         // Set countdown timer based on selection the user made
         timerTime = getIntent().getIntExtra("timer", -1);
         if (timerTime == 1) {
-            millisInFuture = 60000;
+//            millisInFuture = 60000;
+            millisInFuture = 10000;
+            minSteps = 100;
+            maxSteps = 140;
         } else if (timerTime == 3) {
             millisInFuture = 180000;
+            minSteps = 300;
+            maxSteps = 340;
         } else {
             millisInFuture = 300000;
+            minSteps = 500;
+            maxSteps = 540;
         }
 
         // Initialize a new CountDownTimer instance
@@ -109,6 +132,9 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
                 btnPause.setClickable(false);
                 btnResume.setEnabled(false);
                 btnResume.setClickable(false);
+
+                // Perform calculations and actions to start EndWalk screen
+                finishTransition();
             }
         }.start();
 
@@ -157,6 +183,9 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
                         btnPause.setClickable(false);
                         btnResume.setEnabled(false);
                         btnResume.setClickable(false);
+
+                        // Perform calculations and actions to start EndWalk screen
+                        finishTransition();
                     }
                 }.start();
                  onResume();
@@ -165,16 +194,6 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
             onPause();
             }
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Start walk activity
-        Intent endScreenIntent = new Intent(getApplicationContext(), EndWalk.class);
-        endScreenIntent.putExtra("steps", numSteps);
-        endScreenIntent.putExtra("timer", timerTime);
-        startActivity(endScreenIntent);
     }
 
     @Override
@@ -212,6 +231,76 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
 
     }
 
+    /**
+     *
+     */
+    private void finishTransition() {
+        // Will transition to the EndWalk activity, declare intent
+        Intent endScreenIntent = new Intent(getApplicationContext(), EndWalk.class);
+        endScreenIntent.putExtra("steps", numSteps);
+        endScreenIntent.putExtra("timer", timerTime);
 
+        // Finish and extra step bonus calculation; pass point score to EndWalk activity
+        // Add the String that we will use to display the points earned
+        // Increase totalPoints variable which will be used to calculate the level progression
+        Random rand = new Random();
+        int stepsNeeded = rand.nextInt((maxSteps - minSteps) + 1) + minSteps;
+        if (numSteps == stepsNeeded) {  // Level was completed successfully but no bonus was obtained
+            endScreenIntent.putExtra("walk finished", "Walk Finished +25");
+            endScreenIntent.putExtra("step bonus", "");
+            totalPoints += 25;
+        } else if (numSteps > stepsNeeded) { // Level was completed successfully and bonus was obtained
+            endScreenIntent.putExtra("walk finished", "Walk Finished +25");
+            endScreenIntent.putExtra("step bonus", "Step Bonus +25");
+            totalPoints += 50;
+        } else {    // Level was failed
+            endScreenIntent.putExtra("walk finished", "");
+            endScreenIntent.putExtra("step bonus", "");
+        }
+
+        // Extra time bonus calculation
+        // Add the String that we will use to display the points earned
+        // Increase totalPoints variable which will be used to calculate the level progression
+        if (extraTimeMarker == true) {
+            endScreenIntent.putExtra("time bonus", "Extra Time Bonus +50");
+            totalPoints += 50;
+        } else {
+            endScreenIntent.putExtra("time bonus", "");
+        }
+
+        // Calcuating bonus for personal best
+        int bestSoFar = preferences.getInt("personal best", -1);
+        // Extra time bonus calculation
+        // Add the String that we will use to display the points earned
+        // Increase totalPoints variable which will be used to calculate the level progression
+        if (numSteps > bestSoFar) { // A new personal best was achieved
+            endScreenIntent.putExtra("personal best", "Personal Best +75");
+            totalPoints += 75;
+            editor.putInt("personal best", numSteps);   // Add new personal best to Shared Preferences
+            editor.apply();
+        } else {    // No personal best achieved this instance
+            endScreenIntent.putExtra("personal best", "");
+        }
+
+        // Calculate minutes walked
+        double minutes = Double.parseDouble(preferences.getString("minutes walked", null)); // Need to get Double from String
+        minutes = minutes + timerTime + bonusTime;  // Add current session's time on to total minutes
+        editor.putString("minutes walked", Double.toString(minutes));
+        editor.apply();
+        endScreenIntent.putExtra("minutes summary", timerTime + bonusTime); // Pass this session's time to the end screen
+
+        // Calculate distance walked
+        double distance = numSteps * 0.8;
+        endScreenIntent.putExtra("distance summary", distance);
+        double existingDistance = Math.round(Double.parseDouble(preferences.getString("distance walked", null)) + distance);
+        editor.putString("distance walked", Double.toString(existingDistance));
+        editor.apply();
+
+        // Start the end screen activity
+        endScreenIntent.putExtra("total points", totalPoints);
+        editor.putInt("xp", preferences.getInt("xp", -1) + totalPoints);
+        editor.apply();
+        startActivity(endScreenIntent);
+    }
 
 }
