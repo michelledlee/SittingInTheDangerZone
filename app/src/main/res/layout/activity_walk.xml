@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/scenario_eaten"
     tools:context=".SimplePedometerActivity">
 
 <!--tools:context=".WalkActivity">-->
@@ -12,36 +13,49 @@
     <TextView
         android:id="@+id/step_counter"
         android:layout_width="100sp"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="35sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/timer"
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:text="@string/timer_default"
+            android:textSize="50sp"/>
+    </LinearLayout>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/settings_button_spacing">
-        <TextView
-            android:id="@+id/timer"
-            android:layout_width="100sp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/timer_default"
-            android:textSize="35sp"/>
         <Button
             android:id="@+id/btn_pause"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_toEndOf="@id/timer"
             android:text="@string/pause"
-            android:drawable="@drawable/button"/>
+            android:alpha="10"
+            android:textColor="@color/white"
+            android:background="@drawable/button_light"/>
+
         <Button
             android:id="@+id/btn_resume"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/btn_pause"
             android:text="@string/resume"
-            android:drawable="@drawable/button"/>
+            android:textColor="@color/white"
+            android:background="@drawable/button_light"/>
     </RelativeLayout>
 
 </RelativeLayout>

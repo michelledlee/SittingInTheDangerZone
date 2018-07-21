@@ -27,7 +27,7 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
     private SimpleStepDetector simpleStepDetector;
     private SensorManager sensorManager;
     private Sensor accel;
-    private static final String TEXT_NUM_STEPS = "Number of Steps: ";
+    private static final String TEXT_NUM_STEPS = "Steps: ";
     private int numSteps;
     private int minSteps;
     private int maxSteps;
@@ -108,12 +108,18 @@ public class SimplePedometerActivity extends AppCompatActivity implements Sensor
                 String text = String.format(Locale.getDefault(), "%02d:%02d",
                         TimeUnit.MILLISECONDS.toMinutes(millis),
                         TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                if (text.equals("00:30") || text.equals("00:25") || text.equals("00:20") || text.equals("00:15") ||
+                        text.equals("00:10") || text.equals("00:09") || text.equals("00:08") || text.equals("00:07") || text.equals("00:06") ||
+                        text.equals("00:05") || text.equals("00:04") || text.equals("00:03") || text.equals("00:02") || text.equals("00:01")) {
+                    tView.setTextColor(getResources().getColor(R.color.red_color));
+                }
+                else tView.setTextColor(getResources().getColor(R.color.white));
 
                 if (isPaused) {             // Cancel current instance if paused
-                    btnResume.setClickable(true);  // Resume is enabled while paused
-                    btnResume.setEnabled(true);    // Resume is enabled while paused
-                    onPause();
-                    cancel();
+                btnResume.setClickable(true);  // Resume is enabled while paused
+                btnResume.setEnabled(true);    // Resume is enabled while paused
+                onPause();
+                cancel();
                 } else {
                     tView.setText(text);    // Display current time set above
                     timeRemaining = millisUntilFinished;    // Store remaining time
