@@ -8,8 +8,6 @@
     android:background="@drawable/scenario_eaten"
     tools:context=".SimplePedometerActivity">
 
-<!--tools:context=".WalkActivity">-->
-
     <TextView
         android:id="@+id/step_counter"
         android:layout_width="100sp"

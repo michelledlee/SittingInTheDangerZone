@@ -118,7 +118,7 @@ public class EndWalk extends AppCompatActivity {
         String minutesSummary = "Minutes Walked (min) ... " + Double.toString(minutesSession);    // Concatenate string with values
         statisticsArray.add(minutesSummary);    // Add to the array of statistics strings
         double distanceSession = extras.getDouble("distance summary"); // Get distance walked this session
-        String distanceSummary = "Distance Walked (m) ... " + Double.toString(distanceSession); // Concatenate string with values
+        String distanceSummary = "Distance Walked (m) ... " + Double.toString(Math.round(distanceSession)); // Concatenate string with values
         statisticsArray.add(distanceSummary);   // Add to the array of statistics strings
         ArrayAdapter<String> statisticsAdapter = new ArrayAdapter<String>(this, R.layout.list_item_profile, statisticsArray);
         ListView statisticsSummary = (ListView) findViewById(R.id.statistics_list);

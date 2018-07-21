@@ -36,9 +36,6 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="landscape"/>
         <activity
-            android:name=".WalkActivity"
-            android:screenOrientation="landscape"/>
-        <activity
             android:name=".WalkIntro"
             android:screenOrientation="portrait"/>
         <activity

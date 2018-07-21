@@ -48,9 +48,6 @@ public class MainActivity extends AppCompatActivity {
         walkIntroButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) throws RuntimeException {
-//                Intent walkIntroIntent = new Intent(getApplicationContext(), WalkIntro.class);
-//                Intent walkIntroIntent = new Intent(getApplicationContext(), EndWalk.class);
-//                startActivity(walkIntroIntent);
                 Intent walkIntent = new Intent(getApplicationContext(), WalkIntro.class);
                 startActivity(walkIntent);
             }
@@ -62,6 +59,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) throws RuntimeException {
                 Intent userProfileIntent = new Intent(getApplicationContext(), UserProfileActivity.class);
+                startActivity(userProfileIntent);
+            }
+        });
+
+        // Information and instructions button
+        View instructionsButton = findViewById(R.id.instructions_button);
+        instructionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) throws RuntimeException {
+                Intent userProfileIntent = new Intent(getApplicationContext(), InformationInstructionsFragment.class);
                 startActivity(userProfileIntent);
             }
         });
