@@ -5,40 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradient_bg"
     tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:src="@drawable/info_graphic_small"/>
 
     <TextView
         android:id="@+id/title_information"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/info_font_size"
         android:text="@string/information"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold"
+        android:layout_marginTop="-20dp"/>
 
     <ScrollView
-        android:layout_width="300dp"
-        android:layout_height="420dp"
-        android:layout_gravity="center"
-        android:paddingBottom="20dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/info_box_padding"
+        android:layout_marginRight="@dimen/info_box_padding"
+        android:layout_marginBottom="@dimen/info_box_bottom_padding"
+        android:layout_gravity="center">
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/instructions_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textSize="@dimen/info_text_size"
                 android:text="@string/instructions" />
         </LinearLayout>
     </ScrollView>
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/bottom_offset">
 
         <Button
             android:id="@+id/ack_button"

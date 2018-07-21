@@ -4,18 +4,18 @@
     // INFORMATION AND INSTRUCTIONS
     <string name="acknowledgments">Acknowledgments</string>
     <string name="sources">
-    Volcano image and dinosaurs from pixabay.com\n\
-    Tom Cruise from google</string>
-    <string name="instructions">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac diam condimentum, dignissim leo nec, congue massa. Duis vulputate nunc diam, sit amet commodo risus blandit in. Cras diam justo, consequat et nibh a, tristique venenatis est. Duis sagittis metus et est laoreet, elementum commodo mi gravida. Proin accumsan imperdiet dolor, varius sagittis quam commodo ut. Nunc eu tellus ut mi egestas consequat. Sed tincidunt leo sed maximus venenatis. Proin non massa diam. Maecenas viverra mi id libero suscipit mattis eu sit amet lacus. Nam at varius nunc, at ultrices felis. Cras nec elit ac est imperdiet commodo eu venenatis augue. Aenean iaculis auctor magna a pellentesque. Suspendisse faucibus turpis aliquet nisl eleifend eleifend. Maecenas porttitor nulla risus, et condimentum ex placerat eget. Morbi eu interdum est.
-\n
-Vivamus elementum tortor non ex lacinia lacinia. Maecenas suscipit lacus euismod odio pellentesque, eget euismod nunc tincidunt. Nunc sit amet posuere magna. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget congue nunc. Sed nisl orci, luctus quis varius a, viverra vel metus. Etiam ante sem, pretium ac varius suscipit, sagittis at lacus. In vulputate fermentum sapien, nec rutrum eros sagittis ac. Aliquam suscipit ultricies dolor, id ornare felis. Maecenas nec vulputate nibh, nec luctus massa.
-\n
-Sed quam nunc, rutrum ut sapien et, vestibulum consectetur dui. Etiam luctus lacinia enim at tincidunt. Sed fermentum turpis vel risus porttitor ornare. In hac habitasse platea dictumst. Vivamus varius accumsan enim, sit amet efficitur massa volutpat imperdiet. Sed consequat tellus in risus tempus imperdiet. Nunc auctor metus lectus, in rhoncus justo porta dignissim. Nullam bibendum, urna vehicula facilisis hendrerit, nulla justo dictum nibh, vitae pretium nisl libero quis est. Aenean eget nisl porttitor, auctor sem ut, bibendum libero. Maecenas eu turpis nulla. Quisque eget dui eu lacus dictum placerat. Phasellus vulputate volutpat cursus. Donec sed luctus libero, et molestie tellus.
-\n
-Duis porta gravida nulla eget ultrices. Morbi eu consectetur dui, vel pellentesque dolor. Ut eu fermentum purus. Donec rhoncus varius velit et posuere. Proin a euismod libero, placerat sodales justo. Suspendisse pharetra, dolor in aliquam eleifend, nulla mauris volutpat felis, et porta dui diam eu augue. Ut in justo nec mauris malesuada aliquet accumsan ac nisl. Suspendisse potenti. Praesent in turpis commodo, commodo turpis non, euismod nunc.
-\n
-Curabitur suscipit metus placerat arcu tincidunt cursus. Nunc nec mauris fermentum, ullamcorper arcu a, convallis tortor. Nullam eu augue eros. Vestibulum id eros quis dui ullamcorper aliquam. Curabitur ultricies, urna sit amet vehicula dictum, neque lacus vulputate sem, sit amet semper tortor massa eu mi. Mauris pellentesque mi ligula, eget molestie elit molestie quis. Proin mattis diam vitae neque facilisis, a molestie libero mollis. Praesent tincidunt sem in suscipit tempus. Quisque dictum maximus est, in ultrices odio rhoncus nec. Morbi a ipsum pharetra, viverra turpis id, auctor nulla. Etiam bibend</string>
-    <string name="information">Information</string>
+         Volcano image and dinosaurs from pixabay.com\n
+    Tom Cruise from google and Tom Cruise’s mom\n
+    Button noises and music from soundjay.com\n
+    Awesome app by Michelle Lee and Bri Garbo.</string>
+    <string name="instructions">LAUNCH! THAT! APP!\n
+\nSo you’ve decided to step into the DANGER ZONE?! You’re so brave. Now that you’ve set your name, it’s time to understand the DANGER.
+    You can walk at any time by selecting the WALK option on the main screen. Choose how long you’d like to walk, and we’ll load a random
+    DANGER ZONE SCENARIO for you to escape from — or try! \n
+\nDANGER ZONE will randomly prompt you with a sudden DANGER ZONE SCENARIO throughout the day! To disable this option, select the GEAR on the main page, where you can opt out of this feature. \n
+\nOnce running, you’ll have the displayed amount of time to ESCAPE FROM THE DANGER ZONE! Track your steps and progress, earn achievements, compete against your friends, AND MORE! All while avoiding spending too much time sitting at your couch or desk!\n
+\nCan you escape… the DANGER ZONE??</string>
+    <string name="information">HOW TO PLAY:</string>
     <string name="ok_label">OK</string>
     <string name="ack_title">Acknowledgments</string>
     <string name="ack_list">FILL IN</string>

@@ -41,4 +41,11 @@
     <dimen name="list_width">250dp</dimen>
     <dimen name="list_height">100dp</dimen>
     <dimen name="thin_padding">10dp</dimen>
+
+    <dimen name="info_font_size">30dp</dimen>
+    <dimen name="info_box_padding">30dp</dimen>
+    <dimen name="info_box_bottom_padding">100dp</dimen>
+    <dimen name="info_text_size">15dp</dimen>
+    <dimen name="bottom_offset">-70dp</dimen>
+    <dimen name="ack_padding">10dp</dimen>
 </resources>
