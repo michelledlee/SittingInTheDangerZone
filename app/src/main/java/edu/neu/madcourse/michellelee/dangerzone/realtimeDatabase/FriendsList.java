@@ -12,4 +12,12 @@ public class FriendsList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends_list);
     }
+
+    private void addFriend() {
+
+    }
+
+    private void deleteFriend() {
+
+    }
 }

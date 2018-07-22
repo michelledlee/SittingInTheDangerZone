@@ -14,26 +14,33 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class UserProfileActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
+    private String token = FirebaseInstanceId.getInstance().getToken();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
 
         // Initialize Shared Preferences
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
         // Get user information
-        String name = preferences.getString("username", null);
+        final String name = preferences.getString("username", null);
         int level = preferences.getInt("level", -1);
         String currentTitle = preferences.getString("title", null);
         String minutesWalked = preferences.getString("minutes walked", null);
@@ -113,10 +120,18 @@ public class UserProfileActivity extends AppCompatActivity {
                 editor.putString("title", selected);
                 editor.apply();
                 Toast.makeText(UserProfileActivity.this,selected,Toast.LENGTH_LONG).show();
+                dataAddAppInstance(name, selected);
             }
         });
 
-
     }
 
+    /**
+     * Method to change the title name to be displayed to the friend's list
+     */
+    public void dataAddAppInstance(String name, String title) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child(token).child(name).child("title").setValue(title);
+
+    }
 }

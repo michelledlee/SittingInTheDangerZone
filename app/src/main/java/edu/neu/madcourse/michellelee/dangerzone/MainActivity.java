@@ -8,16 +8,30 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+import edu.neu.madcourse.michellelee.dangerzone.realtimeDatabase.models.User;
+
+import static android.content.ContentValues.TAG;
+
 public class MainActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+    private DatabaseReference mDatabase;
+
 
     private AlertDialog startDialog;
 
@@ -29,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Shared Preferences
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
+
+        // Get instance of Firebase
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // Ask if this is the first startup of the app as we need to get the user name
         isInitialStartup();
@@ -108,8 +125,8 @@ public class MainActivity extends AppCompatActivity {
                 // Update shared preferences with default values for the user profile
                 editor.putString("username", userNameString);
                 editor.putInt("level", 1);
-                editor.putString("minutes walked", "0");
-                editor.putString("distance walked", "0");
+                editor.putString("minutes walked", "none");
+                editor.putString("distance walked", "none");
                 editor.putInt("# titles", 1);
                 editor.putString("title", "Fresh Meat");
                 editor.putInt("# achievements", 1);
@@ -117,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.putInt("xp", 0);
                 editor.putInt("personal best", 0);
                 editor.apply();
-
+                doDataAddToDb(userNameString, "Fresh Meat");
                 }
             });
 
@@ -128,5 +145,24 @@ public class MainActivity extends AppCompatActivity {
             editor.apply();
         }
     }
+
+    /**
+     * Adds a brand new user to Firebase
+     * @param userNameString the user name entered by the user
+     * @param title the current title of the user
+     */
+    private void doDataAddToDb(String userNameString, String title) {
+        String date = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
+        Log.e(TAG, "date" + date);
+
+        // Creating a new user for the database
+        User newUser = new User(userNameString, title, date, "n/a", "n/a");  // creating a new user object to hold that data
+
+        // Add new node in database
+//        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference usersRef = mDatabase.child("users");
+        usersRef.setValue(newUser);
+    }
+
 
 }
