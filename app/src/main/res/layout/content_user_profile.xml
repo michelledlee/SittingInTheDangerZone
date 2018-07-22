@@ -104,21 +104,15 @@
         android:gravity="end"
         android:text="@string/titles_default"/>
 
-    <!--<ScrollView-->
-        <!--android:layout_width="200dp"-->
-        <!--android:layout_height="80dp"-->
-        <!--android:layout_below="@id/number_of_titles"-->
-        <!--android:layout_marginStart="@dimen/profile_double_indented">-->
-        <ListView
-            android:id="@+id/titles_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@id/number_of_titles"
-            android:layout_below="@id/number_of_titles"
-            android:clickable="true"
-            android:focusable="true">
-        </ListView>
-    <!--</ScrollView>-->
+    <ListView
+        android:id="@+id/titles_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/number_of_titles"
+        android:layout_below="@id/number_of_titles"
+        android:clickable="true"
+        android:focusable="true">
+    </ListView>
 
     <TextView
         android:id="@+id/number_of_achievements"
@@ -141,19 +135,21 @@
         android:gravity="end"
         android:text="@string/achievements_default"/>
 
-    <!--<ScrollView-->
-        <!--android:layout_width="200dp"-->
-        <!--android:layout_height="80dp"-->
-        <!--android:layout_below="@id/number_of_achievements"-->
-        <!--android:layout_marginStart="@dimen/profile_double_indented">-->
-        <ListView
-            android:id="@+id/achievements_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@id/number_of_achievements"
-            android:layout_below="@id/number_of_achievements">
-        </ListView>
-    <!--</ScrollView>-->
+    <ListView
+        android:id="@+id/achievements_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/number_of_achievements"
+        android:layout_below="@id/number_of_achievements">
+    </ListView>
 
+    <Button
+        android:id="@+id/friends_screen"
+        android:layout_width="@dimen/time_button_width"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/friends"
+        android:background="@drawable/button"/>
 
 </RelativeLayout>

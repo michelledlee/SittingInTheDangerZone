@@ -1,5 +1,6 @@
 package edu.neu.madcourse.michellelee.dangerzone;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
+import edu.neu.madcourse.michellelee.dangerzone.realtimeDatabase.FriendsList;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -46,7 +50,6 @@ public class UserProfileActivity extends AppCompatActivity {
         int titles = preferences.getInt("# titles", -1);
         int achievements = preferences.getInt("# achievements", -1);
         String achievementsString = preferences.getString("achievements", null);
-
 
         // Hooking up achievements with adapters
         ArrayList<String> itemList1 = new ArrayList<String>();
@@ -122,6 +125,16 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
+        // Hook up button for friends list activity
+        Button friendsScreen = (Button) findViewById(R.id.friends_screen);
+        friendsScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent friendsIntent = new Intent(getApplicationContext(), FriendsList.class);
+                startActivity(friendsIntent);
+            }
+        });
+
     }
 
     /**
@@ -131,10 +144,14 @@ public class UserProfileActivity extends AppCompatActivity {
      */
     public void dataAddAppInstance(String name, String title) {
         // Get token for this app instance
-        String token = FirebaseInstanceId.getInstance().getToken();
+//        String token = FirebaseInstanceId.getInstance().getToken();
 
+        // Get ID reference for node in question
+        String uniqueID =  preferences.getString("uid", null);
+
+        // Update firebase
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
-        myRef.child(token).child("title").setValue(title);
+        myRef.child(uniqueID).child("title").setValue(title);
     }
 }
