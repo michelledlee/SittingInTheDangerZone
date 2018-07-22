@@ -65,7 +65,8 @@ public class FriendsList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String friendID = enterFriendID.getText().toString();
-                addFriend(friendID);
+//                addFriend(friendID);
+                checkIfAdded(friendID);
             }
         });
 
@@ -96,11 +97,6 @@ public class FriendsList extends AppCompatActivity {
                 // Loop over each User in the DataSnapshot
                 for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     String nodeID = userSnapshot.child("uniqueID").getValue(String.class);
-//                    if (Log.e("THE UNIQUE ID", nodeID) != null) {
-//
-//                    };
-                    // If the user node unique ID is equal to the one we are looking for, add it to this user's friend list
-//                    if (nodeID.equals(friendsID)) {
                     if (nodeID != null) {
                         foundID = true;
                         break;  // Have found the friend node, can add friend to friend's list
@@ -128,6 +124,44 @@ public class FriendsList extends AppCompatActivity {
     }
 
     /**
+     * Check if this friendID has already been added to friends
+     * @param friendsID
+     * @return
+     */
+    private boolean checkIfAdded(final String friendsID) {
+        boolean alreadyAdded = false;
+        // Accessing database contents
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mRef = rootRef.child("users");
+
+        // Getting initial read of data from database
+        final ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Loop over each User in the DataSnapshot
+                for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String nodeID = userSnapshot.child("uniqueID").getValue(String.class);    // Get the unique ID for this node
+                    // If this friendsID is already in the list, do not add it again
+                    if (nodeID != null && nodeID.equals(uid)) {
+                        // Iterate through existing friends
+                        Map<String, String> map = (Map<String, String>) userSnapshot.child("friends").getValue();
+                        if (map == null || !map.containsValue(friendsID)) {
+                            addFriend(friendsID);
+                        } else { // Already friends with this person, do not add
+                            Toast.makeText(FriendsList.this, "Friend already added",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        mRef.addListenerForSingleValueEvent(eventListener);
+        return false;
+    }
+
+    /**
      * Get information for the friend ID passed in and add to friend's list
      * @param friendsID
      */
@@ -140,10 +174,8 @@ public class FriendsList extends AppCompatActivity {
         final ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                User friendNode = new User();
                 // Loop over each User in the DataSnapshot
                 for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-//                    friendNode = (User) userSnapshot.getValue(User.class);
                     String nodeID = userSnapshot.child("uniqueID").getValue(String.class);    // Get the unique ID for this node
                     // If the user node unique ID is equal to the one we are looking for, add it to this user's friend list
                     if (nodeID.equals(friendsID)) {
