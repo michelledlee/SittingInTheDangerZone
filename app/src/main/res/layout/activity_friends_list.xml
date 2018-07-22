@@ -5,6 +5,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".realtimeDatabase.FriendsList">
 
+    <TextView
+        android:id="@+id/uuid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/userid"/>
+
+    <Button
+        android:id="@+id/delete_friends"
+        android:layout_width="@dimen/time_button_width"
+        android:layout_height="wrap_content"
+        android:text="@string/delete"
+        android:background="@drawable/button"/>
+
+    <EditText
+        android:id="@+id/edit_text_input"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:hint="@string/edit_hint"
+        android:layout_marginTop="50dp"/>
+
+    <Button
+        android:id="@+id/edit_submit"
+        android:layout_width="@dimen/time_button_width"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        android:background="@drawable/button"/>
 </LinearLayout>

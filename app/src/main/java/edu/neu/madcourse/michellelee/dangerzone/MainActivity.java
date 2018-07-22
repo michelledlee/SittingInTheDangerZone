@@ -20,8 +20,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import edu.neu.madcourse.michellelee.dangerzone.realtimeDatabase.models.User;
 
@@ -150,17 +153,23 @@ public class MainActivity extends AppCompatActivity {
     private void doDataAddToDb(String userNameString, String title) {
         // Get token for this app instance
         String token = FirebaseInstanceId.getInstance().getToken();
+        String uniqueID = token.substring(token.length()-8);
+        editor.putString("uid", uniqueID);  // Add this ID to shared preferences
+        editor.apply();
 
         // Get date last active (now)
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
 
+        // Create a String[] for friends
+        String friendsList = "";
+
         // Creating a new user for the database
-        User newUser = new User(userNameString, title, date, "n/a", "n/a");
+        User newUser = new User(userNameString, title, date, "n/a", "n/a", uniqueID, friendsList);
 
         // Add new node in database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
-        myRef.child(token).setValue(newUser);
+        myRef.child(uniqueID).setValue(newUser);
     }
 
 

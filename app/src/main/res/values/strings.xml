@@ -49,6 +49,7 @@
     <string name="number_of_titles"># of Titles</string>
     <string name="titles_default">None</string>
     <string name="achievements_default">None</string>
+    <string name="friends">Friends</string>
 
     // INITIAL STARTUP DIALOG
     <string name="welcome_title">You are now entering the danger zone&#8230;</string>
@@ -80,5 +81,12 @@
     <string name="pause">Pause</string>
     <string name="resume">Resume</string>
     <string name="timer_default">0:00</string>
+
+    // FRIENDS LIST
+    <string name="add">Add</string>
+    <string name="delete">Remove</string>
+    <string name="userid">My Friend Code:&#160;</string>
+    <string name="edit_hint">Enter friend code</string>
+    <string name="submit">Submit</string>
 
 </resources>
