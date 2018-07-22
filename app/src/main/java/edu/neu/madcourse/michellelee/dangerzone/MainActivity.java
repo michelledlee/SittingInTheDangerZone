@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    private DatabaseReference mDatabase;
-
 
     private AlertDialog startDialog;
 
@@ -43,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Shared Preferences
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
-
-        // Get instance of Firebase
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // Ask if this is the first startup of the app as we need to get the user name
         isInitialStartup();
@@ -152,16 +148,19 @@ public class MainActivity extends AppCompatActivity {
      * @param title the current title of the user
      */
     private void doDataAddToDb(String userNameString, String title) {
+        // Get token for this app instance
+        String token = FirebaseInstanceId.getInstance().getToken();
+
+        // Get date last active (now)
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(new Date());
-        Log.e(TAG, "date" + date);
 
         // Creating a new user for the database
-        User newUser = new User(userNameString, title, date, "n/a", "n/a");  // creating a new user object to hold that data
+        User newUser = new User(userNameString, title, date, "n/a", "n/a");
 
         // Add new node in database
-//        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference usersRef = mDatabase.child("users");
-        usersRef.setValue(newUser);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
+        myRef.child(token).setValue(newUser);
     }
 
 
