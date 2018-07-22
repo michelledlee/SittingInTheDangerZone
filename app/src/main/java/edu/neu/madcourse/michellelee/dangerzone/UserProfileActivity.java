@@ -28,8 +28,6 @@ public class UserProfileActivity extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
-    private String token = FirebaseInstanceId.getInstance().getToken();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -128,10 +126,15 @@ public class UserProfileActivity extends AppCompatActivity {
 
     /**
      * Method to change the title name to be displayed to the friend's list
+     * @param name username of the person we are changing
+     * @param title title that is being changed to
      */
     public void dataAddAppInstance(String name, String title) {
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        mDatabase.child(token).child(name).child("title").setValue(title);
+        // Get token for this app instance
+        String token = FirebaseInstanceId.getInstance().getToken();
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
+        myRef.child(token).child("title").setValue(title);
     }
 }
