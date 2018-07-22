@@ -217,11 +217,47 @@ public class FriendsList extends AppCompatActivity {
      * @param friendsID the unique ID of the friend to delete
      */
     private void deleteFriend(final String friendsID) {
-        // Accessing database contents
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mRef = rootRef.child("users").child(uid).child("friends");
+//        // Accessing database contents
+//        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+//
+//        mRef.removeValue();
 
-        mRef.removeValue();
+        // Accessing database contents
+        final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mRef = rootRef.child("users");    // Users level reference
+
+        // Getting initial read of data from database
+        final ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Loop over each User in the DataSnapshot
+                for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String nodeID = userSnapshot.child("uniqueID").getValue(String.class);    // Get the unique ID for this node
+                    if (nodeID != null && nodeID.equals(uid)) { // If this is the node we need the friend's list from
+                        Map<String, String> map = (Map<String, String>) userSnapshot.child("friends").getValue();   // Get the friends list for this node
+                        if (map != null || map.containsValue(friendsID)) {  // If the friends list is not null and contains the friend's ID
+                            for (Map.Entry<String, String> entry : map.entrySet()) { // Iterate through this map to find the friend to delete
+                                Log.e("entry value", entry.getValue());
+                                if (entry.getValue().equals(friendsID)) {    // If this entry is the friend that is to be deleted
+                                    Log.e("found id", entry.getValue());
+                                    String theKey = entry.getKey(); // Get the key for this friend
+                                    Log.e("the key", entry.getKey());
+                                    DatabaseReference friendRef = rootRef.child("users").child(uid).child("friends").child(theKey); // Get a reference to this key
+                                    friendRef.removeValue(); // Remove the value at this level
+                                    friendRef.setValue(null);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        mRef.addListenerForSingleValueEvent(eventListener);
+
     }
 
     /**
