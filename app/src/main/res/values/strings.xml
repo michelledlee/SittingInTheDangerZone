@@ -70,7 +70,7 @@
     <string name="time_selection">SELECT WALK TIME: </string>
 
     // END WALK
-    <string name="victory_title">VICTORY!</string>
+    <string name="victory_title">RESULTS</string>
     <string name="experience_earned">Walk Experience Summary:</string>
     <string name="stat_summary">Walk Statistics Summary:</string>
     <string name="main_menu_button">Main Menu</string>

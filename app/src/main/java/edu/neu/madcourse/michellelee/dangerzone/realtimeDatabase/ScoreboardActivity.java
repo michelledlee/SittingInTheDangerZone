@@ -72,10 +72,10 @@ public class ScoreboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.score_board);
 
-//        // accessing database contents for this instance only
-//        rootRef = FirebaseDatabase.getInstance().getReference();
-//        mRef = rootRef.child(token);
-//
+        // Accessing database contents for this instance only
+        rootRef = FirebaseDatabase.getInstance().getReference();
+        mRef = rootRef.child(token);
+
 //        final ValueEventListener eventListener = new ValueEventListener() {
 //            @Override
 //            public void onDataChange(DataSnapshot dataSnapshot) {
