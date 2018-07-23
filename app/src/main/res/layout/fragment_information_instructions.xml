@@ -32,6 +32,7 @@
         android:layout_marginRight="@dimen/info_box_padding"
         android:layout_marginBottom="@dimen/info_box_bottom_padding"
         android:layout_gravity="center">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

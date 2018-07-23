@@ -69,6 +69,8 @@
     <string name="five_min">5 min</string>
     <string name="walk">Walk!</string>
     <string name="time_selection">SELECT WALK TIME: </string>
+    <string name="walk_title">WALK FOR YOUR LIFE!</string>
+    <string name="walk_scenario">the very important scenario information about not getting eaten by a dinosaur goes here!!</string>
 
     // END WALK
     <string name="victory_title">RESULTS</string>
@@ -88,5 +90,8 @@
     <string name="userid">My Friend Code:&#160;</string>
     <string name="edit_hint">Enter friend code</string>
     <string name="submit">Submit</string>
+    <string name="friends_list_title">FRIENDS LIST</string>
+    <string name="friends_title">Title</string>
+    <string name="friends_scenario">Last Scenario</string>
 
 </resources>
