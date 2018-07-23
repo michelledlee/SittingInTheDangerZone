@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "436657917357",
+    "firebase_url": "https://dangerzone-b71dd.firebaseio.com",
+    "project_id": "dangerzone-b71dd",
+    "storage_bucket": "dangerzone-b71dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436657917357:android:1762b701b8d4acfd",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.michellelee.dangerzone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "436657917357-4gto7r9q09prsphpfqpm27302mlavgu6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.neu.madcourse.michellelee.dangerzone",
+            "certificate_hash": "3bcef24cde34a77ed5002e69027a96055ffd13c3"
+          }
+        },
+        {
+          "client_id": "436657917357-b6ghik1guin5hqgph9vtc0rcq4g146js.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO6_wgsy3JSlsaLOxSz9-jY3T2YaF0Wio"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "436657917357-b6ghik1guin5hqgph9vtc0rcq4g146js.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
