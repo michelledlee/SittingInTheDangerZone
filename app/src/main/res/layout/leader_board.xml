@@ -8,315 +8,102 @@
     android:background="@drawable/gradient_bg"
     tools:context=".realtimeDatabase.LeaderboardActivity">
 
-    <TableRow
-        android:layout_marginTop="@dimen/profile_padding"
-        android:layout_marginStart="@dimen/profile_padding">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/friends_list_title"
-            android:textStyle="bold"
-            android:textSize="@dimen/friends_title_size"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/friends_title_size"
-            android:text="@string/user_default"
-            android:paddingLeft="@dimen/random_offset"/>
+    <!--<TableRow-->
+        <!--android:layout_marginTop="@dimen/profile_padding"-->
+        <!--android:layout_marginStart="@dimen/profile_padding">-->
 
-    </TableRow>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/friends_list_title"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="@dimen/friends_title_size"/>-->
 
-    <TableRow
-        android:layout_marginStart="@dimen/profile_indented">
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="@dimen/friends_title_size"-->
+            <!--android:text="@string/user_default"-->
+            <!--android:paddingLeft="@dimen/random_offset"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="italic"
-            android:textSize="@dimen/profile_username_title"
-            android:text="@string/title_default"/>
-    </TableRow>
+    <!--</TableRow>-->
 
-    <TableRow
-        android:layout_marginTop="@dimen/profile_soft_padding"
-        android:layout_marginStart="@dimen/profile_double_indented" >
 
-        <TextView
-            android:id="@+id/friend1_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend1"/>
+    <!--<TableRow-->
+        <!--android:layout_marginStart="@dimen/profile_indented">-->
 
-        <TextView
-            android:id="@+id/friend1_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend1_id"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textStyle="italic"-->
+            <!--android:textSize="@dimen/profile_username_title"-->
+            <!--android:text="@string/title_default"/>-->
+    <!--</TableRow>-->
 
-    </TableRow>
+    <!--<ListView-->
+        <!--android:layout_marginStart="@dimen/profile_double_indented"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/list_friends">-->
+    <!--</ListView>-->
 
-    <TableRow
-        android:layout_marginStart="@dimen/profile_indented">
+    <!--<TableRow-->
+        <!--android:layout_marginTop="@dimen/profile_soft_padding"-->
+        <!--android:layout_marginStart="@dimen/profile_double_indented" >-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:textStyle="bold"
-            android:text="@string/friends_title"/>
+        <!--<TextView-->
+            <!--android:id="@+id/friend1_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="@dimen/profile_text_size"-->
+            <!--android:text="@string/friend1"/>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:textStyle="bold"
-            android:text="@string/friends_scenario"/>
-    </TableRow>
-    <TableRow
-        android:layout_marginStart="@dimen/profile_indented">
+        <!--<TextView-->
+            <!--android:id="@+id/friend1_id"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textSize="@dimen/profile_text_size"-->
+            <!--android:text="@string/friend1_id"/>-->
 
-        <TextView
-            android:id="@+id/friend1_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend1_title"/>
+    <!--</TableRow>-->
 
-        <TextView
-            android:id="@+id/friend1_last_scenario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend1_last_scenario"/>
-    </TableRow>
+    <!--<TableRow-->
+        <!--android:layout_marginStart="@dimen/profile_indented">-->
 
-    <TableRow
-        android:layout_marginTop="@dimen/random_offset"
-        android:layout_marginStart="@dimen/profile_double_indented" >
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="@dimen/profile_text_size"-->
+            <!--android:textStyle="bold"-->
+            <!--android:text="@string/friends_title"/>-->
 
-        <TextView
-            android:id="@+id/friend2_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend2"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="@dimen/profile_text_size"-->
+            <!--android:textStyle="bold"-->
+            <!--android:text="@string/friends_scenario"/>-->
+    <!--</TableRow>-->
+    <!--<TableRow-->
+        <!--android:layout_marginStart="@dimen/profile_indented">-->
 
-        <TextView
-            android:id="@+id/friend2_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend2_id"/>
-    </TableRow>
+        <!--<TextView-->
+            <!--android:id="@+id/friend1_title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="@dimen/profile_text_size"-->
+            <!--android:text="@string/friend1_title"/>-->
 
-    <TableRow
-        android:layout_marginStart="@dimen/profile_indented">
+        <!--<TextView-->
+            <!--android:id="@+id/friend1_last_scenario"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="@dimen/profile_text_size"-->
+            <!--android:text="@string/friend1_last_scenario"/>-->
+    <!--</TableRow>-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:textStyle="bold"
-            android:text="@string/friends_title"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:textStyle="bold"
-            android:text="@string/friends_scenario"/>
-    </TableRow>
-    <TableRow
-        android:layout_marginStart="@dimen/profile_indented">
-
-        <TextView
-            android:id="@+id/friend2_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend2_title"/>
-
-        <TextView
-            android:id="@+id/friend2_last_scenario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend2_last_scenario"/>
-    </TableRow>
-
-    <TableRow
-        android:layout_marginTop="@dimen/random_offset"
-        android:layout_marginStart="@dimen/profile_double_indented" >
-
-        <TextView
-            android:id="@+id/friend3_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend3"/>
-
-        <TextView
-            android:id="@+id/friend3_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend3_id"/>
-    </TableRow>
-
-    <TableRow
-        android:layout_marginStart="@dimen/profile_indented">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:textStyle="bold"
-            android:text="@string/friends_title"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:textStyle="bold"
-            android:text="@string/friends_scenario"/>
-    </TableRow>
-    <TableRow
-        android:layout_marginStart="@dimen/profile_indented">
-
-        <TextView
-            android:id="@+id/friend3_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend3_title"/>
-
-        <TextView
-            android:id="@+id/friend3_last_scenario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend3_last_scenario"/>
-    </TableRow>
-
-    <TableRow
-        android:layout_marginTop="@dimen/random_offset"
-        android:layout_marginStart="@dimen/profile_double_indented" >
-
-        <TextView
-            android:id="@+id/friend4_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend4"/>
-
-        <TextView
-            android:id="@+id/friend4_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend4_id"/>
-    </TableRow>
-
-    <TableRow
-        android:layout_marginStart="@dimen/profile_indented">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:textStyle="bold"
-            android:text="@string/friends_title"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:textStyle="bold"
-            android:text="@string/friends_scenario"/>
-    </TableRow>
-    <TableRow
-        android:layout_marginStart="@dimen/profile_indented">
-
-        <TextView
-            android:id="@+id/friend4_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend4_title"/>
-
-        <TextView
-            android:id="@+id/friend4_last_scenario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend4_last_scenario"/>
-    </TableRow>
-
-    <TableRow
-        android:layout_marginTop="@dimen/random_offset"
-        android:layout_marginStart="@dimen/profile_double_indented" >
-
-        <TextView
-            android:id="@+id/friend5_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend5"/>
-
-        <TextView
-            android:id="@+id/friend5_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend5_id"/>
-    </TableRow>
-
-    <TableRow
-        android:layout_marginStart="@dimen/profile_indented">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:textStyle="bold"
-            android:text="@string/friends_title"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:textStyle="bold"
-            android:text="@string/friends_scenario"/>
-    </TableRow>
-    <TableRow
-        android:layout_marginStart="@dimen/profile_indented">
-
-        <TextView
-            android:id="@+id/friend5_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend5_title"/>
-
-        <TextView
-            android:id="@+id/friend5_last_scenario"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/friend5_last_scenario"/>
-    </TableRow>
 </TableLayout>

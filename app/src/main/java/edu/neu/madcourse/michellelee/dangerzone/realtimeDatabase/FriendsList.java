@@ -21,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -33,6 +35,8 @@ public class FriendsList extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
     private String uid;
+    private String username;
+    private String currentTitle;
     private ArrayList<String> friendArrayList;
     private ArrayAdapter<String> friendAdapter;
 
@@ -53,11 +57,20 @@ public class FriendsList extends AppCompatActivity {
 //            }
 //        });
 
-        // Display user ID
+        // Display user ID & username
         uid = preferences.getString("uid", null);   // Get user ID for this app instance
+        username = preferences.getString("username", null); // get username for this app instance
+        currentTitle = preferences.getString("title", null); // get current title for this app instance
+
         TextView myID = (TextView) findViewById(R.id.uuid);
+        TextView myUsername = (TextView) findViewById(R.id.friendslist_username);
+        TextView myTitle = (TextView) findViewById(R.id.friendslist_title);
+
         String useridIntro = getResources().getString(R.string.userid);
         myID.setText(useridIntro + uid);    // Display for user
+        myUsername.setText(username); // Display for user
+        myTitle.setText(currentTitle);
+
 
         // Set up EditText for friend code input
         final EditText enterFriendID = (EditText) findViewById(R.id.edit_text_input);

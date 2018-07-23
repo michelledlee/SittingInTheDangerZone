@@ -40,7 +40,7 @@
     // USER XML
     <string name="user_default">USER NAME</string>
     <string name="user_level">LEVEL</string>
-    <string name="title_default">\"Fresh meat\" </string>
+    <string name="title_default">\"Fresh Meat\" </string>
     <string name="minutes_walked">Minutes Walked (min)</string>
     <string name="distance_walked">Distance Walked (m)</string>
     <string name="number_of_achievements"># of Achievements</string>
@@ -85,13 +85,10 @@
     <string name="timer_default">0:00</string>
 
     // FRIENDS LIST
-    <string name="add">Add</string>
-    <string name="delete">Remove</string>
+    <string name="add">Add Friend</string>
+    <string name="delete">Remove Friend</string>
     <string name="userid">My Friend Code:&#160;</string>
     <string name="edit_hint">Enter friend code</string>
     <string name="submit">Submit</string>
     <string name="friends_list_title">FRIENDS LIST</string>
-    <string name="friends_title">Title</string>
-    <string name="friends_scenario">Last Scenario</string>
-
 </resources>

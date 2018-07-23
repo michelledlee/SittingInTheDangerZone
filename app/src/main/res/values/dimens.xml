@@ -51,5 +51,6 @@
     <dimen name="ack_padding">10dp</dimen>
     <dimen name="friends_title_size">25sp</dimen>
     <dimen name="random_offset">30sp</dimen>
-    <dimen name="profile_text_size">15</dimen>
+    <dimen name="friends_offset">20sp</dimen>
+    <dimen name="profile_text_size">20sp</dimen>
 </resources>
