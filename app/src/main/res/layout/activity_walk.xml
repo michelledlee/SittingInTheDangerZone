@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/scenario_eaten"
-    tools:context=".SimplePedometerActivity">
+    tools:context=".WalkActivity">
 
     <TextView
         android:id="@+id/step_counter"

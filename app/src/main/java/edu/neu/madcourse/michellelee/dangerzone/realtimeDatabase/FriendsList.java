@@ -49,6 +49,9 @@ public class FriendsList extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
+<<<<<<< HEAD
+        // Display user ID
+=======
 //        final Button deleteFriend = (Button) findViewById(R.id.delete_friends);
 //        deleteFriend.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -58,6 +61,7 @@ public class FriendsList extends AppCompatActivity {
 //        });
 
         // Display user ID & username
+>>>>>>> master
         uid = preferences.getString("uid", null);   // Get user ID for this app instance
         username = preferences.getString("username", null); // get username for this app instance
         currentTitle = preferences.getString("title", null); // get current title for this app instance
@@ -173,12 +177,16 @@ public class FriendsList extends AppCompatActivity {
                     String nodeID = userSnapshot.child("uniqueID").getValue(String.class);    // Get the unique ID for this node
                     // If this friendsID is already in the list, do not add it again
                     if (nodeID != null && nodeID.equals(uid)) {
-                        // Iterate through existing friends
-                        Map<String, String> map = (Map<String, String>) userSnapshot.child("friends").getValue();
-                        if (map == null || !map.containsValue(friendsID)) {
+                        if (userSnapshot.child("friends").getValue() instanceof Map) {  // If there is an existing friend's list with 1+ friends, it is stored as a map
+                            // Iterate through existing friends by obtaining the "friends" map
+                            Map<String, String> map = (Map<String, String>) userSnapshot.child("friends").getValue();
+                            if (map == null || !map.containsValue(friendsID)) { // If the map isn't empty and does not already contain this friend
+                                addFriend(friendsID);   // Add this friend
+                            } else { // Already friends with this person, do not add
+                                Toast.makeText(FriendsList.this, "Friend already added", Toast.LENGTH_LONG).show(); // Let the user know that the friend was already added
+                            }
+                        } else {    // Add the user's very first friend
                             addFriend(friendsID);
-                        } else { // Already friends with this person, do not add
-                            Toast.makeText(FriendsList.this, "Friend already added",Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -230,11 +238,47 @@ public class FriendsList extends AppCompatActivity {
      * @param friendsID the unique ID of the friend to delete
      */
     private void deleteFriend(final String friendsID) {
-        // Accessing database contents
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference mRef = rootRef.child("users").child(uid).child("friends");
+//        // Accessing database contents
+//        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+//
+//        mRef.removeValue();
 
-        mRef.removeValue();
+        // Accessing database contents
+        final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mRef = rootRef.child("users");    // Users level reference
+
+        // Getting initial read of data from database
+        final ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Loop over each User in the DataSnapshot
+                for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    String nodeID = userSnapshot.child("uniqueID").getValue(String.class);    // Get the unique ID for this node
+                    if (nodeID != null && nodeID.equals(uid)) { // If this is the node we need the friend's list from
+                        Map<String, String> map = (Map<String, String>) userSnapshot.child("friends").getValue();   // Get the friends list for this node
+                        if (map != null || map.containsValue(friendsID)) {  // If the friends list is not null and contains the friend's ID
+                            for (Map.Entry<String, String> entry : map.entrySet()) { // Iterate through this map to find the friend to delete
+                                Log.e("entry value", entry.getValue());
+                                if (entry.getValue().equals(friendsID)) {    // If this entry is the friend that is to be deleted
+                                    Log.e("found id", entry.getValue());
+                                    String theKey = entry.getKey(); // Get the key for this friend
+                                    Log.e("the key", entry.getKey());
+                                    DatabaseReference friendRef = rootRef.child("users").child(uid).child("friends").child(theKey); // Get a reference to this key
+                                    friendRef.removeValue(); // Remove the value at this level
+                                    friendRef.setValue(null);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        mRef.addListenerForSingleValueEvent(eventListener);
+
     }
 
     /**
@@ -252,14 +296,23 @@ public class FriendsList extends AppCompatActivity {
                 // Loop over each User in the DataSnapshot
                 for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     String nodeID = userSnapshot.child("uniqueID").getValue(String.class);    // Get the unique ID for this node
-                    // If this friendsID is already in the list, do not add it again
                     if (nodeID != null && nodeID.equals(uid)) {
+//                        if (userSnapshot.child("uniqueID").child("friends").getValue() instanceof String) {   // Case if no friends have been added yet
+//                            Toast.makeText(FriendsList.this, "Add new friends!",Toast.LENGTH_LONG).show();
+//                            break;
+//                        } else if (userSnapshot.child("uniqueID").child("friends").getValue() instanceof Map) {    // If this friendsID is already in the list, do not add it again
+                        if (userSnapshot.child("uniqueID").child("friends").getValue() instanceof Map) {
                         // Iterate through existing friends
-                        Map<String, String> map = (Map<String, String>) userSnapshot.child("friends").getValue();
-                        // For each friend, add to the list
-                        for (Map.Entry<String, String> entry : map.entrySet()) {
-                            friendAdapter.add(entry.getValue());
+                            Map<String, String> map = (Map<String, String>) userSnapshot.child("friends").getValue();
+                            // For each friend, add to the list
+                            for (Map.Entry<String, String> entry : map.entrySet()) {
+                                friendAdapter.add(entry.getValue());
+                            }
+                            break;
+                        } else {
+                            break;
                         }
+
                     }
                 }
             }

@@ -35,7 +35,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SimplePedometerActivity"
+            android:name=".WalkActivity"
             android:label="@string/title_activity_simplepedometer"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar" />
