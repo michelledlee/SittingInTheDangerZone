@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UserProfileActivity"
+    android:background="@drawable/gradient_bg"
     tools:showIn="@layout/activity_user_profile">
-
 
     <TextView
         android:id="@+id/user_name"
@@ -15,7 +15,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="@dimen/profile_padding"
-        android:layout_marginTop="@dimen/settings_padding"
+        android:layout_marginTop="@dimen/profile_padding"
         android:textStyle="bold"
         android:textSize="@dimen/profile_username_text"
         android:text="@string/user_default" />
@@ -24,7 +24,7 @@
         android:id="@+id/user_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/settings_padding"
+        android:layout_marginTop="@dimen/profile_padding"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/profile_padding_right"
         android:textSize="@dimen/profile_username_text"
@@ -36,7 +36,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/user_level"
         android:layout_marginStart="@dimen/profile_indented"
-        android:layout_marginTop="@dimen/settings_related_spacing"
         android:textStyle="italic"
         android:textSize="@dimen/profile_username_title"
         android:text="@string/title_default" />
@@ -46,8 +45,9 @@
         android:layout_width="@dimen/profile_stat_width"
         android:layout_height="wrap_content"
         android:layout_below="@id/user_title"
+        android:textSize="@dimen/profile_text_size"
+        android:layout_marginTop="@dimen/profile_soft_padding"
         android:layout_marginStart="@dimen/profile_double_indented"
-        android:layout_marginTop="@dimen/settings_button_spacing"
         android:text="@string/minutes_walked" />
 
     <TextView
@@ -56,6 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/user_level"
+        android:textSize="@dimen/profile_text_size"
         android:layout_marginEnd="@dimen/profile_padding_right"
         android:layout_marginTop="@dimen/profile_numbers"
         android:layout_toEndOf="@id/user_min_walked"
@@ -67,6 +68,7 @@
         android:layout_width="@dimen/profile_stat_width"
         android:layout_height="wrap_content"
         android:layout_below="@id/user_min_walked"
+        android:textSize="@dimen/profile_text_size"
         android:layout_marginStart="@dimen/profile_double_indented"
         android:layout_marginTop="@dimen/settings_related_spacing"
         android:text="@string/distance_walked" />
@@ -76,6 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:textSize="@dimen/profile_text_size"
         android:layout_below="@id/minutes_walked"
         android:layout_marginEnd="@dimen/profile_padding_right"
         android:layout_marginTop="@dimen/settings_related_spacing"
@@ -88,6 +91,7 @@
         android:layout_width="@dimen/profile_stat_width"
         android:layout_height="wrap_content"
         android:layout_below="@id/user_distance_walked"
+        android:textSize="@dimen/profile_text_size"
         android:layout_marginStart="@dimen/profile_double_indented"
         android:layout_marginTop="@dimen/settings_related_spacing"
         android:text="@string/number_of_titles" />
@@ -98,6 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/distance_walked"
+        android:textSize="@dimen/profile_text_size"
         android:layout_marginEnd="@dimen/profile_padding_right"
         android:layout_marginTop="@dimen/settings_related_spacing"
         android:layout_toEndOf="@id/number_of_achievements"
@@ -119,6 +124,7 @@
         android:layout_width="@dimen/profile_stat_width"
         android:layout_height="wrap_content"
         android:layout_below="@id/number_of_titles"
+        android:textSize="@dimen/profile_text_size"
         android:layout_marginStart="@dimen/profile_double_indented"
         android:layout_marginTop="@dimen/profile_scrollview"
         android:text="@string/number_of_achievements" />
@@ -128,6 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:textSize="@dimen/profile_text_size"
         android:layout_below="@id/titles_earned"
         android:layout_marginEnd="@dimen/profile_padding_right"
         android:layout_marginTop="@dimen/profile_scrollview"
@@ -149,6 +156,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/random_offset"
+        android:textColor="@color/white"
         android:text="@string/friends"
         android:background="@drawable/button"/>
 

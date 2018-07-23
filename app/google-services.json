@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "436657917357-d2bhct1sp50j7c75kkmbvl58gjmlrchj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.neu.madcourse.michellelee.dangerzone",
+            "certificate_hash": "7593344a4e6544e28d7c563ffaeb52f6dd0106c0"
+          }
+        },
+        {
           "client_id": "436657917357-b6ghik1guin5hqgph9vtc0rcq4g146js.apps.googleusercontent.com",
           "client_type": 3
         }
