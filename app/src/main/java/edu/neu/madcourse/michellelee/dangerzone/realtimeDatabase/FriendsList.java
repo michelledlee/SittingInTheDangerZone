@@ -45,14 +45,6 @@ public class FriendsList extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
-//        final Button deleteFriend = (Button) findViewById(R.id.delete_friends);
-//        deleteFriend.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                deleteFriend();
-//            }
-//        });
-
         // Display user ID
         uid = preferences.getString("uid", null);   // Get user ID for this app instance
         TextView myID = (TextView) findViewById(R.id.uuid);
@@ -160,12 +152,16 @@ public class FriendsList extends AppCompatActivity {
                     String nodeID = userSnapshot.child("uniqueID").getValue(String.class);    // Get the unique ID for this node
                     // If this friendsID is already in the list, do not add it again
                     if (nodeID != null && nodeID.equals(uid)) {
-                        // Iterate through existing friends
-                        Map<String, String> map = (Map<String, String>) userSnapshot.child("friends").getValue();
-                        if (map == null || !map.containsValue(friendsID)) {
+                        if (userSnapshot.child("friends").getValue() instanceof Map) {  // If there is an existing friend's list with 1+ friends, it is stored as a map
+                            // Iterate through existing friends by obtaining the "friends" map
+                            Map<String, String> map = (Map<String, String>) userSnapshot.child("friends").getValue();
+                            if (map == null || !map.containsValue(friendsID)) { // If the map isn't empty and does not already contain this friend
+                                addFriend(friendsID);   // Add this friend
+                            } else { // Already friends with this person, do not add
+                                Toast.makeText(FriendsList.this, "Friend already added", Toast.LENGTH_LONG).show(); // Let the user know that the friend was already added
+                            }
+                        } else {    // Add the user's very first friend
                             addFriend(friendsID);
-                        } else { // Already friends with this person, do not add
-                            Toast.makeText(FriendsList.this, "Friend already added",Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -275,14 +271,23 @@ public class FriendsList extends AppCompatActivity {
                 // Loop over each User in the DataSnapshot
                 for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     String nodeID = userSnapshot.child("uniqueID").getValue(String.class);    // Get the unique ID for this node
-                    // If this friendsID is already in the list, do not add it again
                     if (nodeID != null && nodeID.equals(uid)) {
+//                        if (userSnapshot.child("uniqueID").child("friends").getValue() instanceof String) {   // Case if no friends have been added yet
+//                            Toast.makeText(FriendsList.this, "Add new friends!",Toast.LENGTH_LONG).show();
+//                            break;
+//                        } else if (userSnapshot.child("uniqueID").child("friends").getValue() instanceof Map) {    // If this friendsID is already in the list, do not add it again
+                        if (userSnapshot.child("uniqueID").child("friends").getValue() instanceof Map) {
                         // Iterate through existing friends
-                        Map<String, String> map = (Map<String, String>) userSnapshot.child("friends").getValue();
-                        // For each friend, add to the list
-                        for (Map.Entry<String, String> entry : map.entrySet()) {
-                            friendAdapter.add(entry.getValue());
+                            Map<String, String> map = (Map<String, String>) userSnapshot.child("friends").getValue();
+                            // For each friend, add to the list
+                            for (Map.Entry<String, String> entry : map.entrySet()) {
+                                friendAdapter.add(entry.getValue());
+                            }
+                            break;
+                        } else {
+                            break;
                         }
+
                     }
                 }
             }
