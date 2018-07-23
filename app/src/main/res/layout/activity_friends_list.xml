@@ -1,45 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<TableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".realtimeDatabase.FriendsList">
+    android:background="@drawable/gradient_bg"
+    tools:context=".realtimeDatabase.LeaderboardActivity">
 
-    <TextView
-        android:id="@+id/uuid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/userid"/>
+    <TableRow
+        android:layout_marginTop="@dimen/profile_padding"
+        android:layout_marginStart="@dimen/profile_padding">
 
-    <Button
-        android:id="@+id/delete_friends"
-        android:layout_width="@dimen/time_button_width"
-        android:layout_height="wrap_content"
-        android:text="@string/delete"
-        android:background="@drawable/button"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/friends_list_title"
+            android:textStyle="bold"
+            android:textSize="@dimen/friends_title_size"/>
 
-    <EditText
-        android:id="@+id/edit_text_input"
-        android:layout_height="wrap_content"
+        <TextView
+            android:id="@+id/friendslist_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/friends_title_size"
+            android:text="@string/user_default"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_marginStart="@dimen/profile_indented">
+
+        <TextView
+            android:id="@+id/friendslist_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="italic"
+            android:textSize="@dimen/profile_username_title"
+            android:text="@string/title_default"/>
+    </TableRow>
+
+    <TableRow>
+        <TextView
+            android:layout_marginTop="@dimen/friends_offset"
+            android:layout_marginStart="@dimen/profile_padding"
+            android:id="@+id/uuid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/profile_text_size"
+            android:text="@string/userid"/>
+    </TableRow>
+
+    <LinearLayout
+        android:layout_marginStart="@dimen/profile_double_indented"
         android:layout_width="fill_parent"
-        android:hint="@string/edit_hint"
-        android:layout_marginTop="50dp"/>
-
-    <Button
-        android:id="@+id/edit_submit"
-        android:layout_width="@dimen/time_button_width"
         android:layout_height="wrap_content"
-        android:text="@string/add"
-        android:background="@drawable/button"/>
+        android:weightSum="1.0">
 
-    <ListView
-        android:id="@+id/list_of_friends"
+        <EditText
+            android:id="@+id/edit_text_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".8"
+            android:hint="@string/edit_hint" />
+
+        <Button
+            android:id="@+id/edit_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/ack_padding"
+            android:background="@drawable/button"
+            android:text="@string/add"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_weight="1.0"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/ack_padding">
 
-    </ListView>
+        <ListView
+            android:layout_marginStart="@dimen/profile_double_indented"
+            android:id="@+id/list_of_friends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7">
+        </ListView>
 
-</LinearLayout>
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/delete_friends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:textColor="@color/white"
+            android:background="@drawable/button"/>
+    </LinearLayout>
+
+</TableLayout>
