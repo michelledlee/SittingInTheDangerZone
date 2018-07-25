@@ -1,5 +1,8 @@
 package edu.neu.madcourse.michellelee.dangerzone;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,6 +35,9 @@ public class UserProfileActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
+
+    private AlertDialog titleDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +118,26 @@ public class UserProfileActivity extends AppCompatActivity {
         TextView numberOfAchievementsView = (TextView) findViewById(R.id.achievements_earned);
         numberOfAchievementsView.setText(Integer.toString(achievements));
 
+        // Get dialog for the title information
+        final AlertDialog.Builder titleBuilder = new AlertDialog.Builder(this);
+        LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View dialogView = startInflater.inflate(R.layout.title_instructions, null);     // Get dialog view
+        titleBuilder.setCancelable(false);
+        titleBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                titleDialog.dismiss();
+            } });
+        titleBuilder.setView(dialogView);    // Set view to initial start dialog
+
+        // Adding information button on how to change titles
+        Button titleInfo = (Button) findViewById(R.id.info_button);
+        titleInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                titleDialog = titleBuilder.show();
+            }
+        });
+
         // Clickable title selection
         // Making the title ListView clickable so that titles can be changed
         titlesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -120,7 +147,8 @@ public class UserProfileActivity extends AppCompatActivity {
                 userTitleView.setText("Title: " + selected);
                 editor.putString("title", selected);
                 editor.apply();
-                Toast.makeText(UserProfileActivity.this,selected,Toast.LENGTH_LONG).show();
+                String titleChanged = getResources().getString(R.string.title_change);
+                Toast.makeText(UserProfileActivity.this,titleChanged,Toast.LENGTH_LONG).show();
                 dataAddAppInstance(name, selected);
             }
         });

@@ -4,7 +4,7 @@
     // INFORMATION AND INSTRUCTIONS
     <string name="acknowledgments">Acknowledgments</string>
     <string name="sources">
-         Volcano image and dinosaurs from pixabay.com\n
+    Volcano image and dinosaurs from pixabay.com\n
     Tom Cruise from google and Tom Cruise’s mom\n
     Button noises and music from soundjay.com\n
     Awesome app by Michelle Lee and Bri Garbo.</string>
@@ -50,12 +50,15 @@
     <string name="titles_default">None</string>
     <string name="achievements_default">None</string>
     <string name="friends">Friends</string>
+    <string name="title_change">Title changed!</string>
+    <string name="title_information_blurb">Select a title from the list to select a new title.</string>
 
     // INITIAL STARTUP DIALOG
     <string name="welcome_title">You are now entering the danger zone&#8230;</string>
     <string name="enter_name">What should we call you?</string>
     <string name="enter">Enter</string>
     <string name="go">Go</string>
+    <string name="username_hint">Enter username</string>
 
     // ACTIVITY TITLES
     <string name="hello_blank_fragment">Hello blank fragment</string>

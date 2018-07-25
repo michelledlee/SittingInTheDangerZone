@@ -57,24 +57,15 @@
         android:layout_marginTop="@dimen/settings_related_spacing"
         android:textStyle="italic"
         android:text="@string/experience_earned" />
-    <!--android:layout_alignStart="@id/experience_summary"-->
 
-    <!--<ScrollView-->
-        <!--android:id="@+id/experience_summary"-->
-        <!--android:layout_width="250dp"-->
-        <!--android:layout_height="100dp"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_below="@id/experience_text"-->
-        <!--android:background="@drawable/stroke">-->
-        <ListView
-            android:id="@+id/walk_experience_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignStart="@id/experience_text"
-            android:layout_below="@id/experience_text">
-        </ListView>
-    <!--</ScrollView>-->
+    <ListView
+        android:id="@+id/walk_experience_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@id/experience_text"
+        android:layout_below="@id/experience_text">
+    </ListView>
 
     <TextView
         android:id="@+id/statistics_text"
@@ -86,22 +77,14 @@
         android:textStyle="italic"
         android:text="@string/stat_summary" />
 
-    <!--<ScrollView-->
-        <!--android:id="@+id/stat_summary"-->
-        <!--android:layout_width="@dimen/list_width"-->
-        <!--android:layout_height="@dimen/list_height"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_below="@id/statistics_text"-->
-        <!--android:background="@drawable/stroke">-->
-        <ListView
-            android:id="@+id/statistics_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignStart="@id/statistics_text"
-            android:layout_below="@id/statistics_text">
-        </ListView>
-    <!--</ScrollView>-->
+    <ListView
+        android:id="@+id/statistics_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignStart="@id/statistics_text"
+        android:layout_below="@id/statistics_text">
+    </ListView>
 
     <Button
         android:id="@+id/walk"

@@ -47,14 +47,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".realtimeDatabase.FriendsList"></activity>
-        <activity
-            android:name=".realtimeDatabase.LeaderboardActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape"></activity>
-        <activity
-            android:name=".realtimeDatabase.ScoreboardActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

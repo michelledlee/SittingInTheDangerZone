@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@drawable/large_box"
     tools:context=".MainActivity">
 
     <TextView
@@ -25,34 +26,42 @@
         android:textSize="@dimen/profile_username_title"
         android:text="@string/enter_name"/>
 
-    <EditText
-        android:id="@+id/username_input"
+    <LinearLayout
+        android:id="@+id/text_button"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="@dimen/dialog_width"
-        android:layout_marginTop="@dimen/settings_related_spacing"
-        android:layout_marginStart="@dimen/profile_padding"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/username_ask"/>
+        android:layout_below="@id/username_ask">
+        <EditText
+            android:id="@+id/username_input"
+            android:layout_height="wrap_content"
+            android:layout_width="220dp"
+            android:layout_marginTop="@dimen/settings_related_spacing"
+            android:layout_marginStart="@dimen/settings_related_spacing"
+            android:maxLength="15"
+            android:hint="@string/username_hint"
+            android:inputType="text"/>
+
+        <Button
+            android:id="@+id/enter_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/button"
+            android:textColor="@color/white"
+            android:text="@string/enter" />
+    </LinearLayout>
+
 
     <TextView
         android:id="@+id/welcome_message"
         android:layout_width="@dimen/dialog_width"
         android:layout_height="wrap_content"
-        android:layout_below="@id/username_input"
+        android:layout_below="@id/text_button"
         android:layout_marginTop="@dimen/settings_button_spacing"
         android:layout_centerHorizontal="true"
         android:textSize="@dimen/profile_username_title"
         android:textStyle="italic"
         android:visibility="invisible"/>
-
-    <Button
-        android:id="@+id/enter_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/settings_related_spacing"
-        android:layout_below="@id/welcome_message"
-        android:layout_centerHorizontal="true"
-        android:text="@string/enter" />
 
 
 </RelativeLayout>

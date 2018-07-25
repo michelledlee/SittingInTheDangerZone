@@ -315,10 +315,16 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         }
 
         // Calculate minutes walked
-        double minutes = Double.parseDouble(preferences.getString("minutes walked", null)); // Need to get Double from String
+        double minutes = Double.parseDouble(preferences.getString("minutes walked", "")); // Need to get Double from String
         minutes = minutes + timerTime + bonusTime;  // Add current session's time on to total minutes
-        editor.putString("minutes walked", Double.toString(minutes));
-        editor.apply();
+//        if (minutes <= 0) {
+//            editor.putString("minutes walked", "");
+//            editor.apply();
+//        } else {
+            editor.putString("minutes walked", Double.toString(minutes));
+            editor.apply();
+//        }
+
         endScreenIntent.putExtra("minutes summary", timerTime + bonusTime); // Pass this session's time to the end screen
 
         // Calculate distance walked

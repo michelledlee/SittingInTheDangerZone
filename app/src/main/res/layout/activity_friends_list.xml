@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_bg"
-    tools:context=".realtimeDatabase.LeaderboardActivity">
+    tools:context=".realtimeDatabase.FriendsList">
 
     <TableRow
         android:layout_marginTop="@dimen/profile_padding"
@@ -69,8 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/ack_padding"
             android:background="@drawable/button"
-            android:text="@string/add"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:text="@string/add"/>
     </LinearLayout>
 
     <LinearLayout
@@ -88,14 +88,6 @@
             android:layout_weight=".7">
         </ListView>
 
-        <Button
-            android:layout_gravity="center"
-            android:id="@+id/delete_friends"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/delete"
-            android:textColor="@color/white"
-            android:background="@drawable/button"/>
     </LinearLayout>
 
 </TableLayout>

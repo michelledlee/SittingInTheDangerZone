@@ -1,10 +1,14 @@
 package edu.neu.madcourse.michellelee.dangerzone.realtimeDatabase;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -39,6 +43,8 @@ public class FriendsList extends AppCompatActivity {
     private String currentTitle;
     private ArrayList<String> friendArrayList;
     private ArrayAdapter<String> friendAdapter;
+    private AlertDialog confirmationDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +55,6 @@ public class FriendsList extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
-<<<<<<< HEAD
-        // Display user ID
-=======
-//        final Button deleteFriend = (Button) findViewById(R.id.delete_friends);
-//        deleteFriend.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                deleteFriend();
-//            }
-//        });
-
-        // Display user ID & username
->>>>>>> master
         uid = preferences.getString("uid", null);   // Get user ID for this app instance
         username = preferences.getString("username", null); // get username for this app instance
         currentTitle = preferences.getString("title", null); // get current title for this app instance
@@ -83,7 +76,6 @@ public class FriendsList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String friendID = enterFriendID.getText().toString();
-//                addFriend(friendID);
                 checkIfAdded(friendID);
             }
         });
@@ -100,14 +92,47 @@ public class FriendsList extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // Remove friend from list
-                int pos = adapterView.getPositionForView(view); // Get position of the item that was clicked
-                friendArrayList.remove(pos);    // Remove friend at this position that was clicked
-                friendAdapter.notifyDataSetChanged();   // Update friend list for friend removed
-                // Remove from friend's list on Firebase
-                String listEntry = (((TextView) view).getText().toString());
-                String uniqueID = listEntry.substring(0, Math.min(listEntry.length(), 8));
+                final int pos = adapterView.getPositionForView(view);   // Get position of the item that was clicked
+                String listEntry = (((TextView) view).getText().toString());    // Get the entry that is to be deleted
+                final String uniqueID = listEntry.substring(0, Math.min(listEntry.length(), 8));    // Get the unique friend code to be deleted from Firebase
                 Log.e("uniqueID", uniqueID);
-                deleteFriend(uniqueID);
+
+                // Confirmation dialog for friend removal
+                AlertDialog.Builder startBuilder = new AlertDialog.Builder(FriendsList.this);
+                LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View dialogView = startInflater.inflate(R.layout.friend_remove, null);     // Get dialog view
+                startBuilder.setCancelable(false);
+//                startBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        confirmationDialog.dismiss();
+//                        friendArrayList.remove(pos);    // Remove friend at this position that was clicked
+//                        friendAdapter.notifyDataSetChanged();   // Update friend list for friend removed
+//                        deleteFriend(uniqueID); // Remove from friend's list on Firebase
+//                    } });
+
+                // Buttons in alert dialog
+                Button yesRemove = (Button) dialogView.findViewById(R.id.remove_friend_ya);
+                yesRemove.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        confirmationDialog.dismiss();
+                        friendArrayList.remove(pos);    // Remove friend at this position that was clicked
+                        friendAdapter.notifyDataSetChanged();   // Update friend list for friend removed
+                        deleteFriend(uniqueID); // Remove from friend's list on Firebase
+                    }
+                });
+                Button noRemove = (Button) dialogView.findViewById(R.id.remove_friend_na);
+                noRemove.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        confirmationDialog.dismiss();
+                    }
+                });
+
+                startBuilder.setView(dialogView);    // Set view to initial start dialog
+                confirmationDialog = startBuilder.show();
+
+
             }
         });
     }
@@ -238,11 +263,6 @@ public class FriendsList extends AppCompatActivity {
      * @param friendsID the unique ID of the friend to delete
      */
     private void deleteFriend(final String friendsID) {
-//        // Accessing database contents
-//        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-//
-//        mRef.removeValue();
-
         // Accessing database contents
         final DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference mRef = rootRef.child("users");    // Users level reference
