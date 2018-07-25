@@ -42,7 +42,7 @@
     <string name="user_level">LEVEL</string>
     <string name="title_default">\"Fresh Meat\" </string>
     <string name="minutes_walked">Minutes Walked (min)</string>
-    <string name="distance_walked">Distance Walked (m)</string>
+    <string name="distance_walked">Distance Walked (km)</string>
     <string name="number_of_achievements"># of Achievements</string>
     <string name="min_default">0 min</string>
     <string name="distance_default">0 km</string>
@@ -52,6 +52,8 @@
     <string name="friends">Friends</string>
     <string name="title_change">Title changed!</string>
     <string name="title_information_blurb">Select a title from the list to select a new title.</string>
+    <string name="steps_walked">Steps walked (steps)</string>
+    <string name="steps_default">0 steps</string>
 
     // INITIAL STARTUP DIALOG
     <string name="welcome_title">You are now entering the danger zone&#8230;</string>

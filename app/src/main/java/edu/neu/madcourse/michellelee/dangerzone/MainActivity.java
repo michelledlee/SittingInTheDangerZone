@@ -19,12 +19,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import edu.neu.madcourse.michellelee.dangerzone.realtimeDatabase.models.User;
 
@@ -126,9 +128,9 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
                 editor.putInt("level", 1);
                 editor.apply();
-                editor.putString("minutes walked", "none");
+                editor.putInt("seconds walked", 0);
                 editor.apply();
-                editor.putString("distance walked", "none");
+                editor.putInt("steps walked", 0);
                 editor.apply();
                 editor.putInt("# titles", 1);
                 editor.apply();
@@ -161,8 +163,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void doDataAddToDb(String userNameString, String title) {
         // Get token for this app instance
-        String token = FirebaseInstanceId.getInstance().getToken();
-        String uniqueID = token.substring(token.length()-8);
+//        String token = FirebaseInstanceId.getInstance().getToken();
+////        String uniqueID = token.substring(token.length()-8);
+        String uniqueID = idGenerator();
         editor.putString("uid", uniqueID);  // Add this ID to shared preferences
         editor.apply();
 
@@ -179,6 +182,21 @@ public class MainActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
         myRef.child(uniqueID).setValue(newUser);
+    }
+
+    /**
+     * Generates a (hopefully) random 10 character unique ID string
+     * @return the user ID
+     */
+    private String idGenerator() {
+        String alphabet= "abcdefghijklmnopqrstuvwxyz";
+        String s = "";
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            char c = alphabet.charAt(random.nextInt(26));
+            s+=c;
+        }
+        return s;
     }
 
 

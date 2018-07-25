@@ -64,10 +64,33 @@
         android:text="@string/min_default"/>
 
     <TextView
-        android:id="@+id/user_distance_walked"
+        android:id="@+id/user_steps_walked"
         android:layout_width="@dimen/profile_stat_width"
         android:layout_height="wrap_content"
         android:layout_below="@id/user_min_walked"
+        android:textSize="@dimen/profile_text_size"
+        android:layout_marginStart="@dimen/profile_double_indented"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:text="@string/steps_walked" />
+
+    <TextView
+        android:id="@+id/steps_walked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:textSize="@dimen/profile_text_size"
+        android:layout_below="@id/minutes_walked"
+        android:layout_marginEnd="@dimen/profile_padding_right"
+        android:layout_marginTop="@dimen/settings_related_spacing"
+        android:layout_toEndOf="@id/user_distance_walked"
+        android:gravity="end"
+        android:text="@string/steps_default"/>
+
+    <TextView
+        android:id="@+id/user_distance_walked"
+        android:layout_width="@dimen/profile_stat_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_steps_walked"
         android:textSize="@dimen/profile_text_size"
         android:layout_marginStart="@dimen/profile_double_indented"
         android:layout_marginTop="@dimen/settings_related_spacing"
@@ -79,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:textSize="@dimen/profile_text_size"
-        android:layout_below="@id/minutes_walked"
+        android:layout_below="@id/steps_walked"
         android:layout_marginEnd="@dimen/profile_padding_right"
         android:layout_marginTop="@dimen/settings_related_spacing"
         android:layout_toEndOf="@id/user_distance_walked"

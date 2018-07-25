@@ -1,6 +1,5 @@
 package edu.neu.madcourse.michellelee.dangerzone;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,8 +20,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.os.Vibrator;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Random;
 
 import java.util.Locale;
@@ -65,9 +62,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        textView = new TextView(this);
-//        textView.setTextSize(30);
-//        setContentView(R.layout.activity_simple_pedometer);
         setContentView(R.layout.activity_walk);
 
         // Initialize Shared Preferences
@@ -94,7 +88,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
         mSoundAlert = mSoundPool.load(getApplicationContext(), R.raw.beep_alert, 1);
         mBackgroundMusic = mSoundPool.load(getApplicationContext(), R.raw.deeper, 1); // music but not hooked up yet
-
 
         // Default time for CountdownTimer
         long millisInFuture;
@@ -260,11 +253,11 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         numSteps++;
 //        textView.setText(TEXT_NUM_STEPS + numSteps);
         steps.setText(TEXT_NUM_STEPS + numSteps);
-
     }
 
     /**
-     *
+     * After the walk activity has been completed, this method passes information farmed from this
+     * activity to the end walk activity for processing and display.
      */
     private void finishTransition() {
         // Will transition to the EndWalk activity, declare intent
@@ -314,24 +307,18 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
             endScreenIntent.putExtra("personal best", "");
         }
 
-        // Calculate minutes walked
-        double minutes = Double.parseDouble(preferences.getString("minutes walked", "")); // Need to get Double from String
-        minutes = minutes + timerTime + bonusTime;  // Add current session's time on to total minutes
-//        if (minutes <= 0) {
-//            editor.putString("minutes walked", "");
-//            editor.apply();
-//        } else {
-            editor.putString("minutes walked", Double.toString(minutes));
-            editor.apply();
-//        }
+        // Calculate cumulative seconds walked across all sessions
+        int seconds = preferences.getInt("seconds walked", -1);
+        seconds = seconds + (timerTime * 60) + bonusTime;  // Add current session's time on to total
+        editor.putInt("seconds walked", seconds);
+        editor.apply();
 
-        endScreenIntent.putExtra("minutes summary", timerTime + bonusTime); // Pass this session's time to the end screen
+        endScreenIntent.putExtra("seconds summary", (timerTime * 60) + bonusTime); // Pass this session's time to the end screen
 
-        // Calculate distance walked
-        double distance = numSteps * 0.8;
-        endScreenIntent.putExtra("distance summary", distance);
-        double existingDistance = Math.round(Double.parseDouble(preferences.getString("distance walked", null)) + distance);
-        editor.putString("distance walked", Double.toString(existingDistance));
+        // Calculate cumulative steps walked
+        endScreenIntent.putExtra("steps summary", numSteps);
+        int existingSteps = preferences.getInt("steps walked", -1);
+        editor.putInt("steps walked", numSteps + existingSteps);
         editor.apply();
 
         // Start the end screen activity

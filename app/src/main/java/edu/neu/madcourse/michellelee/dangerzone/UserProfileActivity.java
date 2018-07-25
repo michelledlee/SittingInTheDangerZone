@@ -52,11 +52,15 @@ public class UserProfileActivity extends AppCompatActivity {
         final String name = preferences.getString("username", null);
         int level = preferences.getInt("level", -1);
         String currentTitle = preferences.getString("title", null);
-        String minutesWalked = preferences.getString("minutes walked", null);
-        String distanceWalked = preferences.getString("distance walked", null);
+        int secondsWalked = preferences.getInt("seconds walked", -1);
+        int stepsWalked = preferences.getInt("steps walked", -1);
         int titles = preferences.getInt("# titles", -1);
         int achievements = preferences.getInt("# achievements", -1);
         String achievementsString = preferences.getString("achievements", null);
+
+        // Calculate minutes and distance walked
+        int minutesWalked = secondsWalked / 60;
+        int distanceWalked = (int) Math.rint(stepsWalked * 0.000762);
 
         // Hooking up achievements with adapters
         ArrayList<String> itemList1 = new ArrayList<String>();
@@ -110,9 +114,11 @@ public class UserProfileActivity extends AppCompatActivity {
         final TextView userTitleView = (TextView) findViewById(R.id.user_title);
         userTitleView.setText("Title: " + currentTitle);
         TextView minutesWalkedView = (TextView) findViewById(R.id.minutes_walked);
-        minutesWalkedView.setText(minutesWalked);
+        minutesWalkedView.setText(Integer.toString(minutesWalked));
+        TextView stepsWalkedView = (TextView) findViewById(R.id.steps_walked);
+        stepsWalkedView.setText(Integer.toString(stepsWalked));
         TextView distancewalkedView = (TextView) findViewById(R.id.distance_walked);
-        distancewalkedView.setText(distanceWalked);
+        distancewalkedView.setText(Integer.toString(distanceWalked));
         TextView titlesEarned = (TextView) findViewById(R.id.titles_earned);
         titlesEarned.setText(Integer.toString(titles));
         TextView numberOfAchievementsView = (TextView) findViewById(R.id.achievements_earned);

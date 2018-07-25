@@ -112,14 +112,23 @@ public class EndWalk extends AppCompatActivity {
         ListView walkExperienceList = (ListView) findViewById(R.id.walk_experience_list);
         walkExperienceList.setAdapter(pointsAdapter);
 
-        // Statistics calculation and listing
-        ArrayList<String> statisticsArray = new ArrayList<>();
-        double minutesSession = extras.getInt("minutes summary");  // Get minutes walked this session
-        String minutesSummary = "Minutes Walked (min) ... " + Double.toString(minutesSession);    // Concatenate string with values
+        // Statistics calculation and listing (time and steps)
+        ArrayList<String> statisticsArray = new ArrayList<>();  // ArrayList for statistics display
+        int secondsSession = extras.getInt("seconds summary");  // Get seconds walked this session
+        int sessionMinutes = secondsSession / 60;   // Convert to minutes
+        String minutesSummary;  // Declare string for minutes summary
+        // Check to determine what we are displaying for the time statistic
+        if (sessionMinutes < 1) {
+            minutesSummary = "Minutes Walked (min) ... < 1 min";    // Do not display fractional time if less than a minute
+            Log.e("walked: ", "< 1 min");
+        } else {
+            minutesSummary = "Minutes Walked (min) ... " + Integer.toString(sessionMinutes);    // Concatenate string with values
+            Log.e("walked: ", "more than a feeling");
+        }
         statisticsArray.add(minutesSummary);    // Add to the array of statistics strings
-        double distanceSession = extras.getDouble("distance summary"); // Get distance walked this session
-        String distanceSummary = "Distance Walked (m) ... " + Double.toString(Math.round(distanceSession)); // Concatenate string with values
-        statisticsArray.add(distanceSummary);   // Add to the array of statistics strings
+        int stepsSession = extras.getInt("steps summary"); // Get distance walked this session
+        String stepsSummary = "Steps Walked (m) ... " + Integer.toString(stepsSession); // Concatenate string with values
+        statisticsArray.add(stepsSummary);   // Add to the array of statistics strings
         ArrayAdapter<String> statisticsAdapter = new ArrayAdapter<String>(this, R.layout.list_item_profile, statisticsArray);
         ListView statisticsSummary = (ListView) findViewById(R.id.statistics_list);
         statisticsSummary.setAdapter(statisticsAdapter);
