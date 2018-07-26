@@ -116,7 +116,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-
         // Setting up TextViews that display what time was selected
         beforeTimeSet = (TextView) findViewById(R.id.before_time_set);
         afterTimeSet = (TextView) findViewById(R.id.after_time_set);
@@ -153,25 +152,25 @@ public class SettingsActivity extends AppCompatActivity {
         afterTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerDialog.OnTimeSetListener myTimeListener = new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        if (view.isShown()) {
-                            // Save do not disturb "after" time
-                            editor.putInt("afterHours", hourOfDay);
-                            editor.apply();
-                            editor.putInt("afterMinutes", minute);
-                            editor.apply();
-                            // Set TextView to show what time was selected
-                            String timeSet = preferences.getInt("afterHours", -1) + " : " + preferences.getInt("afterMinutes", -1);
-                            afterTimeSet.setText(timeSet);
-                        }
-                    }
-                };
-                TimePickerDialog timePickerDialog = new TimePickerDialog(SettingsActivity.this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar, myTimeListener, hour, minute, true);
-                timePickerDialog.setTitle("Select time:");
-                timePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                timePickerDialog.show();
+            TimePickerDialog.OnTimeSetListener myTimeListener = new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                if (view.isShown()) {
+                    // Save do not disturb "after" time
+                    editor.putInt("afterHours", hourOfDay);
+                    editor.apply();
+                    editor.putInt("afterMinutes", minute);
+                    editor.apply();
+                    // Set TextView to show what time was selected
+                    String timeSet = preferences.getInt("afterHours", -1) + " : " + preferences.getInt("afterMinutes", -1);
+                    afterTimeSet.setText(timeSet);
+                }
+                }
+            };
+            TimePickerDialog timePickerDialog = new TimePickerDialog(SettingsActivity.this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar, myTimeListener, hour, minute, true);
+            timePickerDialog.setTitle("Select time:");
+            timePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            timePickerDialog.show();
             }
         });
     }
@@ -214,10 +213,14 @@ public class SettingsActivity extends AppCompatActivity {
      * @return a notification to display through the alarm
      */
     private Notification getNotification(String content) {
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, WalkIntro.class), PendingIntent.FLAG_UPDATE_CURRENT);
+
         Notification.Builder builder = new Notification.Builder(this);
         builder.setContentTitle("Scheduled Notification");
         builder.setContentText(content);
         builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setContentIntent(contentIntent);
         return builder.build();
     }
 
