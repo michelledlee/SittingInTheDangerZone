@@ -44,6 +44,7 @@ public class FriendsList extends AppCompatActivity {
     private ArrayList<String> friendArrayList;
     private ArrayAdapter<String> friendAdapter;
     private AlertDialog confirmationDialog;
+    private AlertDialog removeDialog;
 
 
     @Override
@@ -77,6 +78,26 @@ public class FriendsList extends AppCompatActivity {
             public void onClick(View view) {
                 String friendID = enterFriendID.getText().toString();
                 checkIfAdded(friendID);
+            }
+        });
+
+        // Set up remove friends information dialog
+        final AlertDialog.Builder removeBuilder = new AlertDialog.Builder(this);
+        LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View dialogView = startInflater.inflate(R.layout.remove_instructions, null);     // Get dialog view
+        removeBuilder.setCancelable(false);
+        removeBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                removeDialog.dismiss();
+            } });
+        removeBuilder.setView(dialogView);    // Set view to initial start dialog
+
+        // Set up info button for removing a friend
+        Button removeInformation = (Button) findViewById(R.id.remove_info_button);
+        removeInformation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeDialog = removeBuilder.show();
             }
         });
 

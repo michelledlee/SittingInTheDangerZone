@@ -68,9 +68,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/ack_padding"
+            android:layout_marginEnd="5dp"
             android:background="@drawable/button"
             android:textColor="@color/white"
             android:text="@string/add"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="top">
+            <Button
+                android:id="@+id/remove_info_button"
+                android:layout_width="@dimen/info_i"
+                android:layout_height="@dimen/info_i"
+                android:background="@drawable/info"/>
+        </RelativeLayout>
     </LinearLayout>
 
     <LinearLayout
