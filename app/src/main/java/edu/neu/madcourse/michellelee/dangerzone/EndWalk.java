@@ -1,6 +1,9 @@
 package edu.neu.madcourse.michellelee.dangerzone;
 
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -8,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
@@ -25,6 +29,10 @@ public class EndWalk extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
+    private AlertDialog failDialog;
+    private AlertDialog successDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,13 +48,53 @@ public class EndWalk extends AppCompatActivity {
         // Get variables passed form ActivityWalk
         Bundle extras = getIntent().getExtras();
         int numSteps = extras.getInt("steps");
-        String walkFinished = extras.getString("walk finished");
-        if (!walkFinished.equals("")) pointsArray.add(walkFinished);
-        String stepBonus = extras.getString("step bonus");
+        String walkFinished = extras.getString("walk finished");    // Get results of walk finished
+        if (!walkFinished.equals("")) { // If walk was finished successfully
+            // SUCCESS DIALOG
+            AlertDialog.Builder successBuilder = new AlertDialog.Builder(this);
+            LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View dialogView = startInflater.inflate(R.layout.success_dialog, null);     // Get dialog view
+            successBuilder.setCancelable(false);
+            successBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                successDialog.dismiss();
+                } });
+            successBuilder.setView(dialogView);    // Set view to success dialog
+            successDialog = successBuilder.show();  // Set to show
+
+            // ADD TO LIST OF POINTS TO DISPLAY
+            pointsArray.add(walkFinished);  // Add walk finished points total to display
+
+            // ADD NEW TITLE
+            // Special Processing to Add: To add a new title to the StringBuilder "list", create a StringBuilder based on the current
+            // titles in shared preferences. Append an "," to the current titles "list" in StringBuilder before the next new title.
+            // Add the new title to the list. Commit to shared preferences.
+            String dinomite = getResources().getString(R.string.dinomite);
+            String existingTitles = preferences.getString("titles", null);
+            StringBuilder titlebuild = new StringBuilder(existingTitles); // Create new StringBuilder
+            titlebuild.append(","); // Add a delimiter to the end of it the existing String list
+            titlebuild.append(dinomite);   // Add the new title to the StringBuilder
+            editor.putString("titles", titlebuild.toString());  // Replace old String of titles with new
+            editor.apply();
+
+        } else {
+            // Create the success alert dialog
+            AlertDialog.Builder failureBuilder = new AlertDialog.Builder(this);
+            LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View dialogView = startInflater.inflate(R.layout.failure_dialog, null);     // Get dialog view
+            failureBuilder.setCancelable(false);
+            failureBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    failDialog.dismiss();
+                } });
+            failureBuilder.setView(dialogView);    // Set view to failure dialog
+            failDialog = failureBuilder.show();
+        }
+        String stepBonus = extras.getString("step bonus");  // Get results of step bonus
         if (!stepBonus.equals("")) pointsArray.add(stepBonus);
-        String timeBonus = extras.getString("time bonus");
+        String timeBonus = extras.getString("time bonus");  // Get results of time bonus
         if (!timeBonus.equals("")) pointsArray.add(timeBonus);
-        String personalBest = extras.getString("personal best");
+        String personalBest = extras.getString("personal best");    // Get results of personal best
         if (!personalBest.equals("")) pointsArray.add(personalBest);
 
         // XP and level calculator

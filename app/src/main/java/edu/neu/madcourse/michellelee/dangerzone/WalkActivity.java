@@ -96,8 +96,8 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         // Set countdown timer based on selection the user made
         timerTime = getIntent().getIntExtra("timer", -1);
         if (timerTime == 1) {
-//            millisInFuture = 60000;
-            millisInFuture = 10000;
+            millisInFuture = 60000;
+//            millisInFuture = 10000;
             minSteps = 100;
             maxSteps = 140;
         } else if (timerTime == 3) {

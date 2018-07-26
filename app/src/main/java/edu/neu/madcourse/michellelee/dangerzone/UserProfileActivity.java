@@ -75,27 +75,9 @@ public class UserProfileActivity extends AppCompatActivity {
 //        achievementsAdapter.add("title1");
 
         // TEST FOR TITLES AND ACHIEVEMENTS PROCESSING
-        // Special Processing to Add: To add a new title to the StringBuilder "list", create a StringBuilder based on the current
-        // titles in shared preferences. Append an "," to the current titles "list" in StringBuilder before the next new title.
-        // Add the new title to the list. Commit to shared preferences.
-        String test1 = "test 1";
-        StringBuilder titlebuild = new StringBuilder(currentTitle); // Create new StringBuilder
-        titlebuild.append(","); // Add a delimiter to the end of it the existing String list
-        titlebuild.append(test1);   // Add the new title to the StringBuilder
-        editor.putString("titles", titlebuild.toString());  // Replace old String of titles with new
-        editor.apply();
-
-//        String test2 = "test 2";
-//        StringBuilder achievebuild = new StringBuilder(achievementsString);   // Create new StringBuilder
-//        achievebuild.append(test1);
-//        achievebuild.append(",");   // Add a delimiter to the end of it the existing String list
-//        achievebuild.append(test2); // Add the new title to the StringBuilder
-//        editor.putString("achievements", achievebuild.toString());  // Replace old String of titles with new
-//        editor.apply();
-
         // Special Processing to Retrieve: Get the String which contains all the titles. Split into an array based on the ","
         // delimiter. Iterate through the array of titles and add each to the ListView.
-        String titleList = preferences.getString("titles", null);   // Get String list from SharedPreferences
+        String titleList = preferences.getString("title list", null);   // Get String list from SharedPreferences
         String[] titleArray = titleList.split(","); // Get array of individual titles by splitting the string based on the "," delimiter
         for (String eachTitle : titleArray) {   // Iterate through each of the titles in the list
             titlesAdapter.add(eachTitle);   // Add each title to the list
@@ -133,7 +115,7 @@ public class UserProfileActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 titleDialog.dismiss();
             } });
-        titleBuilder.setView(dialogView);    // Set view to initial start dialog
+        titleBuilder.setView(dialogView);    // Set view to title dialog
 
         // Adding information button on how to change titles
         Button titleInfo = (Button) findViewById(R.id.info_button);
@@ -149,13 +131,13 @@ public class UserProfileActivity extends AppCompatActivity {
         titlesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String selected = ((TextView) view).getText().toString();
-                userTitleView.setText("Title: " + selected);
-                editor.putString("title", selected);
-                editor.apply();
-                String titleChanged = getResources().getString(R.string.title_change);
-                Toast.makeText(UserProfileActivity.this,titleChanged,Toast.LENGTH_LONG).show();
-                dataAddAppInstance(name, selected);
+            String selected = ((TextView) view).getText().toString();
+            userTitleView.setText("Title: " + selected);
+            editor.putString("title", selected);
+            editor.apply();
+            String titleChanged = getResources().getString(R.string.title_change);
+            Toast.makeText(UserProfileActivity.this,titleChanged,Toast.LENGTH_LONG).show();
+            dataAddAppInstance(name, selected);
             }
         });
 

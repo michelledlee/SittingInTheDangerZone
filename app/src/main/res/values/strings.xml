@@ -83,6 +83,7 @@
     <string name="stat_summary">Walk Statistics Summary:</string>
     <string name="main_menu_button">Main Menu</string>
     <string name="to_next_level">% to level&#160;</string>
+    <string name="dinomite">Dino-mite!</string>
 
     // WALK ACTIVITY
     <string name="pause">Pause</string>
@@ -97,4 +98,7 @@
     <string name="submit">Submit</string>
     <string name="friends_list_title">FRIENDS LIST</string>
     <string name="friends_remove_instructions">Click a friend to remove them from the friends list. Friends can be readded.</string>
+
+    // MAIN ACTIVITY
+    <string name="new_title_earned">New title earned!</string>
 </resources>

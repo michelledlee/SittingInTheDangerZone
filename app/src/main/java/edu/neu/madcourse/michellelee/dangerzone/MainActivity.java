@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -136,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
                 editor.putString("title", "Fresh Meat");
                 editor.apply();
+                editor.putString("title list", "Fresh Meat");
+                editor.apply();
                 editor.putInt("# achievements", 1);
                 editor.apply();
                 editor.putString("achievements", "Danger Seeker");
@@ -145,6 +148,9 @@ public class MainActivity extends AppCompatActivity {
                 editor.putInt("personal best", 0);
                 editor.apply();
                 doDataAddToDb(userNameString, "Fresh Meat");
+                String newTitleEarned = getResources().getString(R.string.new_title_earned);
+                Toast.makeText(MainActivity.this,newTitleEarned,Toast.LENGTH_LONG).show();
+
                 }
             });
 
