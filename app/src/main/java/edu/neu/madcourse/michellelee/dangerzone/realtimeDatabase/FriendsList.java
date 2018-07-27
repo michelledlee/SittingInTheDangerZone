@@ -28,6 +28,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import edu.neu.madcourse.michellelee.dangerzone.R;
@@ -45,7 +46,7 @@ public class FriendsList extends AppCompatActivity {
     private ArrayAdapter<String> friendAdapter;
     private AlertDialog confirmationDialog;
     private AlertDialog removeDialog;
-
+    private static int sessionDepth = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,51 +113,105 @@ public class FriendsList extends AppCompatActivity {
         friendsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                // Remove friend from list
-                final int pos = adapterView.getPositionForView(view);   // Get position of the item that was clicked
-                String listEntry = (((TextView) view).getText().toString());    // Get the entry that is to be deleted
-                final String uniqueID = listEntry.substring(0, Math.min(listEntry.length(), 8));    // Get the unique friend code to be deleted from Firebase
-                Log.e("uniqueID", uniqueID);
+            // Remove friend from list
+            final int pos = adapterView.getPositionForView(view);   // Get position of the item that was clicked
+            String listEntry = (((TextView) view).getText().toString());    // Get the entry that is to be deleted
+            final String uniqueID = listEntry.substring(0, Math.min(listEntry.length(), 10));    // Get the unique friend code to be deleted from Firebase
+            Log.e("uniqueID", uniqueID);
 
-                // Confirmation dialog for friend removal
-                AlertDialog.Builder startBuilder = new AlertDialog.Builder(FriendsList.this);
-                LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View dialogView = startInflater.inflate(R.layout.friend_remove, null);     // Get dialog view
-                startBuilder.setCancelable(false);
-//                startBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        confirmationDialog.dismiss();
-//                        friendArrayList.remove(pos);    // Remove friend at this position that was clicked
-//                        friendAdapter.notifyDataSetChanged();   // Update friend list for friend removed
-//                        deleteFriend(uniqueID); // Remove from friend's list on Firebase
-//                    } });
+            // Confirmation dialog for friend removal
+            AlertDialog.Builder startBuilder = new AlertDialog.Builder(FriendsList.this);
+            LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            final View dialogView = startInflater.inflate(R.layout.friend_remove, null);     // Get dialog view
+            startBuilder.setCancelable(false);
 
-                // Buttons in alert dialog
-                Button yesRemove = (Button) dialogView.findViewById(R.id.remove_friend_ya);
-                yesRemove.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        confirmationDialog.dismiss();
-                        friendArrayList.remove(pos);    // Remove friend at this position that was clicked
-                        friendAdapter.notifyDataSetChanged();   // Update friend list for friend removed
-                        deleteFriend(uniqueID); // Remove from friend's list on Firebase
-                    }
-                });
-                Button noRemove = (Button) dialogView.findViewById(R.id.remove_friend_na);
-                noRemove.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        confirmationDialog.dismiss();
-                    }
-                });
+            // Buttons in alert dialog
+            Button yesRemove = (Button) dialogView.findViewById(R.id.remove_friend_ya);
+            yesRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    confirmationDialog.dismiss();
+                    friendArrayList.remove(pos);    // Remove friend at this position that was clicked
+                    friendAdapter.notifyDataSetChanged();   // Update friend list for friend removed
+                    deleteFriend(uniqueID); // Remove from friend's list on Firebase
+                }
+            });
+            Button noRemove = (Button) dialogView.findViewById(R.id.remove_friend_na);
+            noRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    confirmationDialog.dismiss();
+                }
+            });
 
-                startBuilder.setView(dialogView);    // Set view to initial start dialog
-                confirmationDialog = startBuilder.show();
-
+            startBuilder.setView(dialogView);    // Set view to initial start dialog
+            confirmationDialog = startBuilder.show();
 
             }
         });
+
+        // Set up dummy friend node
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users").child(uid).child("friends");
+//        myRef.child("friend").setValue("");
+
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference().child(uid).child("friends");
+//        myRef.child("friend").setValue("");
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (sessionDepth == 0) {
+            // Do nothing
+        } else {
+            initializeListAdapter();    // Initialize the list adapter so our friends show each time
+        }
+        Log.e("on RESTART has","been called");
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        sessionDepth++;
+        if(sessionDepth == 1){  // App came to foreground
+            // Do nothing
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (sessionDepth > 0)
+            sessionDepth--;
+        if (sessionDepth == 0) {    // App went to background
+            // Do nothing
+        }
+    }
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        Log.e("on START has","been called");
+////        initializeListAdapter();    // Initialize the list adapter so our friends show each time
+//    }
+//
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        Log.e("on RESUME has","been called");
+////        initializeListAdapter();    // Initialize the list adapter so our friends show each time
+//    }
+//
+//    @Override
+//    protected void onPostResume() {
+//        super.onPostResume();
+////        initializeListAdapter();    // Initialize the list adapter so our friends show each time
+//        Log.e("on POST resume has","been called");
+//
+//    }
 
     /**
      * Add a new friend to this user if the friend ID is valid
@@ -178,7 +233,7 @@ public class FriendsList extends AppCompatActivity {
                 // Loop over each User in the DataSnapshot
                 for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     String nodeID = userSnapshot.child("uniqueID").getValue(String.class);
-                    if (nodeID != null) {
+                    if (nodeID != null && nodeID.equals(friendsID)) {
                         foundID = true;
                         break;  // Have found the friend node, can add friend to friend's list
                     }
@@ -195,10 +250,11 @@ public class FriendsList extends AppCompatActivity {
         };
         mRef.addListenerForSingleValueEvent(eventListener);
 
+
         // Add this ID to the user's friend list
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users");
-        myRef.child(uniqueID).child("friends").push().setValue(friendsID);
+        DatabaseReference myRef = database.getReference("users").child(uniqueID).child("friends");
+        myRef.push().setValue(friendsID);
 
         // Update friends list
         updateFriendsList(friendsID);
@@ -266,7 +322,7 @@ public class FriendsList extends AppCompatActivity {
                         String title = userSnapshot.child("title").getValue(String.class);
                         String lastPlayed = userSnapshot.child("lastPlayed").getValue(String.class);
                         String lastEncounter = userSnapshot.child("lastEncounter").getValue(String.class);
-                        String friendInfo = nodeID+username+title+lastPlayed+lastEncounter;
+                        String friendInfo = nodeID+ "\nName: "+username+" ("+title+") "+"\nActive: "+lastPlayed+" "+lastEncounter;
                         friendAdapter.add(friendInfo);
                         break;  // Have found the friend node, can populate friend information
                     }
@@ -337,23 +393,18 @@ public class FriendsList extends AppCompatActivity {
                 // Loop over each User in the DataSnapshot
                 for(DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     String nodeID = userSnapshot.child("uniqueID").getValue(String.class);    // Get the unique ID for this node
-                    if (nodeID != null && nodeID.equals(uid)) {
-//                        if (userSnapshot.child("uniqueID").child("friends").getValue() instanceof String) {   // Case if no friends have been added yet
-//                            Toast.makeText(FriendsList.this, "Add new friends!",Toast.LENGTH_LONG).show();
-//                            break;
-//                        } else if (userSnapshot.child("uniqueID").child("friends").getValue() instanceof Map) {    // If this friendsID is already in the list, do not add it again
-                        if (userSnapshot.child("uniqueID").child("friends").getValue() instanceof Map) {
-                        // Iterate through existing friends
-                            Map<String, String> map = (Map<String, String>) userSnapshot.child("friends").getValue();
-                            // For each friend, add to the list
-                            for (Map.Entry<String, String> entry : map.entrySet()) {
-                                friendAdapter.add(entry.getValue());
+                    if (nodeID.equals(uid)) {   // If we have found this phone's node
+                        User friendUser = userSnapshot.getValue(User.class);         // Get the user for this id
+                        Map<String, String> friendList = friendUser.getFriends();   // Get the friends list for this user
+                        if (friendList == null) return; // If the user has no friends yet (i.e. first start up or no friends), return as there is nothing to update
+                        for (Map.Entry<String, String> entry : friendList.entrySet()) { // If there are items, iterate through
+                            if (entry.getValue().equals("") || entry.getValue() == null) {   // If the value is equal to the empty string or empty, skip this entry
+                                continue;
+                            } else {    // If this value is not empty, add the details of the friend to our list
+                                updateFriendsList(entry.getValue());
                             }
-                            break;
-                        } else {
-                            break;
                         }
-
+                        friendAdapter.notifyDataSetChanged();
                     }
                 }
             }

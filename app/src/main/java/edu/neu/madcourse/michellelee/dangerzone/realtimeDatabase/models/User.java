@@ -14,13 +14,15 @@ public class User {
     private String lastEncounter;
     private String lastOutcome;
     private String uniqueID;
-    private String friends;
+//    private String friends;
+    private Map<String, String> friends;
 
     public User(){
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public User(String username, String title, String lastPlayed, String lastEncounter, String lastOutcome, String uniqueID, String friends){
+//    public User(String username, String title, String lastPlayed, String lastEncounter, String lastOutcome, String uniqueID, String friends){
+        public User(String username, String title, String lastPlayed, String lastEncounter, String lastOutcome, String uniqueID, Map<String, String> friends){
         this.username = username;
         this.title = title;
         this.lastPlayed = lastPlayed;
@@ -54,7 +56,11 @@ public class User {
         return uniqueID;
     }
 
-    public String getFriends() {
+//    public String getFriends() {
+//        return friends;
+//    }
+
+    public Map<String, String> getFriends() {
         return friends;
     }
 }
