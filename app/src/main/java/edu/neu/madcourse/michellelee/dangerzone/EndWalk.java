@@ -70,11 +70,11 @@ public class EndWalk extends AppCompatActivity {
             // titles in shared preferences. Append an "," to the current titles "list" in StringBuilder before the next new title.
             // Add the new title to the list. Commit to shared preferences.
             String dinomite = getResources().getString(R.string.dinomite);
-            String existingTitles = preferences.getString("titles", null);
+            String existingTitles = preferences.getString("title list", null);
             StringBuilder titlebuild = new StringBuilder(existingTitles); // Create new StringBuilder
             titlebuild.append(","); // Add a delimiter to the end of it the existing String list
             titlebuild.append(dinomite);   // Add the new title to the StringBuilder
-            editor.putString("titles", titlebuild.toString());  // Replace old String of titles with new
+            editor.putString("title list", titlebuild.toString());  // Replace old String of titles with new
             editor.apply();
 
         } else {
@@ -123,12 +123,13 @@ public class EndWalk extends AppCompatActivity {
         }
         int level = preferences.getInt("level", -1);
         int nextLevel = level + 1;
-        double percentageXP = experience / experienceNeeded * 100;
+//        double percentageXP = experience / experienceNeeded * 100;
 
         // Convert to double to get percentage to next level
         double obtainedScore = (double) experience;
         double totalScore = (double) experienceNeeded;
         float percentage = (float) ((obtainedScore*100)/totalScore);
+        int xpToNextLevel = experienceNeeded - experience;
 
         // Animate the progress bar
         int progress = (int) percentage;
@@ -143,7 +144,7 @@ public class EndWalk extends AppCompatActivity {
         // TextView to display progress information
         TextView progressNextLevel = (TextView) findViewById(R.id.progress_level);
         String progressText = getResources().getString(R.string.to_next_level);
-        progressNextLevel.setText(experience + progressText + nextLevel);
+        progressNextLevel.setText(xpToNextLevel + progressText + nextLevel);
 
         // Main menu activity
         Button mainMenu = (Button) findViewById(R.id.walk);
