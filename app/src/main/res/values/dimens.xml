@@ -54,4 +54,6 @@
     <dimen name="random_offset">30sp</dimen>
     <dimen name="friends_offset">20sp</dimen>
     <dimen name="profile_text_size">20sp</dimen>
+    <dimen name="end_walk_font_size">50sp</dimen>
+    <dimen name="end_walk_font_size2">25sp</dimen>
 </resources>

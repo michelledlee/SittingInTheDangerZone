@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,51 +8,53 @@
     android:background="@drawable/gradient_bg"
     tools:context=".realtimeDatabase.FriendsList">
 
-    <TableRow
+    <TextView
+        android:id="@+id/friends_list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/profile_padding"
         android:layout_marginTop="@dimen/profile_padding"
-        android:layout_marginStart="@dimen/profile_padding">
+        android:textStyle="bold"
+        android:textSize="@dimen/profile_username_text"
+        android:text="@string/friends_list_title"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/friends_list_title"
-            android:textStyle="bold"
-            android:textSize="@dimen/friends_title_size"/>
+    <TextView
+        android:id="@+id/friendslist_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/random_offset"
+        android:layout_marginTop="@dimen/profile_padding"
+        android:layout_toEndOf="@id/friends_list_title"
+        android:textSize="@dimen/profile_username_text"
+        android:text="@string/user_default"/>
 
-        <TextView
-            android:id="@+id/friendslist_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/friends_title_size"
-            android:text="@string/user_default"/>
-    </TableRow>
+    <TextView
+        android:id="@+id/friendslist_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/friendslist_username"
+        android:layout_marginStart="@dimen/profile_indented"
+        android:textStyle="italic"
+        android:textSize="@dimen/profile_username_title"
+        android:text="@string/title_default" />
 
-    <TableRow
-        android:layout_marginStart="@dimen/profile_indented">
-
-        <TextView
-            android:id="@+id/friendslist_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="italic"
-            android:textSize="@dimen/profile_username_title"
-            android:text="@string/title_default"/>
-    </TableRow>
-
-    <TableRow>
-        <TextView
-            android:layout_marginTop="@dimen/friends_offset"
-            android:layout_marginStart="@dimen/profile_padding"
-            android:id="@+id/uuid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/profile_text_size"
-            android:text="@string/userid"/>
-    </TableRow>
+    <TextView
+        android:layout_marginTop="@dimen/friends_offset"
+        android:layout_marginStart="@dimen/profile_padding"
+        android:id="@+id/uuid"
+        android:layout_below="@id/friendslist_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/profile_text_size"
+        android:text="@string/userid"/>
 
     <LinearLayout
         android:layout_marginStart="@dimen/profile_double_indented"
         android:layout_width="fill_parent"
+        android:layout_below="@id/uuid"
+        android:id="@+id/text_bar"
         android:layout_height="wrap_content"
         android:weightSum="1.0">
 
@@ -73,22 +75,17 @@
             android:textColor="@color/white"
             android:text="@string/add"/>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="top">
-            <Button
-                android:id="@+id/remove_info_button"
-                android:layout_width="@dimen/info_i"
-                android:layout_height="@dimen/info_i"
-                android:background="@drawable/info"/>
-        </RelativeLayout>
+        <Button
+            android:id="@+id/remove_info_button"
+            android:layout_width="@dimen/info_i"
+            android:layout_height="@dimen/info_i"
+            android:background="@drawable/info"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_weight="1.0"
+        android:layout_below="@id/text_bar"
         android:orientation="vertical"
         android:layout_marginBottom="@dimen/ack_padding">
 
@@ -96,10 +93,7 @@
             android:layout_marginStart="@dimen/profile_double_indented"
             android:id="@+id/list_of_friends"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7">
+            android:layout_height="wrap_content">
         </ListView>
-
     </LinearLayout>
-
-</TableLayout>
+</RelativeLayout>
