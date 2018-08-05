@@ -28,14 +28,9 @@
 
     // SETTINGS XML
     <string name="notifications_on_off">Notifications</string>
+    <string name="current_settings">Current Interval:&#160;</string>
     <string name="notification_interval">Interval</string>
-    <string name="notification_hours">Hours</string>
     <string name="notification_minutes">Minutes</string>
-    <string name="notification_donotdisturb">Do Not Disturb</string>
-    <string name="dnd_before">Before</string>
-    <string name="dnd_after">After</string>
-    <string name="select_time">Select</string>
-    <string name="dnd_not_set">- not set -</string>
 
     // USER XML
     <string name="user_default">USER NAME</string>
@@ -101,4 +96,9 @@
 
     // MAIN ACTIVITY
     <string name="new_title_earned">New title earned!</string>
+
+    // NOTIFICATION STRINGS
+    <string name="channel_name">fcm_default_channel</string>
+    <string name="channel_description">fcm_default_channel</string>
+
 </resources>

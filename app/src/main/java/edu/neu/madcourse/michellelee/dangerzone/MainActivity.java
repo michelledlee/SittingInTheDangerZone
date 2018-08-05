@@ -1,18 +1,18 @@
 package edu.neu.madcourse.michellelee.dangerzone;
 
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -22,22 +22,16 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.iid.FirebaseInstanceId;
 
-import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
+import edu.neu.madcourse.michellelee.dangerzone.notifications.SettingsActivity;
 import edu.neu.madcourse.michellelee.dangerzone.realtimeDatabase.models.User;
-
-import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -98,6 +92,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Create notification channel for the app
+       createNotificationChannel();
+
+    }
+
+    /**
+     * Create notification channel
+     */
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("CHANNEL_ID", name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
     /**
@@ -150,7 +166,11 @@ public class MainActivity extends AppCompatActivity {
                     editor.apply();
                     doDataAddToDb(userNameString, "Fresh Meat");    // Add this user's information to Firebase
                     String newTitleEarned = getResources().getString(R.string.new_title_earned);    // Get the initial title from string resources
-                    Toast.makeText(MainActivity.this,newTitleEarned,Toast.LENGTH_LONG).show();  // Let the user know they have earned a default new player title
+                    Toast.makeText(MainActivity.this,newTitleEarned,Toast.LENGTH_SHORT).show();  // Let the user know they have earned a default new player title
+
+                    // Set default notification preferences in case the user does not set them all
+                    editor.putInt("intervalMinutes", 30);
+                    editor.apply();
                 }
             });
             startDialog = startBuilder.create();

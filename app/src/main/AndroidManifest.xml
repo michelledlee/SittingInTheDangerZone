@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.neu.madcourse.michellelee.dangerzone">
 
-    <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="false"
@@ -30,7 +30,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".notifications.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -45,8 +45,11 @@
         <activity
             android:name=".EndWalk"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".realtimeDatabase.FriendsList"></activity>
+        <activity android:name=".realtimeDatabase.FriendsList" />
+
+        <receiver android:process=":remote" android:name=".notifications.AlarmReceiver" />
+        <receiver android:process=":remote" android:name=".notifications.AlarmBootReceiver" />
+
     </application>
 
 </manifest>
