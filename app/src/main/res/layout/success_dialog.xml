@@ -3,7 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/large_box"
+    android:background="@drawable/scenario_success"
     tools:context=".EndWalk">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/random_offset"
+        android:textSize="@dimen/end_walk_font_size"
+        android:text="@string/success_text"/>
 
 </RelativeLayout>

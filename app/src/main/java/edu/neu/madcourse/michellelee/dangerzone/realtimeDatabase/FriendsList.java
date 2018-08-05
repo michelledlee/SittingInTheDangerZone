@@ -65,8 +65,11 @@ public class FriendsList extends AppCompatActivity {
         TextView myUsername = (TextView) findViewById(R.id.friendslist_username);
         TextView myTitle = (TextView) findViewById(R.id.friendslist_title);
 
+        String displayUID = uid.substring(0,5) + "-" + uid.substring(5); // add hyphen for readibility
+        displayUID = displayUID.toUpperCase(); // to uppercase
+
         String useridIntro = getResources().getString(R.string.userid);
-        myID.setText(useridIntro + uid);    // Display for user
+        myID.setText(useridIntro + displayUID);    // Display for user
         myUsername.setText(username); // Display for user
         myTitle.setText(currentTitle);
 
@@ -77,7 +80,9 @@ public class FriendsList extends AppCompatActivity {
         enterSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String friendID = enterFriendID.getText().toString();
+                String tempfriendID = enterFriendID.getText().toString();
+                String friendID = tempfriendID.replace("-", "");  // remove hyphen if input
+                friendID = friendID.toLowerCase(); // lowercase if uppercase input
                 checkIfAdded(friendID);
             }
         });

@@ -79,6 +79,9 @@
     <string name="main_menu_button">Main Menu</string>
     <string name="to_next_level">xp to level&#160;</string>
     <string name="dinomite">Dino-mite!</string>
+    <string name="failure_text">YOU GOT EATEN!</string>
+    <string name="failure_text2">Better walk faster next time…</string>
+    <string name="success_text">Success!</string>
 
     // WALK ACTIVITY
     <string name="pause">Pause</string>
