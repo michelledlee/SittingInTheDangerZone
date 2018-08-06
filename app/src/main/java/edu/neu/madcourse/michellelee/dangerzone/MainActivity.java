@@ -50,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
         editor = preferences.edit();
 
         // Ask if this is the first startup of the app as we need to get the user name
-        isInitialStartup();
+        if (preferences.getBoolean("initial startup", true)) {
+            isInitialStartup();
+        }
 
         // Settings button
         View settingsButton = findViewById(R.id.settings_button);
@@ -109,8 +111,7 @@ public class MainActivity extends AppCompatActivity {
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel("CHANNEL_ID", name, importance);
             channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
+            // Register the channel with the system
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
@@ -120,9 +121,6 @@ public class MainActivity extends AppCompatActivity {
      * Initial startup routine that gathers user information for the app experience and Firebase
      */
     private void isInitialStartup() {
-
-        // If this is the first time we are opening the app
-        if (preferences.getBoolean("initial startup", true)) {
             // Set up views
             LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  // Get layout inflater
             final View dialogView = startInflater.inflate(R.layout.initial_start_dialog, null);     // Get dialog view
@@ -170,6 +168,10 @@ public class MainActivity extends AppCompatActivity {
 
                     // Set default notification preferences in case the user does not set them all
                     editor.putInt("intervalMinutes", 30);
+                    editor.apply();
+
+                    // Set the initial startup flag so that it does not ask again
+                    editor.putBoolean("initial startup", false);
                     editor.apply();
                 }
             });
@@ -221,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
                     enterUserName.setVisibility(View.INVISIBLE);
                 }
             });
-        }
+
 
         startDialog.show();
         startDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
