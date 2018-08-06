@@ -35,34 +35,48 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         mContext = getApplicationContext();
 
-
         // Initialize Shared Preferences
         preferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
         editor = preferences.edit();
 
-        // Get current interval preferences
+        // Get current interval preferences. The efault is set to 30 minutes since it is recommended
+        // to walk approximately 8 minutes per hour. We assume the app will go off at least twice
+        // and users can choose their time length to walk.
         interval = preferences.getInt("intervalMinutes", 30);
 
-        // Setting up switch to turn notifications on/off
+        // Set the view for the notifications switch depending to user preferences
         final Switch notificationsSwitch = (Switch) findViewById(R.id.notifications_switch);
+        // Get the current state of notification preferences
+        String switchState = preferences.getString("Notifications", "Off");
+        if (switchState.equals("On")) { // If notifications are on, display the switch in its "On" state
+            notificationsSwitch.setChecked(true);
+        } else {    // If they are turned off, display the switch in its "Off" state
+            notificationsSwitch.setChecked(false);
+        }
+
+        // Setting up switch function to turn notifications on/off
         notificationsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 // Enable buttons for selecting notification settings
                 if (notificationsSwitch.isChecked()) {
-                    editor.putString("Notifications","On");
-                    Toast.makeText(SettingsActivity.this, "Notifications on", Toast.LENGTH_LONG).show();
+                    editor.putString("Notifications","On"); // Save the notification preference as on
+                    Toast.makeText(SettingsActivity.this, "Notifications on", Toast.LENGTH_LONG).show();    // Let the user know that notifications are turned on
                     editor.apply();
+
+                    // Get the current interval level
+                    interval = preferences.getInt("intervalMinutes", 30);
+
+                    // Schedule a repeating notification to walk
                     NotificationHelper.scheduleRepeatingElapsedNotification(mContext);
                     NotificationHelper.enableBootReceiver(mContext);
-                    enableButtons();
 
                 // Disable buttons if notifications are turned off
                 } else {
-                    editor.putString("Notifications","Off");
-                    Toast.makeText(SettingsActivity.this, "Notifications off", Toast.LENGTH_LONG).show();
+                    editor.putString("Notifications","Off"); // Save the notification preference as off
+                    Toast.makeText(SettingsActivity.this, "Notifications off", Toast.LENGTH_LONG).show();   // Let the user know that notifications are turned off
                     editor.apply();
-                    disableButtons();
+
                     // Cancel alarm intent as notifications were switched off
                     NotificationHelper.cancelAlarmElapsed();
                     NotificationHelper.disableBootReceiver(mContext);
@@ -70,13 +84,21 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        // Display what interval the notifications are sent to go off at
+        currentInterval = (TextView) findViewById(R.id.current_setting);    // TextView to update
+        final String currentSettings = getResources().getString(R.string.current_settings);
+        currentInterval.setText(currentSettings + interval);     // Display default setting on startup
+
         // Setting up minutes spinner
         minutesSpinner = (Spinner) findViewById(R.id.minutes_spinner);
         minutesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                editor.putInt("intervalMinutes", i);    // Save minutes interval for notification reminder
+                int minutesSelected = Integer.parseInt(adapterView.getItemAtPosition(i).toString()); // Get user selection from spinner and convert to integer
+                editor.putInt("intervalMinutes", minutesSelected);    // Save minutes interval for notification reminder
                 editor.apply();
+                interval = preferences.getInt("intervalMinutes", 30);
+                currentInterval.setText(currentSettings + interval);
             }
 
             @Override
@@ -85,32 +107,28 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        // Display what interval the notifications are sent to go off at
-        currentInterval = (TextView) findViewById(R.id.current_setting);
-        String currentSettings = getResources().getString(R.string.current_settings);
-        currentInterval.setText(currentSettings + interval);
-
-        // Submitting this changes the interval to which the timer is set
-        submitNotification = (Button) findViewById(R.id.submit_notification);
-        submitNotification.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                scheduleNotification(getNotification(notificationText));
-            }
-        });
+//
+//        // Submitting this changes the interval to which the timer is set
+//        submitNotification = (Button) findViewById(R.id.submit_notification);
+//        submitNotification.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+////                scheduleNotification(getNotification(notificationText));
+//            }
+//        });
     }
 
-    /**
-     * Enable buttons if notifications are turned on
-     */
-    private void enableButtons() {
-        submitNotification.setClickable(true);
-    }
-
-    /**
-     * Disable buttons if notifications are turned off
-     */
-    private void disableButtons() {
-        submitNotification.setClickable(false);
-    }
+//    /**
+//     * Enable buttons if notifications are turned on
+//     */
+//    private void enableButtons() {
+//        submitNotification.setClickable(true);
+//    }
+//
+//    /**
+//     * Disable buttons if notifications are turned off
+//     */
+//    private void disableButtons() {
+//        submitNotification.setClickable(false);
+//    }
 }

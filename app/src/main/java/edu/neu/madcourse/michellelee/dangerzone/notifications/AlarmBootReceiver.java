@@ -6,6 +6,11 @@ import android.content.Intent;
 
 public class AlarmBootReceiver extends BroadcastReceiver {
 
+    /**
+     *
+     * @param context
+     * @param intent
+     */
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
 
