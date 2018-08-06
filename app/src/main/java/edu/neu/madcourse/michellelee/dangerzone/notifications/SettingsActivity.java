@@ -1,7 +1,5 @@
 package edu.neu.madcourse.michellelee.dangerzone.notifications;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,7 +7,6 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -24,8 +21,8 @@ public class SettingsActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
     private Spinner minutesSpinner;
+    private boolean initialView = true;
     private TextView currentInterval;
-    private Button submitNotification;
     private int interval;
 
     private Context mContext;
@@ -61,21 +58,21 @@ public class SettingsActivity extends AppCompatActivity {
                 // Enable buttons for selecting notification settings
                 if (notificationsSwitch.isChecked()) {
                     editor.putString("Notifications","On"); // Save the notification preference as on
-                    Toast.makeText(SettingsActivity.this, "Notifications on", Toast.LENGTH_LONG).show();    // Let the user know that notifications are turned on
                     editor.apply();
+                    Toast.makeText(SettingsActivity.this, "Notifications on", Toast.LENGTH_LONG).show();    // Let the user know that notifications are turned on
 
                     // Get the current interval level
                     interval = preferences.getInt("intervalMinutes", 30);
 
                     // Schedule a repeating notification to walk
-                    NotificationHelper.scheduleRepeatingElapsedNotification(mContext);
+                    NotificationHelper.scheduleRepeatingElapsedNotification30(mContext);
                     NotificationHelper.enableBootReceiver(mContext);
 
                 // Disable buttons if notifications are turned off
                 } else {
                     editor.putString("Notifications","Off"); // Save the notification preference as off
-                    Toast.makeText(SettingsActivity.this, "Notifications off", Toast.LENGTH_LONG).show();   // Let the user know that notifications are turned off
                     editor.apply();
+                    Toast.makeText(SettingsActivity.this, "Notifications off", Toast.LENGTH_LONG).show();   // Let the user know that notifications are turned off
 
                     // Cancel alarm intent as notifications were switched off
                     NotificationHelper.cancelAlarmElapsed();
@@ -94,11 +91,54 @@ public class SettingsActivity extends AppCompatActivity {
         minutesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                // Check if this is the intialization phase, if it is we do not want to change the settings based on this "selection"
+                if (initialView) {
+                    initialView = false;    // All selection instances after this are true user select instances, therefore set initialView to false so below can execdute
+                    return;
+                }
+
                 int minutesSelected = Integer.parseInt(adapterView.getItemAtPosition(i).toString()); // Get user selection from spinner and convert to integer
                 editor.putInt("intervalMinutes", minutesSelected);    // Save minutes interval for notification reminder
                 editor.apply();
-                interval = preferences.getInt("intervalMinutes", 30);
-                currentInterval.setText(currentSettings + interval);
+
+                interval = preferences.getInt("intervalMinutes", 30);   // Set interval to the new preference
+                currentInterval.setText(currentSettings + interval);    // Display current interval as selected by the user
+
+                // Cancel the old alarm
+                NotificationHelper.cancelAlarmElapsed();
+                NotificationHelper.disableBootReceiver(mContext);
+
+                // Set the new alarm based on new preferences based on interval selected
+                switch (interval) {
+                    case 1: // 1 minute
+                        NotificationHelper.scheduleRepeatingElapsedNotification1(mContext);
+                        NotificationHelper.enableBootReceiver(mContext);
+                        Toast.makeText(SettingsActivity.this, "1 minute set", Toast.LENGTH_LONG).show();
+                        break;
+                    case 15: // 15 minutes
+                        NotificationHelper.scheduleRepeatingElapsedNotification15(mContext);
+                        NotificationHelper.enableBootReceiver(mContext);
+                        Toast.makeText(SettingsActivity.this, "15 minute set", Toast.LENGTH_LONG).show();
+                        break;
+                    case 30: // 30 minutes
+                        NotificationHelper.scheduleRepeatingElapsedNotification30(mContext);
+                        NotificationHelper.enableBootReceiver(mContext);
+                        Toast.makeText(SettingsActivity.this, "30 minute set", Toast.LENGTH_LONG).show();
+                        break;
+                    case 45: // 45 minutes
+                        NotificationHelper.scheduleRepeatingElapsedNotification45(mContext);
+                        NotificationHelper.enableBootReceiver(mContext);
+                        Toast.makeText(SettingsActivity.this, "45 minute set", Toast.LENGTH_LONG).show();
+                        break;
+                    case 60: // 60 minutes
+                        NotificationHelper.scheduleRepeatingElapsedNotification60(mContext);
+                        NotificationHelper.enableBootReceiver(mContext);
+                        Toast.makeText(SettingsActivity.this, "60 minute set", Toast.LENGTH_LONG).show();
+                        break;
+                    default:
+                        break;
+                }
+
             }
 
             @Override
@@ -107,28 +147,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-//
-//        // Submitting this changes the interval to which the timer is set
-//        submitNotification = (Button) findViewById(R.id.submit_notification);
-//        submitNotification.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                scheduleNotification(getNotification(notificationText));
-//            }
-//        });
     }
 
-//    /**
-//     * Enable buttons if notifications are turned on
-//     */
-//    private void enableButtons() {
-//        submitNotification.setClickable(true);
-//    }
-//
-//    /**
-//     * Disable buttons if notifications are turned off
-//     */
-//    private void disableButtons() {
-//        submitNotification.setClickable(false);
-//    }
 }

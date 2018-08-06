@@ -13,6 +13,10 @@ import edu.neu.madcourse.michellelee.dangerzone.R;
 import edu.neu.madcourse.michellelee.dangerzone.WalkIntro;
 
 public class AlarmReceiver extends BroadcastReceiver {
+
+    /**
+     * Displays a notification once received info from the Alarm Manager
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
 
