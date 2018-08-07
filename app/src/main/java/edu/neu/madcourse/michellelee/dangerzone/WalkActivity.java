@@ -15,6 +15,7 @@ import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,6 +26,10 @@ import java.util.Random;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * The game activity of the app. It runs a timer for a user specified amount of time and records the steps
+ * that the user takes.
+ */
 public class WalkActivity extends AppCompatActivity implements SensorEventListener, StepListener {
     //  Step counter variables
     private SimpleStepDetector simpleStepDetector;
@@ -64,11 +69,14 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walk);
 
-        // Initialize Shared Preferences
+        // Keeps the screen on during the walk activity
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        // Initialize Shared Preferences to record game information like steps walked
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
-        // Get an instance of the SensorManager
+        // Get an instance of the SensorManager that will be used to track the steps during the walk
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         simpleStepDetector = new SimpleStepDetector();
@@ -83,7 +91,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         btnResume.setClickable(false);  // Resume is disabled while not paused
         btnResume.setEnabled(false);    // Resume is disabled while not paused
 
-        // build vibrator service & soundpool
+        // Build vibrator service & soundpool that will alert the user at different time intervals
         final Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
         mSoundAlert = mSoundPool.load(getApplicationContext(), R.raw.beep_alert, 1);
@@ -97,19 +105,22 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         timerTime = getIntent().getIntExtra("timer", -1);
         if (timerTime == 1) {
             millisInFuture = 60000;
+            // Target number of steps that is walkable in a minute is between 40 - 50 for the average adult
             minSteps = 40;
             maxSteps = 50;
         } else if (timerTime == 3) {
             millisInFuture = 180000;
+            // Target number of steps that is walkable in 3 min is between 100 - 125 for the average adult
             minSteps = 100;
             maxSteps = 125;
         } else {
             millisInFuture = 300000;
+            // Target number of steps that is walkable in 5 min is between 210 - 250 for the average adult
             minSteps = 210;
             maxSteps = 250;
         }
 
-        // Initialize a new CountDownTimer instance
+        // Initialize a new CountDownTimer instance to display how much time is left during the walk
         timer = new CountDownTimer(millisInFuture, countDownInterval) {
             public void onTick(long millisUntilFinished) {
                 long millis = millisUntilFinished;
@@ -119,14 +130,14 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
                         TimeUnit.MILLISECONDS.toMinutes(millis),
                         TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
 
-                // change background resource
+                // Change background resource to indicate the dinosaur is getting closer
                 if (text.equals("00:30")) {
                     RelativeLayout layout =(RelativeLayout)findViewById(R.id.walk_activity);
                     layout.setBackgroundResource(R.drawable.scenario_end);
                     mSoundPool.play(mSoundAlert, mVolume, mVolume, 1, 0, 1f);
                 }
 
-                // flash text & vibrate at set times
+                // Flash text & vibrate at set times so the user knows that time is about to run out and they can adjust their walk speed
                 if (text.equals("00:30") || text.equals("00:25") || text.equals("00:20") || text.equals("00:15") ||
                         text.equals("00:10") || text.equals("00:09") || text.equals("00:08") || text.equals("00:07") || text.equals("00:06") ||
                         text.equals("00:05") || text.equals("00:04") || text.equals("00:03") || text.equals("00:02") || text.equals("00:01")) {
@@ -153,7 +164,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
                 btnResume.setEnabled(false);
                 btnResume.setClickable(false);
 
-                // vibrate alert
+                // Vibrate alert
                 v.vibrate(500);
                 mSoundPool.play(mSoundAlert, mVolume, mVolume, 1, 0, 1f);
 
@@ -223,8 +234,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onResume() {
         super.onResume();
-//        numSteps = 0;
-//        textView.setText(TEXT_NUM_STEPS + numSteps);
         steps.setText(TEXT_NUM_STEPS + numSteps);
         sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_FASTEST);
     }

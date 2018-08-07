@@ -22,6 +22,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * This Activity calculates and displays all results from the walk including whether the user
+ * has won or lost, the steps and distance they walked, etc.
+ */
 public class EndWalk extends AppCompatActivity {
 
     SharedPreferences preferences;
@@ -30,13 +34,12 @@ public class EndWalk extends AppCompatActivity {
     private AlertDialog failDialog;
     private AlertDialog successDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_walk);
 
-        // Initialize Shared Preferences
+        // Initialize Shared Preferences to record user profile information such as level, distance, etc.
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
@@ -62,7 +65,6 @@ public class EndWalk extends AppCompatActivity {
 
             // ADD TO LIST OF POINTS TO DISPLAY
             pointsArray.add(walkFinished);  // Add walk finished points total to display
-
 
             // UPDATE THAT THIS SCENARIO HAS BEEN COMPLETED
             // This is because we only want to add the title for this specific scenario once
@@ -97,6 +99,8 @@ public class EndWalk extends AppCompatActivity {
             failureBuilder.setView(dialogView);    // Set view to failure dialog
             failDialog = failureBuilder.show();
         }
+
+        // Get results of the bonuses. If there is actually a value, we add this to the key for storage.
         String stepBonus = extras.getString("step bonus");  // Get results of step bonus
         if (!stepBonus.equals("")) pointsArray.add(stepBonus);
         String timeBonus = extras.getString("time bonus");  // Get results of time bonus
@@ -105,44 +109,46 @@ public class EndWalk extends AppCompatActivity {
         if (!personalBest.equals("")) pointsArray.add(personalBest);
 
         // XP and level calculator
-        int experience = preferences.getInt("xp", -1);
+        int experience = preferences.getInt("xp", -1);  // Retrieve the current xp balance
         int experienceNeeded = 0;
-        if (experience < 99) {
+        if (experience < 99) {  // Level 1 if under 99xp
             editor.putInt("level", 1);
             editor.apply();
             experienceNeeded = 100;
-        } else if (experience >= 100 && experience < 199) {
+        } else if (experience >= 100 && experience < 199) { // Level 2 between this xp threshold
             editor.putInt("level", 2);
             editor.apply();
             experienceNeeded = 200;
-        } else if (experience >= 200 && experience < 399) {
+        } else if (experience >= 200 && experience < 399) { // Level 3 between this xp threshold
             editor.putInt("level", 3);
             editor.apply();
             experienceNeeded = 399;
-        } else if (experience >= 400 && experience < 799) {
+        } else if (experience >= 400 && experience < 799) { // Level 4 between this xp threshold
             editor.putInt("level", 4);
             editor.apply();
             experienceNeeded = 799;
-        } else if (experience >= 800 && experience < 1599) {
+        } else if (experience >= 800 && experience < 1599) {    // Level 5 between this xp threshold
             editor.putInt("level", 5);
             editor.apply();
             experienceNeeded = 1599;
         }
-        int level = preferences.getInt("level", -1);
-        int nextLevel = level + 1;
+        int level = preferences.getInt("level", -1);    // Update the level based on the calculator
+        int nextLevel = level + 1;  // Determine what the next level is so we can calculate the progress bar animation requirements
 
-        // Convert to double to get percentage to next level
+        // Have to convert to double to get percentage value to next level
         double obtainedScore = (double) experience;
         double totalScore = (double) experienceNeeded;
-        float percentage = (float) ((obtainedScore*100)/totalScore);
-        int xpToNextLevel = experienceNeeded - experience;
+        float percentage = (float) ((obtainedScore*100)/totalScore);    // This is what the progress bar uses to determine how much of itself to display
+        int xpToNextLevel = experienceNeeded - experience;  // Used to display to the user how many xp points are needed
+
+        // Percentage text within the progress bar
+        int progress = (int) percentage;    // Convert to an int as it will be displayed as a string and we just want the whole number
+        TextView xpProgress = (TextView) findViewById(R.id.progress_text);  // Initialize the textview that displays % in numbers
+        xpProgress.setText(Integer.toString(progress) + "%");   // Set the text to the percentage calculated
 
         // Animate the progress bar
-        int progress = (int) percentage;
-        TextView xpProgress = (TextView) findViewById(R.id.progress_text);
-        xpProgress.setText(Integer.toString(progress) + "%");
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        ObjectAnimator animation = ObjectAnimator.ofInt(progressBar, "progress", 0, progress); // see this max value coming back here, we animate towards that value
+        ObjectAnimator animation = ObjectAnimator.ofInt(progressBar, "progress", 0, progress); // See this max value coming back here, we animate towards that value
         animation.setDuration(5000); // in milliseconds
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();
@@ -167,12 +173,12 @@ public class EndWalk extends AppCompatActivity {
             }
         });
 
-        // Total points calculator and listing
+        // Views to display the points earned during the walk
         ArrayAdapter<String> pointsAdapter = new ArrayAdapter<String>(this, R.layout.list_item_profile, pointsArray);
         ListView walkExperienceList = (ListView) findViewById(R.id.walk_experience_list);
         walkExperienceList.setAdapter(pointsAdapter);
 
-        // Statistics calculation and listing (time and steps)
+        // Views to display the statistics calculation and listing (time and steps)
         ArrayList<String> statisticsArray = new ArrayList<>();  // ArrayList for statistics display
         int secondsSession = extras.getInt("seconds summary");  // Get seconds walked this session
         int sessionMinutes = secondsSession / 60;   // Convert to minutes

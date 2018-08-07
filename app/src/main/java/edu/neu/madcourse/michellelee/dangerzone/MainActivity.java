@@ -33,6 +33,11 @@ import java.util.Random;
 import edu.neu.madcourse.michellelee.dangerzone.notifications.SettingsActivity;
 import edu.neu.madcourse.michellelee.dangerzone.realtimeDatabase.models.User;
 
+/**
+ * This activity is the main menu of the app. On initial startup it asks for a user name and initializes
+ * app-wide data that will be used. It also adds this user instance to Firebase. The main menu has buttons
+ * to the other activities in the app.
+ */
 public class MainActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
@@ -45,16 +50,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize Shared Preferences
+        // Initialize Shared Preferences which will be heavily used on first start to initialize the user's profile
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
         // Ask if this is the first startup of the app as we need to get the user name
         if (preferences.getBoolean("initial startup", true)) {
-            isInitialStartup();
+            isInitialStartup(); // Initial startup routine gets the user name, adds them to Firebase, and intializes their user profile
         }
 
-        // Settings button
+        // Settings button to start the Settings activity
         View settingsButton = findViewById(R.id.settings_button);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Walk introduction screen
+        // Walk introduction screen that allows the user to select the times they want to walk and start that activity
         View walkIntroButton = findViewById(R.id.walk_button);
         walkIntroButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // User profile
+        // User profile button accesses all their user specific data from app usage
         View userProfile = findViewById(R.id.profile_button);
         userProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Information and instructions button
+        // Information and instructions button on how to play and about the developers
         View instructionsButton = findViewById(R.id.instructions_button);
         instructionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,11 +101,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Create notification channel for the app
        createNotificationChannel();
-
     }
 
     /**
-     * Create notification channel
+     * Create notification channel for the app. The app sends notifications based on an interval
+     * timer to remind the user to play.
      */
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
@@ -118,10 +123,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Initial startup routine that gathers user information for the app experience and Firebase
+     * Initial startup routine that gathers user information for the app experience and Firebase.
      */
     private void isInitialStartup() {
-            // Set up views
+            // Set up views for the dialog to ask for the user name
             LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  // Get layout inflater
             final View dialogView = startInflater.inflate(R.layout.initial_start_dialog, null);     // Get dialog view
             final EditText usernameEntry = (EditText) dialogView.findViewById(R.id.username_input); // Get edit text view

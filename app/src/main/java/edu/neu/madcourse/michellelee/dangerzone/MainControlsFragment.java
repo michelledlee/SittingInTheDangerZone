@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+/**
+ * This class displays the buttons on the main menu.
+ */
 public class MainControlsFragment extends Fragment {
     private AlertDialog mDialog;
 

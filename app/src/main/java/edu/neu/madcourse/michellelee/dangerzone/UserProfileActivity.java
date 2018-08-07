@@ -31,6 +31,9 @@ import java.util.Locale;
 
 import edu.neu.madcourse.michellelee.dangerzone.realtimeDatabase.FriendsList;
 
+/**
+ * Shows the user information including a summary of app usage and provides a link to the friends list of the user.
+ */
 public class UserProfileActivity extends AppCompatActivity {
 
     SharedPreferences preferences;

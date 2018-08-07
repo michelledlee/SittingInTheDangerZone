@@ -12,6 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+/**
+ * This activity displays an introduction to the user about the app and how to play. It also
+ * includes links to information about the developers.
+ */
 public class InformationInstructionsFragment extends AppCompatActivity {
     private AlertDialog ackDialog;
 
@@ -20,6 +24,7 @@ public class InformationInstructionsFragment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_information_instructions);
 
+        // Acknowledgements button that displays a popup that lists the acknowledgements
         Button acknowledgmentsButton = (Button) findViewById(R.id.ack_button);
         acknowledgmentsButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,6 +6,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+/**
+ * This class publishes a notification that is received.
+ */
 public class NotificationPublisher extends BroadcastReceiver {
 
     public static String NOTIFICATION_ID = "notification-id";
