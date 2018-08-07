@@ -155,10 +155,9 @@
         android:id="@+id/number_of_achievements"
         android:layout_width="@dimen/profile_stat_width"
         android:layout_height="wrap_content"
-        android:layout_below="@id/number_of_titles"
+        android:layout_below="@id/titles_list"
         android:textSize="@dimen/profile_text_size"
         android:layout_marginStart="@dimen/profile_double_indented"
-        android:layout_marginTop="@dimen/profile_scrollview"
         android:text="@string/number_of_achievements" />
 
     <TextView
@@ -167,9 +166,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:textSize="@dimen/profile_text_size"
-        android:layout_below="@id/titles_earned"
         android:layout_marginEnd="@dimen/profile_padding_right"
-        android:layout_marginTop="@dimen/profile_scrollview"
+        android:layout_below="@id/titles_list"
         android:layout_toEndOf="@id/number_of_achievements"
         android:gravity="end"
         android:text="@string/achievements_default"/>

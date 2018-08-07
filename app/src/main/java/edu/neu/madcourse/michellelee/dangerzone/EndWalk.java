@@ -63,19 +63,26 @@ public class EndWalk extends AppCompatActivity {
             // ADD TO LIST OF POINTS TO DISPLAY
             pointsArray.add(walkFinished);  // Add walk finished points total to display
 
-            // ADD NEW TITLE
-            // Special Processing to Add: To add a new title to the StringBuilder "list", create a StringBuilder based on the current
-            // titles in shared preferences. Append an "," to the current titles "list" in StringBuilder before the next new title.
-            // Add the new title to the list. Commit to shared preferences.
-            String dinomite = getResources().getString(R.string.dinomite);
-            String existingTitles = preferences.getString("title list", null);
-            StringBuilder titlebuild = new StringBuilder(existingTitles); // Create new StringBuilder
-            titlebuild.append(","); // Add a delimiter to the end of it the existing String list
-            titlebuild.append(dinomite);   // Add the new title to the StringBuilder
-            editor.putString("title list", titlebuild.toString());  // Replace old String of titles with new
-            editor.apply();
-            String newTitleEarned = getResources().getString(R.string.new_title_earned);    // Get the initial title from string resources
-            Toast.makeText(this,newTitleEarned,Toast.LENGTH_SHORT).show(); // Let the user know they have earned a new title
+
+            // UPDATE THAT THIS SCENARIO HAS BEEN COMPLETED
+            // This is because we only want to add the title for this specific scenario once
+            if (preferences.getInt("dinosaurs", -1) == -1) {
+                editor.putInt("dinosaurs", 1);
+
+                // ADD NEW TITLE
+                // Special Processing to Add: To add a new title to the StringBuilder "list", create a StringBuilder based on the current
+                // titles in shared preferences. Append an "," to the current titles "list" in StringBuilder before the next new title.
+                // Add the new title to the list. Commit to shared preferences.
+                String dinomite = getResources().getString(R.string.dinomite);
+                String existingTitles = preferences.getString("title list", null);
+                StringBuilder titlebuild = new StringBuilder(existingTitles); // Create new StringBuilder
+                titlebuild.append(","); // Add a delimiter to the end of it the existing String list
+                titlebuild.append(dinomite);   // Add the new title to the StringBuilder
+                editor.putString("title list", titlebuild.toString());  // Replace old String of titles with new
+                editor.apply();
+                String newTitleEarned = getResources().getString(R.string.new_title_earned);    // Get the initial title from string resources
+                Toast.makeText(this,newTitleEarned,Toast.LENGTH_SHORT).show(); // Let the user know they have earned a new title
+            }
 
         } else {
             // Create the success alert dialog

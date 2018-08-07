@@ -136,7 +136,7 @@ public class UserProfileActivity extends AppCompatActivity {
             editor.putString("title", selected);
             editor.apply();
             String titleChanged = getResources().getString(R.string.title_change);
-            Toast.makeText(UserProfileActivity.this,titleChanged,Toast.LENGTH_LONG).show();
+            Toast.makeText(UserProfileActivity.this,titleChanged,Toast.LENGTH_SHORT).show();
             dataAddAppInstance(name, selected);
             }
         });
