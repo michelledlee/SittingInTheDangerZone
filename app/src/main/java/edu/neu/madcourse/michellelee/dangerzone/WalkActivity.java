@@ -138,8 +138,16 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
                 }
 
                 // Flash text & vibrate at set times so the user knows that time is about to run out and they can adjust their walk speed
-                if (text.equals("00:30") || text.equals("00:25") || text.equals("00:20") || text.equals("00:15") ||
-                        text.equals("00:10") || text.equals("00:09") || text.equals("00:08") || text.equals("00:07") || text.equals("00:06") ||
+                // At half time
+                if (timerTime == 1) {
+                    if (text.equals("00:30"))  v.vibrate(500);
+                } else if (timerTime == 3) {
+                    if (text.equals("01:30")) v.vibrate(500);
+                } else {
+                    if (text.equals("02:30")) v.vibrate(500);
+                }
+                // 10 second count down
+                if (text.equals("00:10") || text.equals("00:09") || text.equals("00:08") || text.equals("00:07") || text.equals("00:06") ||
                         text.equals("00:05") || text.equals("00:04") || text.equals("00:03") || text.equals("00:02") || text.equals("00:01")) {
                     tView.setTextColor(getResources().getColor(R.color.red_color));
                     v.vibrate(500);
