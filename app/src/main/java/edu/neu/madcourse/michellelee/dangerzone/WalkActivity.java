@@ -97,22 +97,16 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         timerTime = getIntent().getIntExtra("timer", -1);
         if (timerTime == 1) {
             millisInFuture = 60000;
-//            minSteps = 100;
-//            maxSteps = 140;
             minSteps = 40;
             maxSteps = 50;
         } else if (timerTime == 3) {
             millisInFuture = 180000;
-//            minSteps = 300;
-//            maxSteps = 340;
-            minSteps = 80;
-            maxSteps = 100;
+            minSteps = 100;
+            maxSteps = 125;
         } else {
             millisInFuture = 300000;
-//            minSteps = 500;
-//            maxSteps = 540;
-            minSteps = 240;
-            maxSteps = 200;
+            minSteps = 210;
+            maxSteps = 250;
         }
 
         // Initialize a new CountDownTimer instance
@@ -256,7 +250,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void step(long timeNs) {
         numSteps++;
-//        textView.setText(TEXT_NUM_STEPS + numSteps);
         steps.setText(TEXT_NUM_STEPS + numSteps);
     }
 
