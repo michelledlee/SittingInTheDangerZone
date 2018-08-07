@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_bg"
     tools:context=".EndWalk">
 
     <TextView
@@ -18,11 +19,18 @@
         android:text="@string/victory_title" />
 
     <TextView
+        android:id="@+id/current_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/victory_text"/>
+
+    <TextView
         android:id="@+id/progress_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/victory_text"
+        android:layout_below="@id/current_level"
         android:layout_marginTop="60dp"
         android:textStyle="bold"
         android:textSize="@dimen/profile_username_title"/>
@@ -33,7 +41,7 @@
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/victory_text"
+        android:layout_below="@id/current_level"
         android:layout_marginTop="@dimen/endwalk_padding"
         android:max="100"
         android:progress="0"

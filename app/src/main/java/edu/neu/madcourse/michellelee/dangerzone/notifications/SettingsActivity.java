@@ -22,6 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private Spinner minutesSpinner;
     private boolean initialView = true;
+    private boolean initialSwitch = true;
     private TextView currentInterval;
     private int interval;
 
@@ -55,6 +56,12 @@ public class SettingsActivity extends AppCompatActivity {
         notificationsSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                // Check if this is the intialization phase, if it is we do not want to change the settings based on this "selection"
+                if (initialSwitch) {
+                    initialSwitch = false;    // All selection instances after this are true user select instances, therefore set initialView to false so below can execdute
+                    return;
+                }
+
                 // Enable buttons for selecting notification settings
                 if (notificationsSwitch.isChecked()) {
                     editor.putString("Notifications","On"); // Save the notification preference as on

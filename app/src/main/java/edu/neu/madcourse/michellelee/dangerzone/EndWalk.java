@@ -123,7 +123,6 @@ public class EndWalk extends AppCompatActivity {
         }
         int level = preferences.getInt("level", -1);
         int nextLevel = level + 1;
-//        double percentageXP = experience / experienceNeeded * 100;
 
         // Convert to double to get percentage to next level
         double obtainedScore = (double) experience;
@@ -140,6 +139,11 @@ public class EndWalk extends AppCompatActivity {
         animation.setDuration(5000); // in milliseconds
         animation.setInterpolator(new DecelerateInterpolator());
         animation.start();
+
+        // TextView to display current level
+        int currentLevel = preferences.getInt("level", -1);
+        TextView currentLevelDisplay = (TextView) findViewById(R.id.current_level);
+        currentLevelDisplay.setText("LVL " + currentLevel);
 
         // TextView to display progress information
         TextView progressNextLevel = (TextView) findViewById(R.id.progress_level);
@@ -182,4 +186,12 @@ public class EndWalk extends AppCompatActivity {
         ListView statisticsSummary = (ListView) findViewById(R.id.statistics_list);
         statisticsSummary.setAdapter(statisticsAdapter);
     }
+
+    /**
+     * Do not want users going back to the walk screen, so disable back button.
+     */
+    @Override
+    public void onBackPressed() {
+    }
+
 }

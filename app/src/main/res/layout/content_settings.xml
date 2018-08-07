@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".notifications.SettingsActivity"
+    android:background="@drawable/gradient_bg"
     tools:showIn="@layout/activity_settings">
 
     <TextView
@@ -24,7 +25,8 @@
         android:layout_toEndOf="@id/notifications_on_off"
         android:layout_marginTop="@dimen/settings_padding"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/settings_padding" />
+        android:layout_marginEnd="@dimen/settings_padding"
+        android:showText="true"/>
 
     <TextView
         android:id="@+id/interval_text"

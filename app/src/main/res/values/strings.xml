@@ -3,11 +3,12 @@
 
     // INFORMATION AND INSTRUCTIONS
     <string name="acknowledgments">Acknowledgments</string>
-    <string name="sources">
-    Volcano image and dinosaurs from pixabay.com\n
-    Tom Cruise from google and Tom Cruise’s mom\n
-    Button noises and music from soundjay.com\n
-    Awesome app by Michelle Lee and Bri Garbo.</string>
+    <string name="sources">Volcano image and dinosaurs from pixabay.com\n
+        Tom Cruise from google and Tom Cruise’s mom\n
+        Button noises and music from soundjay.com\n
+        Notification guide from ptyagi techLog blog\n
+        Pedometer example from Google open source\n
+        Awesome app by Michelle Lee and Bri Garbo.</string>
     <string name="instructions">LAUNCH! THAT! APP!\n
 \nSo you’ve decided to step into the DANGER ZONE?! You’re so brave. Now that you’ve set your name, it’s time to understand the DANGER.
     You can walk at any time by selecting the WALK option on the main screen. Choose how long you’d like to walk, and we’ll load a random

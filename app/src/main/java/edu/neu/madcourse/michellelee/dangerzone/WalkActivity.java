@@ -333,4 +333,11 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         startActivity(endScreenIntent);
     }
 
+
+    /**
+     * Do not want users going back to the start screen, so disable back button.
+     */
+    @Override
+    public void onBackPressed() {
+    }
 }
