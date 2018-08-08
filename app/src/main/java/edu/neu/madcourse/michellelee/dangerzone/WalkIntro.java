@@ -33,7 +33,7 @@ public class WalkIntro extends AppCompatActivity {
         mSoundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
             @Override
             public void onLoadComplete(SoundPool soundPool, int i, int i1) {
-                mSoundPool.play(mDinoStomp, mVolume, mVolume, 1, 0, 1f);
+            mSoundPool.play(mDinoStomp, mVolume, mVolume, 1, 0, 1f);
             }
         });
 

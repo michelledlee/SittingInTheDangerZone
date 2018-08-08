@@ -32,12 +32,21 @@
             android:textSize="50sp"/>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/sound_setting"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/sound_on"/>
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/settings_button_spacing">
+
         <Button
             android:id="@+id/btn_pause"
             android:layout_height="wrap_content"

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
 
 import android.hardware.Sensor;
@@ -52,6 +51,9 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
 
     // Sound
     private MediaPlayer mMediaPlayer;
+    private Button soundControl;
+    private int length = 0;
+    private int mediaOn = 1;
 
     // Bonus
     private boolean extraTimeMarker = false;
@@ -67,10 +69,30 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walk);
 
-        // start playing background music on startup
+        // Start playing background music on startup
         mMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.danger_zone);
         mMediaPlayer.setLooping(true);
         mMediaPlayer.start();
+
+        // Control to turn music on and off
+        soundControl = (Button) findViewById(R.id.sound_setting);
+        soundControl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                soundControl.setSelected(!soundControl.isSelected());   // Default position is on since it will play on startup
+                if (soundControl.isSelected()) { // To control what happens once the sound is turned off
+                    length = mMediaPlayer.getCurrentPosition(); // Remember where we paused
+                    mMediaPlayer.pause();
+                    soundControl.setBackgroundResource(R.drawable.sound_off);   // Toggle the image to off
+                    mediaOn = 0;
+                } else {
+                    mMediaPlayer.seekTo(length);    // Go to where we left off
+                    mMediaPlayer.start();   // Start music
+                    soundControl.setBackgroundResource(R.drawable.sound_on);    // Toggle the image to on
+                    mediaOn = 1;
+                }
+            }
+        });
 
         // Keeps the screen on during the walk activity
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -137,16 +159,16 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
                 }
 
                 // Flash text & vibrate at set times so the user knows that time is about to run out and they can adjust their walk speed
-                // At half time
-                if (timerTime == 1) {
-                    if (text.equals("00:30"))  v.vibrate(500);
-                } else if (timerTime == 3) {
-                    if (text.equals("01:30")) v.vibrate(500);
-                } else {
-                    if (text.equals("02:30")) v.vibrate(500);
-                }
+//                // At half time
+//                if (timerTime == 1) {
+//                    if (text.equals("00:30"))  v.vibrate(500);
+//                } else if (timerTime == 3) {
+//                    if (text.equals("01:30")) v.vibrate(500);
+//                } else {
+//                    if (text.equals("02:30")) v.vibrate(500);
+//                }
                 // 10 second count down
-                if (text.equals("00:10") || text.equals("00:09") || text.equals("00:08") || text.equals("00:07") || text.equals("00:06") ||
+                if ((timerTime == 1 && text.equals("00:30")) || (timerTime == 3 && text.equals("01:30")) || (timerTime == 5 && text.equals("02:30")) || text.equals("00:10") || text.equals("00:09") || text.equals("00:08") || text.equals("00:07") || text.equals("00:06") ||
                         text.equals("00:05") || text.equals("00:04") || text.equals("00:03") || text.equals("00:02") || text.equals("00:01")) {
                     tView.setTextColor(getResources().getColor(R.color.red_color));
                     v.vibrate(500);
@@ -235,23 +257,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
             onPause();
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        steps.setText(TEXT_NUM_STEPS + numSteps);
-        sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_FASTEST);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        sensorManager.unregisterListener(this);
-        if(mMediaPlayer.isPlaying())
-            mMediaPlayer.stop();
-        else
-            return;
     }
 
     @Override
@@ -361,5 +366,36 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
             mMediaPlayer.stop();
         else
             return;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        steps.setText(TEXT_NUM_STEPS + numSteps);
+        sensorManager.registerListener(this, accel, SensorManager.SENSOR_DELAY_FASTEST);
+
+        // If sound was playing, then resume where we were
+        if (mediaOn == 1) {
+            mMediaPlayer.seekTo(length);    // Go to where we left off
+            mMediaPlayer.start();   // Start music
+        } else {
+            return;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
+
+        // If music is playing, pause this on pause as well
+        if(mMediaPlayer.isPlaying()) {
+            length = mMediaPlayer.getCurrentPosition(); // Remember where we paused
+            mMediaPlayer.pause();
+            mediaOn = 1;
+        } else {
+            return;
+        }
     }
 }

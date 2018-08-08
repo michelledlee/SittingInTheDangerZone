@@ -5,7 +5,10 @@
     <string name="acknowledgments">Acknowledgments</string>
     <string name="sources">Volcano image and dinosaurs from pixabay.com\n
         Tom Cruise from google and Tom Cruise’s mom\n
-        Button noises and music from soundjay.com\n
+        Dinosaur sounds from freesound.org\n
+        Music from freemidi.org\n
+        Audio conversion from aconvert.com\n
+        Android icons from material.io\n
         Notification guide from ptyagi techLog blog\n
         Pedometer example from Google open source\n
         Awesome app by Michelle Lee and Bri Garbo.</string>

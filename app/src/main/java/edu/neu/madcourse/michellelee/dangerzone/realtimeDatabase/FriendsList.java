@@ -224,7 +224,7 @@ public class FriendsList extends AppCompatActivity {
      */
     private void addFriend(final String friendsID) {
         // Get ID reference for node in question
-        String uniqueID = preferences.getString("uid", null);
+        final String uniqueID = preferences.getString("uid", null);
 
         // Accessing database contents
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
@@ -247,6 +247,14 @@ public class FriendsList extends AppCompatActivity {
                 if (!foundID) {
                     Toast.makeText(FriendsList.this, "Invalid ID",Toast.LENGTH_LONG).show();    // Indicate to the user the ID was not valid
                     return; // Return as no friend information will be added
+                } else {
+                    // Add this ID to the user's friend list
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = database.getReference("users").child(uniqueID).child("friends");
+                    myRef.push().setValue(friendsID);
+
+                    // Update friends list
+                    updateFriendsList(friendsID);
                 }
             }
 
@@ -255,14 +263,6 @@ public class FriendsList extends AppCompatActivity {
         };
         mRef.addListenerForSingleValueEvent(eventListener);
 
-
-        // Add this ID to the user's friend list
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users").child(uniqueID).child("friends");
-        myRef.push().setValue(friendsID);
-
-        // Update friends list
-        updateFriendsList(friendsID);
     }
 
     /**
