@@ -3,7 +3,7 @@ package edu.neu.madcourse.michellelee.dangerzone;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 
@@ -50,10 +50,8 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     private TextView steps;
     private int timerTime;
 
-    // sound
-    public int mSoundAlert, mBackgroundMusic;
-    private SoundPool mSoundPool;
-    private float mVolume = 1f;
+    // Sound
+    private MediaPlayer mMediaPlayer;
 
     // Bonus
     private boolean extraTimeMarker = false;
@@ -68,6 +66,11 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walk);
+
+        // start playing background music on startup
+        mMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.danger_zone);
+        mMediaPlayer.setLooping(true);
+        mMediaPlayer.start();
 
         // Keeps the screen on during the walk activity
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -93,8 +96,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
 
         // Build vibrator service & soundpool that will alert the user at different time intervals
         final Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
-        mSoundAlert = mSoundPool.load(getApplicationContext(), R.raw.beep_alert, 1);
 
         // Default time for CountdownTimer
         long millisInFuture;
@@ -133,7 +134,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
                 if (text.equals("00:30")) {
                     RelativeLayout layout =(RelativeLayout)findViewById(R.id.walk_activity);
                     layout.setBackgroundResource(R.drawable.scenario_end);
-                    mSoundPool.play(mSoundAlert, mVolume, mVolume, 1, 0, 1f);
                 }
 
                 // Flash text & vibrate at set times so the user knows that time is about to run out and they can adjust their walk speed
@@ -173,7 +173,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
 
                 // Vibrate alert
                 v.vibrate(500);
-                mSoundPool.play(mSoundAlert, mVolume, mVolume, 1, 0, 1f);
 
                 // Perform calculations and actions to start EndWalk screen
                 finishTransition();
@@ -249,6 +248,10 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     public void onPause() {
         super.onPause();
         sensorManager.unregisterListener(this);
+        if(mMediaPlayer.isPlaying())
+            mMediaPlayer.stop();
+        else
+            return;
     }
 
     @Override
@@ -348,5 +351,15 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
      */
     @Override
     public void onBackPressed() {
+    }
+
+    @Override
+    public void onStop()
+    {
+        super.onStop();
+        if(mMediaPlayer.isPlaying())
+            mMediaPlayer.stop();
+        else
+            return;
     }
 }

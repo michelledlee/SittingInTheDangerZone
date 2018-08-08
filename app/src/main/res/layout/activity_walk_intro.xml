@@ -60,19 +60,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/one_min"
-            android:checked="true" />
+            android:checked="false" />
 
         <RadioButton
             android:id="@+id/three_min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/three_min" />
+            android:text="@string/three_min"
+            android:checked="false"/>
 
         <RadioButton
             android:id="@+id/five_min"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/five_min" />
+            android:text="@string/five_min"
+            android:checked="false"/>
 
     </RadioGroup>
 
@@ -85,6 +87,7 @@
         android:layout_marginBottom="@dimen/walk_intro_bottom_padding2"
         android:text="@string/walk"
         android:textColor="@color/white"
-        android:background="@drawable/button"/>
+        android:background="@drawable/button"
+        android:clickable="false"/>
 
 </RelativeLayout>
