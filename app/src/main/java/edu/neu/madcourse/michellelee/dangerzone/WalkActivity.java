@@ -95,7 +95,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         final Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
         mSoundAlert = mSoundPool.load(getApplicationContext(), R.raw.beep_alert, 1);
-        mBackgroundMusic = mSoundPool.load(getApplicationContext(), R.raw.deeper, 1); // music but not hooked up yet
 
         // Default time for CountdownTimer
         long millisInFuture;

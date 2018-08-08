@@ -1,6 +1,8 @@
 package edu.neu.madcourse.michellelee.dangerzone;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,11 +15,14 @@ import android.widget.RadioGroup;
  */
 public class WalkIntro extends AppCompatActivity {
 
+    private int mDinoStomp, mTrexRoar;
+    private SoundPool mSoundPool;
+    private float mVolume = 1f;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walk_intro);
-
 
         // Hooking up buttons
         final RadioGroup minSelection = (RadioGroup) findViewById(R.id.min_group);
@@ -46,5 +51,22 @@ public class WalkIntro extends AppCompatActivity {
             startActivity(walkIntent);
             }
         });
+
+        // Play dinosaur sounds when entering this screen
+        initSound();
+    }
+
+    /**
+     * Initialize music and sounds for game
+     */
+    public void initSound() {
+        // Load the sounds of the dino approaching and roaring
+        mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
+        mDinoStomp = mSoundPool.load(this, R.raw.trex_roar, 1);
+        mTrexRoar = mSoundPool.load(this, R.raw.trex_roar, 1);
+
+        // Play the sounds
+        mSoundPool.play(mDinoStomp, mVolume, mVolume, 1, 0, 1f);
+        mSoundPool.play(mTrexRoar, mVolume, mVolume, 1, 0, 1f);
     }
 }
