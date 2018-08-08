@@ -58,7 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 // Check if this is the intialization phase, if it is we do not want to change the settings based on this "selection"
                 if (initialSwitch) {
-                    initialSwitch = false;    // All selection instances after this are true user select instances, therefore set initialView to false so below can execdute
+                    initialSwitch = false;    // All selection instances after this are true user select instances, therefore set initialView to false so below can execute
                     return;
                 }
 

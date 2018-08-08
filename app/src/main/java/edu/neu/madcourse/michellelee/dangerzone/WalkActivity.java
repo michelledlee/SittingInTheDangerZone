@@ -158,22 +158,14 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
                     layout.setBackgroundResource(R.drawable.scenario_end);
                 }
 
-                // Flash text & vibrate at set times so the user knows that time is about to run out and they can adjust their walk speed
-//                // At half time
-//                if (timerTime == 1) {
-//                    if (text.equals("00:30"))  v.vibrate(500);
-//                } else if (timerTime == 3) {
-//                    if (text.equals("01:30")) v.vibrate(500);
-//                } else {
-//                    if (text.equals("02:30")) v.vibrate(500);
-//                }
-                // 10 second count down
+                // Flash text & vibrate at set times (half and 10 second countdown) so the user knows that time is about to run out and they can adjust their walk speed
                 if ((timerTime == 1 && text.equals("00:30")) || (timerTime == 3 && text.equals("01:30")) || (timerTime == 5 && text.equals("02:30")) || text.equals("00:10") || text.equals("00:09") || text.equals("00:08") || text.equals("00:07") || text.equals("00:06") ||
                         text.equals("00:05") || text.equals("00:04") || text.equals("00:03") || text.equals("00:02") || text.equals("00:01")) {
                     tView.setTextColor(getResources().getColor(R.color.red_color));
                     v.vibrate(500);
+                } else {
+                    tView.setTextColor(getResources().getColor(R.color.white));
                 }
-                else tView.setTextColor(getResources().getColor(R.color.white));
 
                 if (isPaused) {             // Cancel current instance if paused
                 btnResume.setClickable(true);  // Resume is enabled while paused
