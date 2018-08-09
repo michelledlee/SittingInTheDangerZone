@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/ack_padding"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:textColor="#000000"
             android:text="@string/ack_title"/>
 
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/ack_padding"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:textColor="#000000"
             android:text="@string/developer_title"/>
 

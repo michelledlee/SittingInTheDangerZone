@@ -126,108 +126,106 @@ public class MainActivity extends AppCompatActivity {
      * Initial startup routine that gathers user information for the app experience and Firebase.
      */
     private void isInitialStartup() {
-            // Set up views for the dialog to ask for the user name
-            LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  // Get layout inflater
-            final View dialogView = startInflater.inflate(R.layout.initial_start_dialog, null);     // Get dialog view
-            final EditText usernameEntry = (EditText) dialogView.findViewById(R.id.username_input); // Get edit text view
-            final Button enterUserName = (Button) dialogView.findViewById(R.id.enter_username); // Button to submit username
+        // Set up views for the dialog to ask for the user name
+        LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);  // Get layout inflater
+        final View dialogView = startInflater.inflate(R.layout.initial_start_dialog, null);     // Get dialog view
+        final EditText usernameEntry = (EditText) dialogView.findViewById(R.id.username_input); // Get edit text view
+        final Button enterUserName = (Button) dialogView.findViewById(R.id.enter_username); // Button to submit username
 
-            // Dialog to ask for user name
-            final AlertDialog.Builder startBuilder = new AlertDialog.Builder(this);
-            startBuilder.setView(dialogView);    // Set view to initial start dialog
-            // Set up positive button to save user name information that the user enters as well as initialize
-            // shared preferences for this instance's app
-            startBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                    // Get username information from the edit text and convert it to a string
-                    StringBuilder userName = new StringBuilder();
-                    userName.append(usernameEntry.getText());
-                    String userNameString = userName.toString();
+        // Dialog to ask for user name
+        final AlertDialog.Builder startBuilder = new AlertDialog.Builder(this);
+        startBuilder.setView(dialogView);    // Set view to initial start dialog
+        // Set up positive button to save user name information that the user enters as well as initialize
+        // shared preferences for this instance's app
+        startBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // Get username information from the edit text and convert it to a string
+                StringBuilder userName = new StringBuilder();
+                userName.append(usernameEntry.getText());
+                String userNameString = userName.toString();
 
-                    // Update shared preferences with default values for the user profile
-                    editor.putString("username", userNameString);
-                    editor.apply();
-                    editor.putInt("level", 1);
-                    editor.apply();
-                    editor.putInt("seconds walked", 0);
-                    editor.apply();
-                    editor.putInt("steps walked", 0);
-                    editor.apply();
-                    editor.putInt("# titles", 1);
-                    editor.apply();
-                    editor.putString("title", "Fresh Meat");
-                    editor.apply();
-                    editor.putString("title list", "Fresh Meat");
-                    editor.apply();
-                    editor.putInt("# achievements", 1);
-                    editor.apply();
-                    editor.putString("achievements", "Danger Seeker");
-                    editor.apply();
-                    editor.putInt("xp", 0);
-                    editor.apply();
-                    editor.putInt("personal best", 0);
-                    editor.apply();
-                    doDataAddToDb(userNameString, "Fresh Meat");    // Add this user's information to Firebase
-                    String newTitleEarned = getResources().getString(R.string.new_title_earned);    // Get the initial title from string resources
-                    Toast.makeText(MainActivity.this,newTitleEarned,Toast.LENGTH_SHORT).show();  // Let the user know they have earned a default new player title
+                // Update shared preferences with default values for the user profile
+                editor.putString("username", userNameString);
+                editor.apply();
+                editor.putInt("level", 1);
+                editor.apply();
+                editor.putInt("seconds walked", 0);
+                editor.apply();
+                editor.putInt("steps walked", 0);
+                editor.apply();
+                editor.putInt("# titles", 1);
+                editor.apply();
+                editor.putString("title", "Fresh Meat");
+                editor.apply();
+                editor.putString("title list", "Fresh Meat");
+                editor.apply();
+                editor.putInt("# achievements", 1);
+                editor.apply();
+                editor.putString("achievements", "Danger Seeker");
+                editor.apply();
+                editor.putInt("xp", 0);
+                editor.apply();
+                editor.putInt("personal best", 0);
+                editor.apply();
+                doDataAddToDb(userNameString, "Fresh Meat");    // Add this user's information to Firebase
 
-                    // Set default notification preferences in case the user does not set them all
-                    editor.putInt("intervalMinutes", 30);
-                    editor.apply();
+                // Set default notification preferences in case the user does not set them all
+                editor.putInt("intervalMinutes", 30);
+                editor.apply();
 
-                    // Set the initial startup flag so that it does not ask again
-                    editor.putBoolean("initial startup", false);
-                    editor.apply();
+                // Set the initial startup flag so that it does not ask again
+                editor.putBoolean("initial startup", false);
+                editor.apply();
+            }
+        });
+        startDialog = startBuilder.create();
+
+
+        // Add text changed listener to ensure that the user has entered some username information before they can continue
+        // as the username cannot be changed once submitted
+        usernameEntry.addTextChangedListener(new TextWatcher() {
+            private void handleText() {
+                // Grab the button
+                final Button okButton = startDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                if(usernameEntry.getText().length() == 0) {
+                    okButton.setEnabled(false);
+                } else {
+                    okButton.setEnabled(true);
                 }
-            });
-            startDialog = startBuilder.create();
+            }
 
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            // Add text changed listener to ensure that the user has entered some username information before they can continue
-            // as the username cannot be changed once submitted
-            usernameEntry.addTextChangedListener(new TextWatcher() {
-                private void handleText() {
-                    // Grab the button
-                    final Button okButton = startDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-                    if(usernameEntry.getText().length() == 0) {
-                        okButton.setEnabled(false);
-                    } else {
-                        okButton.setEnabled(true);
-                    }
-                }
+            }
 
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                }
+            }
 
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            @Override
+            public void afterTextChanged(Editable editable) {
+                handleText();
+            }
+        });
 
-                }
+        // Show the button to submit the user name
+        enterUserName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get username from the edit text
+                StringBuilder userName = new StringBuilder();
+                userName.append(usernameEntry.getText());
+                String userNameString = userName.toString();
 
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    handleText();
-                }
-            });
-
-            // Show the button to submit the user name
-            enterUserName.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Get username from the edit text
-                    StringBuilder userName = new StringBuilder();
-                    userName.append(usernameEntry.getText());
-                    String userNameString = userName.toString();
-
-                    // Text view that shows what the user has submitted their name as
-                    TextView welcomeUser = (TextView) dialogView.findViewById(R.id.welcome_message);
-                    welcomeUser.setText("Welcome " + userNameString + ".");
-                    welcomeUser.setVisibility(View.VISIBLE);
-                    enterUserName.setVisibility(View.INVISIBLE);
-                }
-            });
+                // Text view that shows what the user has submitted their name as
+                TextView welcomeUser = (TextView) dialogView.findViewById(R.id.welcome_message);
+                welcomeUser.setText("Welcome " + userNameString + ".");
+                welcomeUser.setVisibility(View.VISIBLE);
+                enterUserName.setVisibility(View.INVISIBLE);
+            }
+        });
 
 
         startDialog.show();

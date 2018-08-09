@@ -65,6 +65,10 @@
     <string name="title_information_blurb">Select a title from the list to select a new title.</string>
     <string name="steps_walked">Steps walked (steps)</string>
     <string name="steps_default">0 steps</string>
+    <string name="new_title">New Title Earned!</string>
+    <string name="new_title_blurb">Ahh Fresh Meat! We have another one trying to escape what lurks beneath the seat&#8230;how will you fare?</string>
+    <string name="new_achievement">New Achievement Earned!</string>
+    <string name="new_achievement_blurb">&#9833;And then a hero comes along&#8230;you\'re fearless aren\'t you? Some might even call you a Danger Seeker!</string>
 
     // INITIAL STARTUP DIALOG
     <string name="welcome_title">You are now entering the danger zone&#8230;</string>

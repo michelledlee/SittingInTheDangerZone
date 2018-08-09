@@ -7,10 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,12 +19,8 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.iid.FirebaseInstanceId;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 import edu.neu.madcourse.michellelee.dangerzone.realtimeDatabase.FriendsList;
 
@@ -40,7 +33,8 @@ public class UserProfileActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
 
     private AlertDialog titleDialog;
-
+    private AlertDialog firstTimerTitleDialog;
+    private AlertDialog firstTimerAchievementDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +44,12 @@ public class UserProfileActivity extends AppCompatActivity {
         // Initialize Shared Preferences
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
+
+        // Check if this is the first time this screen has been accessed because we want to
+        // congratulate the user for playing by giving them a new title and a new achievement
+        if (preferences.getBoolean("profile access", true)) {
+            isInitialStartup();
+        }
 
         // Get user information
         final String name = preferences.getString("username", null);
@@ -168,4 +168,44 @@ public class UserProfileActivity extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("users");
         myRef.child(uniqueID).child("title").setValue(title);
     }
+
+    /**
+     * Initial startup routine that displays the new players title and achievement for starting
+     * the app for the first time
+     */
+    private void isInitialStartup() {
+        final LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        // Title dialog with new title information
+        final View titleView = startInflater.inflate(R.layout.first_title, null);
+
+        // Make this dialog pop up and set the conditions for dismissal
+        final AlertDialog.Builder firstTitleBuilder = new AlertDialog.Builder(this);
+        firstTitleBuilder.setView(titleView);
+        firstTitleBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+               firstTimerTitleDialog.dismiss();
+                // Achievement dialog with new achievement information
+                final View achievementView = startInflater.inflate(R.layout.first_achievement, null);
+
+                // Make this dialog pop up and set the conditions for dismissal
+                final AlertDialog.Builder firstAchievementBuilder = new AlertDialog.Builder(UserProfileActivity.this);
+                firstAchievementBuilder.setView(achievementView);
+                firstAchievementBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        firstTimerAchievementDialog.dismiss();
+                    }
+                });
+                firstTimerAchievementDialog = firstAchievementBuilder.create();
+                firstTimerAchievementDialog.show();
+            }
+        });
+        firstTimerTitleDialog = firstTitleBuilder.create();
+        firstTimerTitleDialog.show();
+
+        // Set the access flag so that it does not show the dialog again
+        editor.putBoolean("profile access", false);
+        editor.apply();
+    }
+
 }
