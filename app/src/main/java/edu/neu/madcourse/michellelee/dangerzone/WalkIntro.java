@@ -44,33 +44,33 @@ public class WalkIntro extends AppCompatActivity {
         minSelection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                // Dinosaur roars!
-                mSoundPool.play(mTrexRoar, mVolume, mVolume, 1, 0, 1f);
-                walkButton.setClickable(true);
-                walkButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // Get user selection for walk time
-                        int radioButtonID = minSelection.getCheckedRadioButtonId();
-                        View radioButton = minSelection.findViewById(radioButtonID);
-                        int index = minSelection.indexOfChild(radioButton);
+            // Dinosaur roars!
+            mSoundPool.play(mTrexRoar, mVolume, mVolume, 1, 0, 1f);
+            walkButton.setClickable(true);
+            walkButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                // Get user selection for walk time
+                int radioButtonID = minSelection.getCheckedRadioButtonId();
+                View radioButton = minSelection.findViewById(radioButtonID);
+                int index = minSelection.indexOfChild(radioButton);
 
-                        // Identify what times the user can select
-                        int timer = 0;
-                        if (index == 0) {
-                            timer = 1;
-                        } else if (index == 1) {
-                            timer = 3;
-                        } else {
-                            timer = 5;
-                        }
+                // Identify what times the user can select
+                int timer = 0;
+                if (index == 0) {
+                    timer = 1;
+                } else if (index == 1) {
+                    timer = 3;
+                } else {
+                    timer = 5;
+                }
 
-                        // Start walk activity
-                        Intent walkIntent = new Intent(getApplicationContext(), WalkActivity.class);
-                        walkIntent.putExtra("timer", timer);
-                        startActivity(walkIntent);
-                    }
-                });
+                // Start walk activity
+                Intent walkIntent = new Intent(getApplicationContext(), WalkActivity.class);
+                walkIntent.putExtra("timer", timer);
+                startActivity(walkIntent);
+                }
+            });
             }
         });
 

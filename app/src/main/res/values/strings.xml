@@ -3,7 +3,8 @@
 
     // INFORMATION AND INSTRUCTIONS
     <string name="acknowledgments">Acknowledgments</string>
-    <string name="sources">Volcano image and dinosaurs from pixabay.com\n
+    <string name="sources">\n
+        Volcano image and dinosaurs from pixabay.com\n
         Tom Cruise from google and Tom Cruise’s mom\n
         Dinosaur sounds from freesound.org\n
         Music from freemidi.org\n
@@ -32,7 +33,7 @@
 
     // SETTINGS XML
     <string name="notifications_on_off">Notifications</string>
-    <string name="current_settings">Current Interval:&#160;</string>
+    <string name="current_settings">Current interval is set to:&#160;</string>
     <string name="notification_interval">Interval</string>
     <string name="notification_minutes">Minutes</string>
 

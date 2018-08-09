@@ -20,8 +20,6 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Toast.makeText(context, "sup fucker", Toast.LENGTH_LONG).show();
-
         // Get the pending intent for the notification. The notification is intended to tell the user when to walk so it
         // will start the Walk activity.
         PendingIntent contentIntent = PendingIntent.getActivity(context, 0,

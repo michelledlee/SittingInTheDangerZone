@@ -16,6 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="@dimen/settings_padding"
         android:layout_marginTop="@dimen/settings_padding"
+        android:textSize="20sp"
         android:text="@string/notifications_on_off" />
 
     <Switch
@@ -35,38 +36,143 @@
         android:layout_below="@id/notifications_on_off"
         android:layout_marginStart="@dimen/settings_padding"
         android:layout_marginTop="@dimen/settings_button_spacing"
+        android:textSize="20sp"
         android:text="@string/notification_interval" />
 
-    <TextView
-        android:id="@+id/minutes_text"
-        android:layout_width="@dimen/settings_text_width"
+    <RadioGroup
+        android:id="@+id/interval_group"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/interval_text"
+        android:layout_marginTop="10dp"
         android:layout_marginStart="@dimen/settings_indented"
-        android:layout_marginTop="@dimen/settings_related_spacing"
-        android:text="@string/notification_minutes" />
+        android:orientation="vertical"
+        android:clickable="false">
 
-    <Spinner
-        android:id="@+id/minutes_spinner"
-        android:layout_width="100dp"
+        <RadioButton
+            android:id="@+id/fifteen_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15 min"
+            android:checked="false" />
+
+        <RadioButton
+            android:id="@+id/thirty_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30 min"
+            android:checked="false"/>
+
+        <RadioButton
+            android:id="@+id/fortyfive_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="45 min"
+            android:checked="false"/>
+
+        <RadioButton
+            android:id="@+id/sixty_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="60 min"
+            android:checked="false"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/submit_interval"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@id/minutes_text"
-        android:layout_below="@id/notifications_switch"
-        android:layout_marginEnd="@dimen/settings_padding"
-        android:layout_marginStart="@dimen/spinner_margin"
-        android:layout_toEndOf="@id/minutes_text"
-        android:dropDownWidth="@dimen/spinner_width"
-        android:entries="@array/minutes_array" />
+        android:layout_below="@id/interval_group"
+        android:layout_alignStart="@id/interval_group"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        android:text="Submit"
+        android:background="@drawable/button"
+        android:clickable="false"/>
 
     <TextView
         android:id="@+id/current_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/minutes_text"
-        android:layout_marginStart="@dimen/settings_indented_time"
+        android:layout_below="@id/submit_interval"
+        android:layout_alignStart="@id/interval_group"
+        android:layout_marginTop="10dp"
         android:textStyle="italic"
         android:text="@string/current_settings" />
+
+    <!--<TextView-->
+    <!--android:id="@+id/minutes_text"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/interval_text"-->
+    <!--android:layout_marginStart="@dimen/settings_indented"-->
+    <!--android:layout_marginTop="@dimen/settings_related_spacing"-->
+    <!--android:textSize="18sp"-->
+    <!--android:text="@string/notification_minutes" />-->
+
+    <!--<Spinner-->
+    <!--android:id="@+id/minutes_spinner"-->
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentEnd="true"-->
+    <!--android:layout_alignTop="@id/minutes_text"-->
+    <!--android:layout_below="@id/notifications_switch"-->
+    <!--android:layout_marginEnd="@dimen/settings_padding"-->
+    <!--android:layout_marginStart="@dimen/spinner_margin"-->
+    <!--android:layout_toEndOf="@id/minutes_text"-->
+    <!--android:dropDownWidth="@dimen/spinner_width"-->
+    <!--android:entries="@array/minutes_array"-->
+    <!--android:prompt="@string/spinner_default"-->
+    <!--android:clickable="false" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/fifteen_min"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_below="@id/current_setting"-->
+        <!--android:layout_marginStart="@dimen/settings_padding"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:text="15"-->
+        <!--android:background="@drawable/button"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/thirty_min"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_below="@id/current_setting"-->
+        <!--android:layout_toEndOf="@id/fifteen_min"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:text="30"-->
+        <!--android:background="@drawable/button"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/fortyfive_min"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_below="@id/current_setting"-->
+        <!--android:layout_toEndOf="@id/thirty_min"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:text="45"-->
+        <!--android:background="@drawable/button"/>-->
+
+    <!--<Button-->
+        <!--android:id="@+id/sixty_min"-->
+        <!--android:layout_width="40dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_below="@id/current_setting"-->
+        <!--android:layout_toEndOf="@id/fortyfive_min"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginStart="10dp"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:text="60"-->
+        <!--android:background="@drawable/button"/>-->
+
 
 
 </RelativeLayout>

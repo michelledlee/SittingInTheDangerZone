@@ -26,7 +26,6 @@ public class NotificationHelper {
      */
     public static void scheduleRepeatingElapsedNotification30(Context context) {
 
-
         // Setting intent to class where notification will be handled
         Intent intent = new Intent(context, AlarmReceiver.class);
 
