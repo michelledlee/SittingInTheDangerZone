@@ -72,11 +72,6 @@ public class WalkIntro extends AppCompatActivity {
                 }
 
                 mHandler.postDelayed(mLaunchTask,3000);
-
-//                // Start walk activity
-//                Intent walkIntent = new Intent(getApplicationContext(), WalkActivity.class);
-//                walkIntent.putExtra("timer", timer);
-//                startActivity(walkIntent);
                 }
             });
             }
