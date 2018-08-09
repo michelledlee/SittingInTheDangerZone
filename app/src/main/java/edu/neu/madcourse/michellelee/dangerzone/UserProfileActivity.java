@@ -47,7 +47,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         // Check if this is the first time this screen has been accessed because we want to
         // congratulate the user for playing by giving them a new title and a new achievement
-        if (preferences.getBoolean("profile access", true)) {
+        if (!preferences.getBoolean("profile access", false)) {
             isInitialStartup();
         }
 

@@ -167,6 +167,8 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
                 editor.putInt("personal best", 0);
                 editor.apply();
+                editor.putBoolean("profile access", false);
+                editor.apply();
                 doDataAddToDb(userNameString, "Fresh Meat");    // Add this user's information to Firebase
 
                 // Set default notification preferences in case the user does not set them all

@@ -38,6 +38,7 @@ public class EndWalk extends AppCompatActivity {
 
     private AlertDialog failDialog;
     private AlertDialog successDialog;
+    private AlertDialog dinoTitleDialog;
 
     private int mDinoEating, mBirdsChirping;
     private SoundPool mSoundPool;
@@ -70,39 +71,58 @@ public class EndWalk extends AppCompatActivity {
 
             // SUCCESS DIALOG
             AlertDialog.Builder successBuilder = new AlertDialog.Builder(this);
-            LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            final LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View dialogView = startInflater.inflate(R.layout.success_dialog, null);     // Get dialog view
             successBuilder.setCancelable(false);
             successBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                 successDialog.dismiss();
+                    // IF THIS IS THE FIRST TIME THIS SCENARIO HAS BEEN WON, A NEW TITLE IS EARNED
+                    if (preferences.getBoolean("initial dino", true)) {
+                        // Title dialog with new title information
+                        final View titleView = startInflater.inflate(R.layout.first_dino, null);
+                        // Make this dialog pop up and set the conditions for dismissal
+                        final AlertDialog.Builder dinoTitleBuilder = new AlertDialog.Builder(EndWalk.this);
+                        dinoTitleBuilder.setView(titleView);
+                        dinoTitleBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dinoTitleDialog.dismiss();
+                                // ADD NEW TITLE
+                                // Special Processing to Add: To add a new title to the StringBuilder "list", create a StringBuilder based on the current
+                                // titles in shared preferences. Append an "," to the current titles "list" in StringBuilder before the next new title.
+                                // Add the new title to the list. Commit to shared preferences.
+                                String dinomite = getResources().getString(R.string.dinomite);
+                                String existingTitles = preferences.getString("title list", null);
+                                StringBuilder titlebuild = new StringBuilder(existingTitles); // Create new StringBuilder
+                                titlebuild.append(","); // Add a delimiter to the end of it the existing String list
+                                titlebuild.append(dinomite);   // Add the new title to the StringBuilder
+                                editor.putString("title list", titlebuild.toString());  // Replace old String of titles with new
+                                editor.apply();
+                            }
+                        });
+                        dinoTitleDialog = dinoTitleBuilder.create();
+                        dinoTitleDialog.show();
+                        editor.putBoolean("initial dino", false);
+                        editor.apply();
+                    }
                 } });
             successBuilder.setView(dialogView);    // Set view to success dialog
             successDialog = successBuilder.show();  // Set to show
             mSoundPool.play(mBirdsChirping, mVolume, mVolume, 1, 0, 1f); // Pleasant bird in meadow sounds
 
+            // Set the access flag so that it does not show the dialog again
+            editor.putBoolean("profile access", false);
+            editor.apply();
+
             // ADD TO LIST OF POINTS TO DISPLAY
             pointsArray.add(walkFinished);  // Add walk finished points total to display
 
-            // UPDATE THAT THIS SCENARIO HAS BEEN COMPLETED
-            // This is because we only want to add the title for this specific scenario once
-            if (preferences.getInt("dinosaurs", -1) == -1) {
-                editor.putInt("dinosaurs", 1);
-
-                // ADD NEW TITLE
-                // Special Processing to Add: To add a new title to the StringBuilder "list", create a StringBuilder based on the current
-                // titles in shared preferences. Append an "," to the current titles "list" in StringBuilder before the next new title.
-                // Add the new title to the list. Commit to shared preferences.
-                String dinomite = getResources().getString(R.string.dinomite);
-                String existingTitles = preferences.getString("title list", null);
-                StringBuilder titlebuild = new StringBuilder(existingTitles); // Create new StringBuilder
-                titlebuild.append(","); // Add a delimiter to the end of it the existing String list
-                titlebuild.append(dinomite);   // Add the new title to the StringBuilder
-                editor.putString("title list", titlebuild.toString());  // Replace old String of titles with new
-                editor.apply();
-                String newTitleEarned = getResources().getString(R.string.new_title_earned);    // Get the initial title from string resources
-                Toast.makeText(this,newTitleEarned,Toast.LENGTH_SHORT).show(); // Let the user know they have earned a new title
-            }
+//            // UPDATE THAT THIS SCENARIO HAS BEEN COMPLETED
+//            // This is because we only want to add the title for this specific scenario once
+//            if (preferences.getInt("dinosaurs", -1) == -1) {
+//                editor.putInt("dinosaurs", 1);
+//
+//            }
 
         } else {
             // ADD RESULTS TO FIREBASE FOR A LOSS
