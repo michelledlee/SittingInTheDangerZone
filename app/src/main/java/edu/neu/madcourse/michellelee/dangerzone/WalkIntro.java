@@ -37,52 +37,103 @@ public class WalkIntro extends AppCompatActivity {
             @Override
             public void onLoadComplete(SoundPool soundPool, int i, int i1) {
             mSoundPool.play(mDinoStomp, mVolume, mVolume, 1, 0, 1f);
+
+            // Let the stomps finish
+            final Handler sHandler = new Handler();
+            sHandler.postDelayed(sLaunchTask,3000);
             }
         });
 
-        walkButton = (Button) findViewById(R.id.walk);
-
-        // Used to delay the start time once hte walk activity is initiated so the dinosaur can stop roaring first
-        final Handler mHandler = new Handler();
-
-        // Hooking up buttons
-        final RadioGroup minSelection = (RadioGroup) findViewById(R.id.min_group);
-        minSelection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-            walkButton.setClickable(true);
-            walkButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                // Dinosaur roars!
-                mSoundPool.play(mTrexRoar, mVolume, mVolume, 1, 0, 1f);
-
-                // Get user selection for walk time
-                int radioButtonID = minSelection.getCheckedRadioButtonId();
-                View radioButton = minSelection.findViewById(radioButtonID);
-                int index = minSelection.indexOfChild(radioButton);
-
-                // Get the time selection so we know how long the walk activity should last
-                if (index == 0) {
-                    timer = 1;
-                } else if (index == 1) {
-                    timer = 3;
-                } else {
-                    timer = 5;
-                }
-
-                mHandler.postDelayed(mLaunchTask,3000);
-                }
-            });
-            }
-        });
+//        walkButton = (Button) findViewById(R.id.walk);
+//
+//        // Used to delay the start time once hte walk activity is initiated so the dinosaur can stop roaring first
+//        final Handler mHandler = new Handler();
+//
+//        // Hooking up buttons
+//        final RadioGroup minSelection = (RadioGroup) findViewById(R.id.min_group);
+//        minSelection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//            walkButton.setClickable(true);
+//            walkButton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                // Dinosaur roars!
+//                mSoundPool.play(mTrexRoar, mVolume, mVolume, 1, 0, 1f);
+//
+//                // Get user selection for walk time
+//                int radioButtonID = minSelection.getCheckedRadioButtonId();
+//                View radioButton = minSelection.findViewById(radioButtonID);
+//                int index = minSelection.indexOfChild(radioButton);
+//
+//                // Get the time selection so we know how long the walk activity should last
+//                if (index == 0) {
+//                    timer = 1;
+//                } else if (index == 1) {
+//                    timer = 3;
+//                } else {
+//                    timer = 5;
+//                }
+//
+//                mHandler.postDelayed(mLaunchTask,3000);
+//                }
+//            });
+//            }
+//        });
     }
 
+    /**
+     * Let the roar finish before we jump into the walk activity
+     */
     private Runnable mLaunchTask = new Runnable() {
         public void run() {
             Intent walkIntent = new Intent(getApplicationContext(), WalkActivity.class);
             walkIntent.putExtra("timer", timer);
             startActivity(walkIntent);
+        }
+    };
+
+    /**
+     * Let the stomps finsh before the user can launch the walk activity
+     */
+    private Runnable sLaunchTask = new Runnable() {
+        public void run() {
+            walkButton = (Button) findViewById(R.id.walk);
+
+            // Used to delay the start time once hte walk activity is initiated so the dinosaur can stop roaring first
+            final Handler mHandler = new Handler();
+
+            // Hooking up buttons
+            final RadioGroup minSelection = (RadioGroup) findViewById(R.id.min_group);
+            minSelection.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    walkButton.setClickable(true);
+                    walkButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // Dinosaur roars!
+                            mSoundPool.play(mTrexRoar, mVolume, mVolume, 1, 0, 1f);
+
+                            // Get user selection for walk time
+                            int radioButtonID = minSelection.getCheckedRadioButtonId();
+                            View radioButton = minSelection.findViewById(radioButtonID);
+                            int index = minSelection.indexOfChild(radioButton);
+
+                            // Get the time selection so we know how long the walk activity should last
+                            if (index == 0) {
+                                timer = 1;
+                            } else if (index == 1) {
+                                timer = 3;
+                            } else {
+                                timer = 5;
+                            }
+
+                            mHandler.postDelayed(mLaunchTask,3000);
+                        }
+                    });
+                }
+            });
         }
     };
 }
