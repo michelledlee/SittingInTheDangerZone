@@ -204,7 +204,7 @@ public class UserProfileActivity extends AppCompatActivity {
         firstTimerTitleDialog.show();
 
         // Set the access flag so that it does not show the dialog again
-        editor.putBoolean("profile access", false);
+        editor.putBoolean("profile access", true);
         editor.apply();
     }
 
