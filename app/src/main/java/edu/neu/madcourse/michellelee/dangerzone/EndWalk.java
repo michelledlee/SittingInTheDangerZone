@@ -77,8 +77,10 @@ public class EndWalk extends AppCompatActivity {
             successBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                 successDialog.dismiss();
+
                     // IF THIS IS THE FIRST TIME THIS SCENARIO HAS BEEN WON, A NEW TITLE IS EARNED
-                    if (preferences.getBoolean("initial dino", true)) {
+                    int successfulDinoAttempts = preferences.getInt("dinosaurs", 0);
+                    if (successfulDinoAttempts == 0) {
                         // Title dialog with new title information
                         final View titleView = startInflater.inflate(R.layout.first_dino, null);
                         // Make this dialog pop up and set the conditions for dismissal
@@ -102,8 +104,36 @@ public class EndWalk extends AppCompatActivity {
                         });
                         dinoTitleDialog = dinoTitleBuilder.create();
                         dinoTitleDialog.show();
-                        editor.putBoolean("initial dino", false);
+
+                        // Update # of times this scenario has been completed successfully
+                        editor.putInt("dinosaurs", successfulDinoAttempts + 1);
                         editor.apply();
+                    }
+
+                    // CHECKING FOR ACHIEVEMENTS
+                    if (successfulDinoAttempts > 5) {
+                        editor.putInt("# achievements", 2);
+                        editor.apply();
+
+                        // ADD NEW ACHIEVEMENT
+                        // Special Processing to Add: To add a new achievement to the StringBuilder "list", create a StringBuilder based on the current
+                        // achievements in shared preferences. Append an "," to the current achievements "list" in StringBuilder before the next new achievement.
+                        // Add the new achievement to the list. Commit to shared preferences.
+                        String dinowrangler = getResources().getString(R.string.dino_wrangler);
+                        String existingAchievements = preferences.getString("achievement list", null);
+                        StringBuilder achievementBuild = new StringBuilder(existingAchievements); // Create new StringBuilder
+                        achievementBuild.append(","); // Add a delimiter to the end of it the existing String list
+                        achievementBuild.append(dinowrangler);   // Add the new title to the StringBuilder
+                        editor.putString("achievement list", achievementBuild.toString());  // Replace old String of titles with new
+                        editor.apply();
+
+                        // Get ID reference for node in question
+                        String uniqueID =  preferences.getString("uid", null);
+
+                        // Update firebase
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference myRef = database.getReference("users");
+                        myRef.child(uniqueID).child("achievements").setValue(2);
                     }
                 } });
             successBuilder.setView(dialogView);    // Set view to success dialog
@@ -116,13 +146,6 @@ public class EndWalk extends AppCompatActivity {
 
             // ADD TO LIST OF POINTS TO DISPLAY
             pointsArray.add(walkFinished);  // Add walk finished points total to display
-
-//            // UPDATE THAT THIS SCENARIO HAS BEEN COMPLETED
-//            // This is because we only want to add the title for this specific scenario once
-//            if (preferences.getInt("dinosaurs", -1) == -1) {
-//                editor.putInt("dinosaurs", 1);
-//
-//            }
 
         } else {
             // ADD RESULTS TO FIREBASE FOR A LOSS
@@ -228,10 +251,10 @@ public class EndWalk extends AppCompatActivity {
         // Check to determine what we are displaying for the time statistic
         if (sessionMinutes < 1) {
             minutesSummary = "Minutes Walked (min) ... < 1 min";    // Do not display fractional time if less than a minute
-            Log.e("walked: ", "< 1 min");
+//            Log.e("walked: ", "< 1 min");
         } else {
             minutesSummary = "Minutes Walked (min) ... " + Integer.toString(sessionMinutes);    // Concatenate string with values
-            Log.e("walked: ", "more than a feeling");
+//            Log.e("walked: ", "more than a feeling");
         }
         statisticsArray.add(minutesSummary);    // Add to the array of statistics strings
         int stepsSession = extras.getInt("steps summary"); // Get distance walked this session
@@ -265,7 +288,20 @@ public class EndWalk extends AppCompatActivity {
         myRef.child(uniqueID).child("lastEncounter").setValue(encounter);
         myRef.child(uniqueID).child("lastOutcome").setValue(outcome);
         myRef.child(uniqueID).child("level").setValue(level);
+    }
 
+    /**
+     * Method to update the user's achievements
+     * @param achievements
+     */
+    public void dataAddAchievement(int achievements) {
+        // Get ID reference for node in question
+        String uniqueID =  preferences.getString("uid", null);
+
+        // Update firebase
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
+        myRef.child(uniqueID).child("achievements").setValue(2);
     }
 
 }

@@ -163,6 +163,8 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
                 editor.putString("achievements", "Danger Seeker");
                 editor.apply();
+                editor.putString("achievement list", "Danger Seeker");
+                editor.apply();
                 editor.putInt("xp", 0);
                 editor.apply();
                 editor.putInt("personal best", 0);
@@ -253,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
         Map<String, String> friendsList = new HashMap<String, String>();
 
         // Creating a new user for the database
-        User newUser = new User(userNameString, title, date, "n/a", "n/a", uniqueID, 1, friendsList);
+        User newUser = new User(userNameString, title, date, "n/a", "n/a", uniqueID, 1, 1, friendsList);
 
         // Add new node in database
         FirebaseDatabase database = FirebaseDatabase.getInstance();

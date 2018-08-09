@@ -303,9 +303,11 @@ public class FriendsList extends AppCompatActivity {
                         String lastEncounter = userSnapshot.child("lastEncounter").getValue(String.class);
                         String lastOutcome = userSnapshot.child("lastOutcome").getValue(String.class);
                         int level = userSnapshot.child("level").getValue(Integer.class);
+                        int achievement = userSnapshot.child("achievements").getValue(Integer.class);
                         String friendInfo = "ID: " + nodeID + " LVL" + level +
                                 "\nName: " + username + " (" + title + ") " +
-                                "\nActive: " + lastPlayed + " " + lastEncounter + "..." + lastOutcome;
+                                "\nActive: " + lastPlayed + " " + lastEncounter + "..." + lastOutcome +
+                                "\nAchievements :" + achievement;
                         friendAdapter.add(friendInfo);
                         break;  // Have found the friend node, can populate friend information
                     }

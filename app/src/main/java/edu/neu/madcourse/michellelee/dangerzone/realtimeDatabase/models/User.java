@@ -15,13 +15,14 @@ public class User {
     private String lastOutcome;
     private String uniqueID;
     private int level;
+    private int achievements;
     private Map<String, String> friends;
 
     public User(){
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-        public User(String username, String title, String lastPlayed, String lastEncounter, String lastOutcome, String uniqueID, int level, Map<String, String> friends){
+        public User(String username, String title, String lastPlayed, String lastEncounter, String lastOutcome, String uniqueID, int level, int achievements, Map<String, String> friends){
         this.username = username;
         this.title = title;
         this.lastPlayed = lastPlayed;
@@ -29,6 +30,7 @@ public class User {
         this.lastOutcome = lastOutcome;
         this.uniqueID = uniqueID;
         this.level = level;
+        this.achievements = achievements;
         this.friends = friends;
     }
 
@@ -58,6 +60,10 @@ public class User {
 
     public int getLevel() {
         return level;
+    }
+
+    public int getAchievements() {
+        return achievements;
     }
 
     public Map<String, String> getFriends() {

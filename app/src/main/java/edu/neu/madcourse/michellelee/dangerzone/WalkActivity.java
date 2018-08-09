@@ -126,7 +126,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         // Set countdown timer based on selection the user made
         timerTime = getIntent().getIntExtra("timer", -1);
         if (timerTime == 1) {
-            millisInFuture = 1000;
+            millisInFuture = 60000;
             // Target number of steps that is walkable in a minute is between 40 - 50 for the average adult
             minSteps = 40;
             maxSteps = 50;
@@ -327,7 +327,8 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         editor.putInt("seconds walked", seconds);
         editor.apply();
 
-        endScreenIntent.putExtra("seconds summary", (timerTime * 60) + bonusTime); // Pass this session's time to the end screen
+        // Pass this session's time to the end screen
+        endScreenIntent.putExtra("seconds summary", (timerTime * 60) + bonusTime);
 
         // Calculate cumulative steps walked
         endScreenIntent.putExtra("steps summary", numSteps);
