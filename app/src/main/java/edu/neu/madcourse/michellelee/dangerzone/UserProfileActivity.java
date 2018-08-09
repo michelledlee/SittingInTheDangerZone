@@ -65,17 +65,16 @@ public class UserProfileActivity extends AppCompatActivity {
         int minutesWalked = secondsWalked / 60;
         int distanceWalked = (int) Math.rint(stepsWalked * 0.000762);
 
-        // Hooking up achievements with adapters
+        // Hooking up titles and achievements with adapters
         ArrayList<String> itemList1 = new ArrayList<String>();
         ArrayAdapter<String> titlesAdapter = new ArrayAdapter<String>(this, R.layout.list_item_profile, itemList1);
         ListView titlesList = (ListView) findViewById(R.id.titles_list);
         titlesList.setAdapter(titlesAdapter);
-//        titlesAdapter.add("title1");
+
         ArrayList<String> itemList2 = new ArrayList<String>();
         ArrayAdapter<String> achievementsAdapter = new ArrayAdapter<String>(this, R.layout.list_item_profile, itemList2);
         ListView achievementsList = (ListView) findViewById(R.id.achievements_list);
         achievementsList.setAdapter(achievementsAdapter);
-//        achievementsAdapter.add("title1");
 
         // TEST FOR TITLES AND ACHIEVEMENTS PROCESSING
         // Special Processing to Retrieve: Get the String which contains all the titles. Split into an array based on the ","
@@ -140,7 +139,7 @@ public class UserProfileActivity extends AppCompatActivity {
             editor.apply();
             String titleChanged = getResources().getString(R.string.title_change);
             Toast.makeText(UserProfileActivity.this,titleChanged,Toast.LENGTH_SHORT).show();
-            dataAddAppInstance(name, selected);
+            dataAddAppInstance(selected);
             }
         });
 
@@ -158,14 +157,10 @@ public class UserProfileActivity extends AppCompatActivity {
 
     /**
      * Method to change the title name to be displayed to the friend's list
-     * @param name username of the person we are changing
      * @param title title that is being changed to
      */
-    public void dataAddAppInstance(String name, String title) {
-        // Get token for this app instance
-//        String token = FirebaseInstanceId.getInstance().getToken();
-
-        // Get ID reference for node in question
+    public void dataAddAppInstance(String title) {
+         // Get ID reference for node in question
         String uniqueID =  preferences.getString("uid", null);
 
         // Update firebase

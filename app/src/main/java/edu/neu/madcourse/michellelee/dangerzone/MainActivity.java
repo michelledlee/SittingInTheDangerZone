@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         Map<String, String> friendsList = new HashMap<String, String>();
 
         // Creating a new user for the database
-        User newUser = new User(userNameString, title, date, "n/a", "n/a", uniqueID, friendsList);
+        User newUser = new User(userNameString, title, date, "n/a", "n/a", uniqueID, 1, friendsList);
 
         // Add new node in database
         FirebaseDatabase database = FirebaseDatabase.getInstance();

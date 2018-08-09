@@ -22,6 +22,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 /**
@@ -62,6 +65,9 @@ public class EndWalk extends AppCompatActivity {
         int numSteps = extras.getInt("steps");
         String walkFinished = extras.getString("walk finished");    // Get results of walk finished
         if (!walkFinished.equals("")) { // If walk was finished successfully
+            // ADD RESULTS TO FIREBASE FOR A WIN
+            dataAddAppInstance("T-Rex Tango", "escaped!", preferences.getInt("level", -1));
+
             // SUCCESS DIALOG
             AlertDialog.Builder successBuilder = new AlertDialog.Builder(this);
             LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -99,6 +105,9 @@ public class EndWalk extends AppCompatActivity {
             }
 
         } else {
+            // ADD RESULTS TO FIREBASE FOR A LOSS
+            dataAddAppInstance("T-Rex Tango", "eaten!", preferences.getInt("level", -1));
+
             // Create the success alert dialog
             AlertDialog.Builder failureBuilder = new AlertDialog.Builder(this);
             LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -218,6 +227,25 @@ public class EndWalk extends AppCompatActivity {
      */
     @Override
     public void onBackPressed() {
+    }
+
+    /**
+     * Method to update the user's last encounter, last outcome, and level information
+     * @param encounter the encounter that just happened
+     * @param outcome the outcome of the walk event
+     * @param level current level of the user
+     */
+    public void dataAddAppInstance(String encounter, String outcome, int level) {
+        // Get ID reference for node in question
+        String uniqueID =  preferences.getString("uid", null);
+
+        // Update firebase
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
+        myRef.child(uniqueID).child("lastEncounter").setValue(encounter);
+        myRef.child(uniqueID).child("lastOutcome").setValue(outcome);
+        myRef.child(uniqueID).child("level").setValue(level);
+
     }
 
 }
