@@ -13,27 +13,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/info_box_padding"
+        android:layout_marginTop="@dimen/endwalk_padding"
         android:textStyle="bold"
         android:textSize="@dimen/info_font_size"
         android:text="@string/walk_title"/>
 
     <TextView
+        android:id="@+id/dino_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/walkies"
-        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/ack_padding"
         android:layout_marginRight="@dimen/ack_padding"
-        android:textStyle="bold"
-        android:text="@string/walk_scenario"/>
+        android:text="@string/walk_scenario"
+        android:textStyle="bold" />
 
     <ImageView
+        android:id="@+id/dino_image"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/scenarioeyes"
-        android:layout_marginTop="@dimen/bottom_offset"/>
+        android:layout_height="251dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/dino_description"
+        android:src="@drawable/scenarioeyes" />
 
     <TextView
         android:id="@+id/select_time"
@@ -50,8 +52,7 @@
         android:id="@+id/min_group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/walk_intro_bottom_padding1"
+        android:layout_above="@id/walk"
         android:layout_centerHorizontal="true"
         android:orientation="horizontal">
 
@@ -84,7 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/walk_intro_bottom_padding2"
+        android:layout_marginBottom="@dimen/random_offset"
         android:text="@string/walk"
         android:textColor="@color/white"
         android:background="@drawable/button"

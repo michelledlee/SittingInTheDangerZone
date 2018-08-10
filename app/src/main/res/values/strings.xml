@@ -94,7 +94,10 @@
     <string name="walk">Walk!</string>
     <string name="time_selection">SELECT WALK TIME: </string>
     <string name="walk_title">WALK FOR YOUR LIFE!</string>
-    <string name="walk_scenario">the very important scenario information about not getting eaten by a dinosaur goes here!!</string>
+    <string name="walk_scenario">You’re sitting at your desk, working, when suddenly the room begins to rumble. <i>Thump. <b>Thump.</b></i>
+        You turn around as the vibrations approach, growing louder, when a <i>roar</i> cuts through the office – and as the tyrannosaurus
+        lifts its scaley head to peer at you with beady eyes, you realize you need to <i>move.</i> \n\n
+        <i>Better start walking.</i></string>
 
     // END WALK
     <string name="victory_title">RESULTS</string>
