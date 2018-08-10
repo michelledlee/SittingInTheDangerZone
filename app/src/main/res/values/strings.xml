@@ -10,6 +10,7 @@
         - Dinosaur sounds from freesound.org\n
         - Music from freemidi.org\n
         - Audio conversion from aconvert.com\n
+        - PNG conversion from lunapic.com\n
         - Android icons from material.io\n
         - Notification guide from ptyagi techLog blog\n
         - Pedometer example from Google open source\n
@@ -26,14 +27,17 @@
     <string name="ack_title">Acknowledgments</string>
     <string name="developer_title">Developer Notes</string>
     <string name="developer_notes">
-        Notes on why we did things the way we did:\n
+        Design Considerations:\n
         - We decided not to add moving images to the app as we did not want people to be staring at
         the screen while they were out for a walk and risk getting injured. This app is first and
         foremost a fitness app that is trying to be more interesting than a pedometer, so it is not
         a game that you have to constantly look at the screen for.\n
         - We did not implement app wide volume controls as we felt most users manage sound at a global
         level on their devices for sensitive situations. An example of such a situation would be at the movies
-        or during a meeting. Most people would turn off their phones completely, put them on silent, etc.
+        or during a meeting. Most people would turn off their phones completely, put them on silent, etc.\n\n
+
+        Future Improvements:\n
+
     </string>
 
     // MAIN FRAGMENT CONTROLS

@@ -1,5 +1,6 @@
 package edu.neu.madcourse.michellelee.dangerzone;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,8 +13,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -173,10 +176,10 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
                 }
 
                 if (isPaused) {             // Cancel current instance if paused
-                btnResume.setClickable(true);  // Resume is enabled while paused
-                btnResume.setEnabled(true);    // Resume is enabled while paused
-                onPause();
-                cancel();
+                    btnResume.setClickable(true);  // Resume is enabled while paused
+                    btnResume.setEnabled(true);    // Resume is enabled while paused
+                    onPause();
+                    cancel();
                 } else {
                     tView.setText(text);    // Display current time set above
                     timeRemaining = millisUntilFinished;    // Store remaining time
@@ -355,6 +358,9 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     public void onBackPressed() {
     }
 
+    /**
+     * Clear the media player when stopped
+     */
     @Override
     public void onStop() {
         super.onStop();
@@ -363,7 +369,9 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
-
+    /**
+     * Checks if the media player was playing before and if it was, pick up where it left off.
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -379,10 +387,14 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
+    /**
+     * If the media player is playing, this remembers where the player was stopped so that on resume
+     * it can pick up where it left off.
+     */
     @Override
     public void onPause() {
         super.onPause();
-        sensorManager.unregisterListener(this);
+//        sensorManager.unregisterListener(this);
 
         // If music is playing, pause this on pause as well
         if(mMediaPlayer.isPlaying()) {
