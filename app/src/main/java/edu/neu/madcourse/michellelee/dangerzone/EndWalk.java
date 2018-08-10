@@ -40,6 +40,8 @@ public class EndWalk extends AppCompatActivity {
     private AlertDialog failDialog;
     private AlertDialog successDialog;
     private AlertDialog dinoTitleDialog;
+    private AlertDialog dinoAchievementDialog;
+
 
     // MediaPlayer
     private MediaPlayer mMediaPlayer;
@@ -122,6 +124,19 @@ public class EndWalk extends AppCompatActivity {
                         achievementBuild.append(dinowrangler);   // Add the new title to the StringBuilder
                         editor.putString("achievement list", achievementBuild.toString());  // Replace old String of titles with new
                         editor.apply();
+
+                        // DISPLAY THE USER THAT THEY GOT A NEW ACHIEVEMENT
+                        // Title dialog with new title information
+                        final View titleView = startInflater.inflate(R.layout.dino_achievement, null);
+                        final AlertDialog.Builder dinoAchievementBuilder = new AlertDialog.Builder(EndWalk.this);
+                        dinoAchievementBuilder.setView(titleView);
+                        dinoAchievementBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dinoAchievementDialog.dismiss();
+                            }
+                        });
+                        dinoAchievementDialog = dinoAchievementBuilder.create();
+                        dinoAchievementDialog.show();
 
                         // Get ID reference for node in question
                         String uniqueID =  preferences.getString("uid", null);
@@ -312,7 +327,6 @@ public class EndWalk extends AppCompatActivity {
 
     protected void onStop(){
         super.onStop();
-        mMediaPlayer.release();
         mMediaPlayer = null;
     }
 }

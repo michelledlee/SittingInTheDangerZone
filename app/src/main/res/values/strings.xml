@@ -111,6 +111,7 @@
     <string name="success_text">Success!</string>
     <string name="dino_title_blurb">Pff that oversized chicken had nothing on you. Dino-mite!</string>
     <string name="dino_wrangler">Dino Wrangler</string>
+    <string name="dino_achievement_blurb">Humans are friends, not food silly dinosaur. A tried and true Dino Wrangler you are!</string>
 
     // WALK ACTIVITY
     <string name="pause">Pause</string>

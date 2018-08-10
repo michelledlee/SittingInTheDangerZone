@@ -100,4 +100,9 @@ public class WalkIntro extends AppCompatActivity {
                     });
                 }
     };
+
+    protected void onDestroy() {
+        super.onDestroy();
+        mSoundPool.release();
+    }
 }
