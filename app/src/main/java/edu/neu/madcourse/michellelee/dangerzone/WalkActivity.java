@@ -86,10 +86,15 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
                     soundControl.setBackgroundResource(R.drawable.sound_off);   // Toggle the image to off
                     mediaOn = 0;
                 } else {
-                    mMediaPlayer.seekTo(length);    // Go to where we left off
-                    mMediaPlayer.start();   // Start music
-                    soundControl.setBackgroundResource(R.drawable.sound_on);    // Toggle the image to on
-                    mediaOn = 1;
+                    if (isPaused) {
+                        mediaOn = 1;
+                        soundControl.setBackgroundResource(R.drawable.sound_on);    // Toggle the image to on
+                    } else {
+                        mMediaPlayer.seekTo(length);    // Go to where we left off
+                        mMediaPlayer.start();   // Start music
+                        soundControl.setBackgroundResource(R.drawable.sound_on);    // Toggle the image to on
+                        mediaOn = 1;
+                    }
                 }
             }
         });
@@ -343,7 +348,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         startActivity(endScreenIntent);
     }
 
-
     /**
      * Do not want users going back to the start screen, so disable back button.
      */
@@ -352,13 +356,11 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     }
 
     @Override
-    public void onStop()
-    {
+    public void onStop() {
         super.onStop();
-        if(mMediaPlayer.isPlaying())
+        if(mMediaPlayer.isPlaying()) {
             mMediaPlayer.stop();
-        else
-            return;
+        }
     }
 
 

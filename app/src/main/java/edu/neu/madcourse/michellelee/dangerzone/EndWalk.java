@@ -138,7 +138,6 @@ public class EndWalk extends AppCompatActivity {
                 } });
             successBuilder.setView(dialogView);    // Set view to success dialog
             successDialog = successBuilder.show();  // Set to show
-            mSoundPool.play(mBirdsChirping, mVolume, mVolume, 1, 0, 1f); // Pleasant bird in meadow sounds
 
             // Set the access flag so that it does not show the dialog again
             editor.putBoolean("profile access", false);
@@ -146,6 +145,8 @@ public class EndWalk extends AppCompatActivity {
 
             // ADD TO LIST OF POINTS TO DISPLAY
             pointsArray.add(walkFinished);  // Add walk finished points total to display
+
+            mSoundPool.play(mBirdsChirping, mVolume, mVolume, 1, 0, 1f); // Pleasant bird in meadow sounds
 
         } else {
             // ADD RESULTS TO FIREBASE FOR A LOSS
@@ -162,6 +163,7 @@ public class EndWalk extends AppCompatActivity {
                 } });
             failureBuilder.setView(dialogView);    // Set view to failure dialog
             failDialog = failureBuilder.show();
+
             mSoundPool.play(mDinoEating, mVolume, mVolume, 1, 0, 1f); // Being eaten sounds
         }
 
