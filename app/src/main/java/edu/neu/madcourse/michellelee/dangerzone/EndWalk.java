@@ -41,11 +41,6 @@ public class EndWalk extends AppCompatActivity {
     private AlertDialog successDialog;
     private AlertDialog dinoTitleDialog;
 
-    // SoundPool
-//    private int mDinoEating, mBirdsChirping;
-//    private SoundPool mSoundPool;
-//    private float mVolume = 1f;
-
     // MediaPlayer
     private MediaPlayer mMediaPlayer;
 
@@ -58,17 +53,6 @@ public class EndWalk extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
-//        // Loading sound objects for victory and failure
-//        mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
-//        mDinoEating = mSoundPool.load(getApplicationContext(), R.raw.dino_eating, 1);
-//        mBirdsChirping = mSoundPool.load(getApplicationContext(), R.raw.birds_chirping, 1);
-
-        // MediaPlayer for victory and failure
-        // Start playing background music on startup
-//        mMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.dino_eating);
-//        mMediaPlayer.setLooping(false);
-//        mMediaPlayer.start();
-
         // Putting together all bonuses for list
         ArrayList<String> pointsArray = new ArrayList<>();
 
@@ -80,6 +64,9 @@ public class EndWalk extends AppCompatActivity {
             // ADD RESULTS TO FIREBASE FOR A WIN
             dataAddAppInstance("T-Rex Tango", "escaped!", preferences.getInt("level", -1));
 
+            // GET NUMBER OF ATTEMPTS TO DETERMINE TITLES AND ACHIEVEMENTS
+            final int successfulDinoAttempts = preferences.getInt("dinosaurs", 0);
+
             // SUCCESS DIALOG
             AlertDialog.Builder successBuilder = new AlertDialog.Builder(this);
             final LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -90,7 +77,6 @@ public class EndWalk extends AppCompatActivity {
                 successDialog.dismiss();
 
                     // IF THIS IS THE FIRST TIME THIS SCENARIO HAS BEEN WON, A NEW TITLE IS EARNED
-                    int successfulDinoAttempts = preferences.getInt("dinosaurs", 0);
                     if (successfulDinoAttempts == 0) {
                         // Title dialog with new title information
                         final View titleView = startInflater.inflate(R.layout.first_dino, null);
@@ -111,18 +97,17 @@ public class EndWalk extends AppCompatActivity {
                                 titlebuild.append(dinomite);   // Add the new title to the StringBuilder
                                 editor.putString("title list", titlebuild.toString());  // Replace old String of titles with new
                                 editor.apply();
+                                int newNoTitles = preferences.getInt("# titles", 1) + 1;
+                                editor.putInt("# titles", newNoTitles);
+                                editor.apply();
                             }
                         });
                         dinoTitleDialog = dinoTitleBuilder.create();
                         dinoTitleDialog.show();
-
-                        // Update # of times this scenario has been completed successfully
-                        editor.putInt("dinosaurs", successfulDinoAttempts + 1);
-                        editor.apply();
                     }
 
                     // CHECKING FOR ACHIEVEMENTS
-                    if (successfulDinoAttempts > 5) {
+                    if (successfulDinoAttempts == 5) {
                         editor.putInt("# achievements", 2);
                         editor.apply();
 
@@ -145,25 +130,29 @@ public class EndWalk extends AppCompatActivity {
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference myRef = database.getReference("users");
                         myRef.child(uniqueID).child("achievements").setValue(2);
+
+                        int totalNewAchievements = preferences.getInt("# achievements", 1) + 1;
+                        editor.putInt("# achievements", totalNewAchievements);
+                        dataAddAchievement(totalNewAchievements);
                     }
                 } });
             successBuilder.setView(dialogView);    // Set view to success dialog
             successDialog = successBuilder.show();  // Set to show
 
-            // Set the access flag so that it does not show the dialog again
-            editor.putBoolean("profile access", false);
-            editor.apply();
-
-            // ADD TO LIST OF POINTS TO DISPLAY
+            // Add to list of points to display
             pointsArray.add(walkFinished);  // Add walk finished points total to display
 
-//            mSoundPool.play(mBirdsChirping, mVolume, mVolume, 1, 0, 1f); // Pleasant bird in meadow sounds
+            // Play nice birds chirping sounds for the win
             mMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds_chirping);
             mMediaPlayer.setLooping(false);
             mMediaPlayer.start();
 
+            // Update # of times this scenario has been completed successfully
+            editor.putInt("dinosaurs", successfulDinoAttempts + 1);
+            editor.apply();
+
         } else {
-            // ADD RESULTS TO FIREBASE FOR A LOSS
+            // Add reuslts to firebase for a loss
             dataAddAppInstance("T-Rex Tango", "eaten!", preferences.getInt("level", -1));
 
             // Create the success alert dialog
@@ -178,7 +167,7 @@ public class EndWalk extends AppCompatActivity {
             failureBuilder.setView(dialogView);    // Set view to failure dialog
             failDialog = failureBuilder.show();
 
-//            mSoundPool.play(mDinoEating, mVolume, mVolume, 1, 0, 1f); // Being eaten sounds
+            // EATEN SOUNDS FOR A LOSS
             mMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.dino_eating);
             mMediaPlayer.setLooping(false);
             mMediaPlayer.start();
@@ -270,10 +259,8 @@ public class EndWalk extends AppCompatActivity {
         // Check to determine what we are displaying for the time statistic
         if (sessionMinutes < 1) {
             minutesSummary = "Minutes Walked (min) ... < 1 min";    // Do not display fractional time if less than a minute
-//            Log.e("walked: ", "< 1 min");
         } else {
             minutesSummary = "Minutes Walked (min) ... " + Integer.toString(sessionMinutes);    // Concatenate string with values
-//            Log.e("walked: ", "more than a feeling");
         }
         statisticsArray.add(minutesSummary);    // Add to the array of statistics strings
         int stepsSession = extras.getInt("steps summary"); // Get distance walked this session
@@ -323,4 +310,9 @@ public class EndWalk extends AppCompatActivity {
         myRef.child(uniqueID).child("achievements").setValue(2);
     }
 
+    protected void onStop(){
+        super.onStop();
+        mMediaPlayer.release();
+        mMediaPlayer = null;
+    }
 }

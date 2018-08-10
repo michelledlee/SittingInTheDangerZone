@@ -47,7 +47,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         // Check if this is the first time this screen has been accessed because we want to
         // congratulate the user for playing by giving them a new title and a new achievement
-        if (!preferences.getBoolean("profile access", false)) {
+        if (preferences.getBoolean("profile access", true)) {
             isInitialStartup();
         }
 
@@ -174,6 +174,10 @@ public class UserProfileActivity extends AppCompatActivity {
      * the app for the first time
      */
     private void isInitialStartup() {
+        // Set the access flag so that it does not show the dialog again
+        editor.putBoolean("profile access", false);
+        editor.apply();
+
         final LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // Title dialog with new title information
@@ -203,9 +207,6 @@ public class UserProfileActivity extends AppCompatActivity {
         firstTimerTitleDialog = firstTitleBuilder.create();
         firstTimerTitleDialog.show();
 
-        // Set the access flag so that it does not show the dialog again
-        editor.putBoolean("profile access", true);
-        editor.apply();
     }
 
 }

@@ -161,13 +161,28 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
                         TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
 
                 // Change background resource to indicate the dinosaur is getting closer
-                if (text.equals("00:30")) {
+                if (text.equals("02:30") && timerTime == 5) {
                     RelativeLayout layout =(RelativeLayout)findViewById(R.id.walk_activity);
+                    tView.setTextColor(getResources().getColor(R.color.red_color));
                     layout.setBackgroundResource(R.drawable.scenario_end);
+                    v.vibrate(500);
+                }
+                if (text.equals("01:30") && timerTime == 3) {
+                    RelativeLayout layout =(RelativeLayout)findViewById(R.id.walk_activity);
+                    tView.setTextColor(getResources().getColor(R.color.red_color));
+                    layout.setBackgroundResource(R.drawable.scenario_end);
+                    v.vibrate(500);
                 }
 
-                // Flash text & vibrate at set times (half and 10 second countdown) so the user knows that time is about to run out and they can adjust their walk speed
-                if ((timerTime == 1 && text.equals("00:30")) || (timerTime == 3 && text.equals("01:30")) || (timerTime == 5 && text.equals("02:30")) || text.equals("00:10") || text.equals("00:09") || text.equals("00:08") || text.equals("00:07") || text.equals("00:06") ||
+                if (text.equals("00:30") && timerTime == 1) {
+                    RelativeLayout layout =(RelativeLayout)findViewById(R.id.walk_activity);
+                    tView.setTextColor(getResources().getColor(R.color.red_color));
+                    layout.setBackgroundResource(R.drawable.scenario_end);
+                    v.vibrate(500);
+                }
+
+                // Flash text & vibrate at set times (10 second countdown) so the user knows that time is about to run out and they can adjust their walk speed
+                if (text.equals("00:10") || text.equals("00:09") || text.equals("00:08") || text.equals("00:07") || text.equals("00:06") ||
                         text.equals("00:05") || text.equals("00:04") || text.equals("00:03") || text.equals("00:02") || text.equals("00:01")) {
                     tView.setTextColor(getResources().getColor(R.color.red_color));
                     v.vibrate(500);
@@ -367,6 +382,8 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         if(mMediaPlayer.isPlaying()) {
             mMediaPlayer.stop();
         }
+        mMediaPlayer.release();
+        mMediaPlayer = null;
     }
 
     /**
