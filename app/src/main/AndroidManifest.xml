@@ -14,16 +14,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".InformationInstructionsFragment"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".UserProfileActivity"
             android:label="@string/title_activity_user_profile"
@@ -41,11 +42,15 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".WalkIntro"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".EndWalk"
-            android:screenOrientation="portrait" />
-        <activity android:name=".realtimeDatabase.FriendsList" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".realtimeDatabase.FriendsList"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <receiver android:process=":remote" android:name=".notifications.AlarmReceiver" />
         <receiver android:process=":remote" android:name=".notifications.AlarmBootReceiver" />
