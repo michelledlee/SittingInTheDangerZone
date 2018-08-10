@@ -307,7 +307,7 @@ public class FriendsList extends AppCompatActivity {
                         String friendInfo = "ID: " + nodeID + " LVL" + level +
                                 "\nName: " + username + " (" + title + ") " +
                                 "\nActive: " + lastPlayed + " " + lastEncounter + "..." + lastOutcome +
-                                "\nAchievements :" + achievement;
+                                "\nAchievements: " + achievement;
                         friendAdapter.add(friendInfo);
                         break;  // Have found the friend node, can populate friend information
                     }

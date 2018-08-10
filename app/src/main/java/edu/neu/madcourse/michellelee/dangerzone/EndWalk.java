@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -40,9 +41,13 @@ public class EndWalk extends AppCompatActivity {
     private AlertDialog successDialog;
     private AlertDialog dinoTitleDialog;
 
-    private int mDinoEating, mBirdsChirping;
-    private SoundPool mSoundPool;
-    private float mVolume = 1f;
+    // SoundPool
+//    private int mDinoEating, mBirdsChirping;
+//    private SoundPool mSoundPool;
+//    private float mVolume = 1f;
+
+    // MediaPlayer
+    private MediaPlayer mMediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +58,16 @@ public class EndWalk extends AppCompatActivity {
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
-        // Loading sound objects for victory and failure
-        mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
-        mDinoEating = mSoundPool.load(getApplicationContext(), R.raw.dino_eating, 1);
-        mBirdsChirping = mSoundPool.load(getApplicationContext(), R.raw.birds_chirping, 1);
+//        // Loading sound objects for victory and failure
+//        mSoundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
+//        mDinoEating = mSoundPool.load(getApplicationContext(), R.raw.dino_eating, 1);
+//        mBirdsChirping = mSoundPool.load(getApplicationContext(), R.raw.birds_chirping, 1);
+
+        // MediaPlayer for victory and failure
+        // Start playing background music on startup
+//        mMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.dino_eating);
+//        mMediaPlayer.setLooping(false);
+//        mMediaPlayer.start();
 
         // Putting together all bonuses for list
         ArrayList<String> pointsArray = new ArrayList<>();
@@ -146,7 +157,10 @@ public class EndWalk extends AppCompatActivity {
             // ADD TO LIST OF POINTS TO DISPLAY
             pointsArray.add(walkFinished);  // Add walk finished points total to display
 
-            mSoundPool.play(mBirdsChirping, mVolume, mVolume, 1, 0, 1f); // Pleasant bird in meadow sounds
+//            mSoundPool.play(mBirdsChirping, mVolume, mVolume, 1, 0, 1f); // Pleasant bird in meadow sounds
+            mMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.birds_chirping);
+            mMediaPlayer.setLooping(false);
+            mMediaPlayer.start();
 
         } else {
             // ADD RESULTS TO FIREBASE FOR A LOSS
@@ -164,7 +178,10 @@ public class EndWalk extends AppCompatActivity {
             failureBuilder.setView(dialogView);    // Set view to failure dialog
             failDialog = failureBuilder.show();
 
-            mSoundPool.play(mDinoEating, mVolume, mVolume, 1, 0, 1f); // Being eaten sounds
+//            mSoundPool.play(mDinoEating, mVolume, mVolume, 1, 0, 1f); // Being eaten sounds
+            mMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.dino_eating);
+            mMediaPlayer.setLooping(false);
+            mMediaPlayer.start();
         }
 
         // Get results of the bonuses. If there is actually a value, we add this to the key for storage.
