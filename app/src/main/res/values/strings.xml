@@ -27,16 +27,44 @@
     <string name="ack_title">Acknowledgments</string>
     <string name="developer_title">Developer Notes</string>
     <string name="developer_notes">
-        Design Considerations:\n
+        <b>Design Considerations:</b>\n
+        - The number of steps that is required to complete a walk is currently likely on the lower end of things making
+        the game a bit easier for our target audience which is people living a sedentary lifestyle. In the future we might
+        consider adding difficulty levels to make it more interesting as players advance.\n
+        - Considered a battery savery mode for the actual walk activity but instead we decided to let the app continue to
+        run even if the phone had the lock button pressed. This is because this is a way to manage the battery life. Additionally
+        since the game does not require the player to constantly monitor the screen during the walk, it would make more sense that
+        they could walk and have it on in the background. The music was set to stop if the app lost focus since it would be
+        obnoxious if it kept going.\n
+        - We opted for no action bar since this was a hybrid game/fitness app but we wanted to make it seem more
+        "fun" instead of having it just a utility pedometer app. The main menu would be the launch point for all the other
+        activities in the app. The inspiration for this was Hearthstone where you never get more than one back button
+        press away from the main menu. Currently all of our activities are like this except one which is two back button
+        presses away. For real app deployment we would look into making this look more aesthetically pleasing and making
+        this the optimal user experience.\n
+        - We thought about adding a countdown before the beginning of the walk. We opted not to because when people
+        hit the walk button they generally expect the activity to start. From being avid Pokemon Go players, we have noticed
+        that during the countdown before gym battles, most people are already tapping their phones and in general impatient
+        for the event to begin.\n
         - We decided not to add moving images to the app as we did not want people to be staring at
         the screen while they were out for a walk and risk getting injured. This app is first and
         foremost a fitness app that is trying to be more interesting than a pedometer, so it is not
-        a game that you have to constantly look at the screen for.\n
+        a game that you have to constantly look at the screen for. Eventually we would want to add some in-walk bonuses
+        but those would be alerted somehow so the player would not have to constantly look at the screen.\n
         - We did not implement app wide volume controls as we felt most users manage sound at a global
         level on their devices for sensitive situations. An example of such a situation would be at the movies
         or during a meeting. Most people would turn off their phones completely, put them on silent, etc.\n\n
 
-        Future Improvements:\n
+        <b>Future Improvements:</b>\n
+        The following is a list of improvements that we would want to implement for an app for full release later on.
+        - Add more scenarios in future releases so that they could be randomly selected by the app and would
+        be more interesting for the user.\n
+        - Add more achievements to the game to keep the interest level in the game higher. Things like achievements
+        for walking a certain number of times, doing enough specific scenarios, doing them right when the notification
+        appears, etc.\n
+        - Add location sharing and a two player mode with friends nearby so that walkers can meet up and walk together. Again
+        aiming to keep engagement levels high.\n
+        - Improve the graphic design and sounds to look more polished and interesting.
 
     </string>
 

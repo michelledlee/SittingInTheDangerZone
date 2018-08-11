@@ -83,17 +83,19 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_width="wrap_content"
         android:layout_below="@id/text_bar"
         android:orientation="vertical"
-        android:layout_marginBottom="@dimen/ack_padding">
+        android:layout_marginBottom="@dimen/ack_padding"
+        android:weightSum="1">
 
         <ListView
             android:layout_marginStart="@dimen/profile_double_indented"
             android:id="@+id/list_of_friends"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight=".9">
         </ListView>
     </LinearLayout>
 </RelativeLayout>
