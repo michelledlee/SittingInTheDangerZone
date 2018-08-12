@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import edu.neu.madcourse.michellelee.dangerzone.notifications.SettingsActivity;
-
 public class AlarmBootReceiver extends BroadcastReceiver {
     SharedPreferences preferences;
 
@@ -25,9 +23,6 @@ public class AlarmBootReceiver extends BroadcastReceiver {
             int interval = preferences.getInt("intervalMinutes", 30);
 
             switch (interval) {
-//                case 1: // 1 minute
-//                    NotificationHelper.scheduleRepeatingElapsedNotification1(context);
-//                    break;
                 case 15: // 15 minutes
                     NotificationHelper.scheduleRepeatingElapsedNotification15(context);
                     break;

@@ -17,7 +17,8 @@ import android.widget.Button;
  * includes links to information about the developers.
  */
 public class InformationInstructionsFragment extends AppCompatActivity {
-    private AlertDialog ackDialog;
+
+    private AlertDialog ackDialog; // Dialog to show the acknowledgements and developer notes
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,16 +30,16 @@ public class InformationInstructionsFragment extends AppCompatActivity {
         acknowledgmentsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder startBuilder = new AlertDialog.Builder(InformationInstructionsFragment.this);
-                LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View dialogView = startInflater.inflate(R.layout.ack_dialog, null);     // Get dialog view
-                startBuilder.setCancelable(false);
-                startBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        ackDialog.dismiss();
-                    } });
-                startBuilder.setView(dialogView);
-                ackDialog = startBuilder.show();
+            AlertDialog.Builder startBuilder = new AlertDialog.Builder(InformationInstructionsFragment.this);
+            LayoutInflater startInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            final View dialogView = startInflater.inflate(R.layout.ack_dialog, null);     // Get dialog view
+            startBuilder.setCancelable(false);
+            startBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    ackDialog.dismiss();
+                } });
+            startBuilder.setView(dialogView);
+            ackDialog = startBuilder.show();
 
             }
         });

@@ -17,10 +17,10 @@
         - Awesome app by Michelle Lee and Bri Garbo.</string>
     <string name="instructions">LAUNCH! THAT! APP!\n
 \nSo you’ve decided to step into the DANGER ZONE?! You’re so brave. Now that you’ve set your name, it’s time to understand the DANGER.
-    You can walk at any time by selecting the WALK option on the main screen. Choose how long you’d like to walk, and we’ll load a random
-    DANGER ZONE SCENARIO for you to escape from — or try! \n
-\nDANGER ZONE will randomly prompt you with a sudden DANGER ZONE SCENARIO throughout the day! To disable this option, select the GEAR on the main page, where you can opt out of this feature. \n
-\nOnce running, you’ll have the displayed amount of time to ESCAPE FROM THE DANGER ZONE! Track your steps and progress, earn achievements, compete against your friends, AND MORE! All while avoiding spending too much time sitting at your couch or desk!\n
+    You can walk at any time by selecting the WALK option on the main screen. Choose how long you’d like to walk, and we’ll load a DANGER ZONE SCENARIO for you to escape from — or try! \n
+\nDANGER ZONE can also prompt you with a sudden DANGER ZONE SCENARIO throughout the day! To enable this option, select the GEAR on the main page, where you can say yes to the test. \n
+\nOnce running, you’ll have the displayed amount of time to ESCAPE FROM THE DANGER ZONE! The twists and turns you take will vary with each scenario so keep up the pace or end up on your face.
+        Track your steps and progress, earn titles and achievements, compete against your friends, AND MORE! All while avoiding spending too much time sitting at your couch or desk!\n
 \nCan you escape… the DANGER ZONE??</string>
     <string name="information">HOW TO PLAY:</string>
     <string name="ok_label">OK</string>
@@ -56,7 +56,8 @@
         or during a meeting. Most people would turn off their phones completely, put them on silent, etc.\n\n
 
         <b>Future Improvements:</b>\n
-        The following is a list of improvements that we would want to implement for an app for full release later on.
+        The following is a list of improvements that we would want to implement for an app for full release later on.\n
+        - Add more levels as the game is currently capped at level 5.
         - Add more scenarios in future releases so that they could be randomly selected by the app and would
         be more interesting for the user.\n
         - Add more achievements to the game to keep the interest level in the game higher. Things like achievements

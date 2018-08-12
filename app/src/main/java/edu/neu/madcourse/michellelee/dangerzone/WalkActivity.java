@@ -1,6 +1,5 @@
 package edu.neu.madcourse.michellelee.dangerzone;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,10 +12,8 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -72,7 +69,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walk);
 
-        // Start playing background music on startup
+        // Start playing background music on startup of the walk
         mMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.danger_zone);
         mMediaPlayer.setLooping(true);
         mMediaPlayer.start();
@@ -173,7 +170,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
                     layout.setBackgroundResource(R.drawable.scenario_end);
                     v.vibrate(500);
                 }
-
                 if (text.equals("00:30") && timerTime == 1) {
                     RelativeLayout layout =(RelativeLayout)findViewById(R.id.walk_activity);
                     tView.setTextColor(getResources().getColor(R.color.red_color));
@@ -274,10 +270,19 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         });
     }
 
+    /**
+     * Take no action if accuracy is changed
+     * @param sensor
+     * @param accuracy
+     */
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
+    /**
+     * When a sensor update is received, update the step detector with the information received
+     * @param event
+     */
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
@@ -286,6 +291,11 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
+    /**
+     * If a step is registered by the sensor, increase the number of steps that have been taken
+     * and display this
+     * @param timeNs
+     */
     @Override
     public void step(long timeNs) {
         numSteps++;
@@ -411,7 +421,6 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onPause() {
         super.onPause();
-//        sensorManager.unregisterListener(this);
 
         // If music is playing, pause this on pause as well
         if(mMediaPlayer.isPlaying()) {

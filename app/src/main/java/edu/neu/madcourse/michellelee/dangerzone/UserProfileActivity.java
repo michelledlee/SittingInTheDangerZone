@@ -32,6 +32,7 @@ public class UserProfileActivity extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
+    // Dialogs for titles and achievements
     private AlertDialog titleDialog;
     private AlertDialog firstTimerTitleDialog;
     private AlertDialog firstTimerAchievementDialog;
@@ -41,7 +42,7 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        // Initialize Shared Preferences
+        // Initialize Shared Preferences to get and display user information like name, level, statistics, etc.
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
 
@@ -51,7 +52,7 @@ public class UserProfileActivity extends AppCompatActivity {
             isInitialStartup();
         }
 
-        // Get user information
+        // Get user information from shared preferences that will be used to update the views
         final String name = preferences.getString("username", null);
         int level = preferences.getInt("level", -1);
         String currentTitle = preferences.getString("title", null);
@@ -61,17 +62,16 @@ public class UserProfileActivity extends AppCompatActivity {
         int achievements = preferences.getInt("# achievements", -1);
         String achievementsString = preferences.getString("achievements", null);
 
-        // Calculate minutes and distance walked
+        // Calculate cumulative minutes and distance walked to display
         int minutesWalked = secondsWalked / 60;
         int distanceWalked = (int) Math.rint(stepsWalked * 0.000762);
 
         // Hooking up titles and achievements with adapters
-        ArrayList<String> itemList1 = new ArrayList<String>();
+        ArrayList<String> itemList1 = new ArrayList<String>();  // TITLES
         ArrayAdapter<String> titlesAdapter = new ArrayAdapter<String>(this, R.layout.list_item_profile, itemList1);
         ListView titlesList = (ListView) findViewById(R.id.titles_list);
         titlesList.setAdapter(titlesAdapter);
-
-        ArrayList<String> itemList2 = new ArrayList<String>();
+        ArrayList<String> itemList2 = new ArrayList<String>(); // ACHIEVEMENTS
         ArrayAdapter<String> achievementsAdapter = new ArrayAdapter<String>(this, R.layout.list_item_profile, itemList2);
         ListView achievementsList = (ListView) findViewById(R.id.achievements_list);
         achievementsList.setAdapter(achievementsAdapter);
@@ -128,8 +128,7 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Clickable title selection
-        // Making the title ListView clickable so that titles can be changed
+        // Clickable title selection- Making the title ListView clickable so that titles can be changed
         titlesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

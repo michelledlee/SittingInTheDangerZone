@@ -101,6 +101,9 @@ public class WalkIntro extends AppCompatActivity {
                 }
     };
 
+    /**
+     * Release the soundpool
+     */
     protected void onDestroy() {
         super.onDestroy();
         mSoundPool.release();

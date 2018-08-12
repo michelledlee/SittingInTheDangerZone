@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -139,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         // shared preferences for this instance's app
         startBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                // Get username information from the edit text and convert it to a string
+                // Get username information from the edit text and convert it to a string to set the user's name
                 StringBuilder userName = new StringBuilder();
                 userName.append(usernameEntry.getText());
                 String userNameString = userName.toString();
@@ -162,8 +161,6 @@ public class MainActivity extends AppCompatActivity {
                 editor.putInt("# achievements", 1);
                 editor.apply();
                 editor.putString("achievements", "Danger Seeker");
-                editor.apply();
-                editor.putString("achievement list", "Danger Seeker");
                 editor.apply();
                 editor.putInt("xp", 0);
                 editor.apply();
