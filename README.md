@@ -10,19 +10,19 @@ Sitting at your desk all day causes all sorts of health issues...or does it? Wha
 ## Screenshots
 
 **Title Screen** 
-![Image of Homepage (Full-Sized)](https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Title.png?raw=true)
+<img src="https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Title.png?raw=true" width="208" height="387">
 
-**Pre-Walk**
-![Image of Pre-Walk Page](https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Selection.png?raw=true)
+**Pre-Walk**  
+<img src="https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Selection.png?raw=true" width="208" height="387">
 
-**Walking Screen**
-![Image of Walk Page](https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Walking.png?raw=true)
+**Walking Screen**  
+<img src="https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Walking.png?raw=true" width="438" height="221">
 
-**Results Page**
-![Image of Result Page](https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Eaten.png?raw=true)
+**Results Page**  
+<img src="https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Eaten.png?raw=true" width="208" height="387">
 
-**Summary Page**
-![Image of Summary Page](https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Results.PNG?raw=true)
+**Summary Page**  
+<img src="https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Results.PNG?raw=true" width="208" height="387">
 
 ## Tech Requirements
 IDE (Authors recommend Android Studio)
