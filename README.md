@@ -9,7 +9,7 @@ Sitting at your desk all day causes all sorts of health issues...or does it? Wha
 
 ## Screenshots
 
-**Title Screen** 
+**Title Screen**  
 <img src="https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Title.png?raw=true" width="208" height="387">
 
 **Pre-Walk**  
