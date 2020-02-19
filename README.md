@@ -10,16 +10,19 @@ Sitting at your desk all day causes all sorts of health issues...or does it? Wha
 ## Screenshots
 
 **Title Screen** 
-![Image of Homepage (Full-Sized)])
+![Image of Homepage (Full-Sized)](https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Title.png?raw=true)
 
 **Pre-Walk**
-![Image of Pre-Walk Page]()
+![Image of Pre-Walk Page](https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Selection.png?raw=true)
 
 **Walking Screen**
-![Image of Walk Page]()
+![Image of Walk Page](https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Walking.png?raw=true)
 
 **Results Page**
-![Image of Result Page]()
+![Image of Result Page](https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Eaten.png?raw=true)
+
+**Summary Page**
+![Image of Summary Page](https://github.com/michelledlee/SittingInTheDangerZone/blob/master/media/Results.PNG?raw=true)
 
 ## Tech Requirements
 IDE (Authors recommend Android Studio)
